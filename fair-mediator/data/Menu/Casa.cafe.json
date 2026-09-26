@@ -1,0 +1,167 @@
+
+{
+  "restaurant": "Casa.cafe Restaurant",
+  "menu_categories": {
+    "Appetizers": {
+      "Veg Starters": [
+        { "item": "Corn Samosa", "price": 100 },
+        { "item": "Veg Spring Roll", "price": 200 },
+        { "item": "Mozerella cheese stick", "price": 200 },
+        { "item": "Crispy Corn Salt n Pepper", "price": 200 },
+        { "item": "Gobi Manchurian/65", "price": 200 },
+        { "item": "Baby Corn (Chilli/Manchrian/65)", "price": 210 },
+        { "item": "Paneer Tikka (Zafarani/Achari/Malai)", "price": 210 },
+        { "item": "Paneer (65/Chilli)", "price": 210 },
+        { "item": "Paneer Pakoda", "price": 220 },
+        { "item": "Mushroom (Stuffed/Tandoori)", "price": 220 },
+        { "item": "Mushroom (Chilli/Manchurian/65)", "price": 220 },
+        { "item": "Broccoli (Tandoori/Malai)", "price": 220 }
+      ],
+      "Non-Veg Starters": [
+        { "item": "Samosa (Chicken Tikka/65)", "price": 160 },
+        { "item": "Chicken (Manchurian/65)", "price": 220 },
+        { "item": "Chicken Drumstick", "price": 220 },
+        { "item": "Chicken Fried Drumstick", "price": 220 },
+        { "item": "Chicken Tandoori Fried Drumstick", "price": 220 },
+        { "item": "Pepper Chicken", "price": 220 },
+        { "item": "Chicken Majestic", "price": 220 },
+        { "item": "Egg Chilli", "price": 220 },
+        { "item": "Egg 65", "price": 220 },
+        { "item": "Egg Manchurian", "price": 220 },
+        { "item": "Devil Chicken", "price": 249 },
+        { "item": "Thai Basil Chicken", "price": 249 },
+        { "item": "Ghee Chicken Roast", "price": 249 },
+        { "item": "Tandoori Chicken Kati Rolls", "price": 249 },
+        { "item": "Kali Mirchi Chicken", "price": 249 },
+        { "item": "Karyapaku Chicken Vepudu", "price": 249 },
+        { "item": "Ghee Roast Fish", "price": 249 },
+        { "item": "Tawa Kali Mirchi Fish", "price": 249 },
+        { "item": "Fish (Apollo/Mustered)", "price": 249 },
+        { "item": "Fish (Achari/Tikka/65)", "price": 249 },
+        { "item": "Ghee Roast Prawns", "price": 249 },
+        { "item": "Prawns (65/Chilli)", "price": 299 },
+        { "item": "Prawns (Tikka/Achari)", "price": 299 },
+        { "item": "Karyapaku Prawns Vepudu", "price": 299 },
+        { "item": "Dohraseekh Kebab", "price": 349 },
+        { "item": "Ghee Roast Mutton", "price": 349 },
+        { "item": "Andhra Mutton Vepudu", "price": 349 }
+      ]
+    },
+    "Main Course": {
+      "Veg": [
+        { "item": "Dal Tadka", "price": 199 },
+        { "item": "Dal Fry", "price": 199 },
+        { "item": "Dal Makhni", "price": 199 },
+        { "item": "Aloo Jeera", "price": 199 },
+        { "item": "Paneer Khurchan", "price": 239 },
+        { "item": "Palak Paneer", "price": 239 },
+        { "item": "Paneer (Tikka/Butter/Makhni)", "price": 239 },
+        { "item": "Matar Paneer", "price": 239 },
+        { "item": "Sabzi Makhniwala", "price": 239 },
+        { "item": "Malai Kofta", "price": 239 },
+        { "item": "Kadai Paneer", "price": 239 },
+        { "item": "Mix Vegetable", "price": 239 },
+        { "item": "Kadai Vegetable", "price": 239 },
+        { "item": "Mushroom Matar", "price": 239 },
+        { "item": "Mushroom Hara Pyaz", "price": 239 }
+      ],
+      "Non-Veg": [
+        { "item": "Egg Masala", "price": 239 },
+        { "item": "Egg Burji/Omelet", "price": 239 },
+        { "item": "RaRa Murgh Chicken Curry", "price": 299 },
+        { "item": "Kali Mirchi Curry", "price": 299 },
+        { "item": "Chettinad Chicken", "price": 299 },
+        { "item": "Telangana Chicken", "price": 299 },
+        { "item": "Chicken Tikka Masala", "price": 299 },
+        { "item": "Butter Chicken", "price": 299 },
+        { "item": "Kadai Chicken", "price": 299 },
+        { "item": "Khurchan Chicken", "price": 299 },
+        { "item": "Prawns Tikka Masala", "price": 329 },
+        { "item": "Lal Mirchi Prawns", "price": 329 },
+        { "item": "Bengali Fish Curry", "price": 329 },
+        { "item": "Telangana Fish Curry", "price": 329 },
+        { "item": "Fish Tikka Curry", "price": 329 },
+        { "item": "Mutton Kheema Fry", "price": 329 },
+        { "item": "RaRa Mutton", "price": 329 },
+        { "item": "Telangana Mutton Curry", "price": 329 }
+      ]
+    },
+    "Rice and Noodles": {
+      "Fried Rice/Noodles": [
+        { "item": "Fried Rice (Veg/Egg/Chicken/Prawns)", "price": "180/190/200/220" },
+        { "item": "Fried Noodles (Veg/Egg/Chicken/Prawns)", "price": "180/190/200/220" },
+        { "item": "Thai Basil Chicken Noodles", "price": 220 },
+        { "item": "Thai Basil Prawns Noodles", "price": 250 }
+      ],
+      "Biryani & Pulao (Veg)": [
+        { "item": "Steamed Basmati Rice", "price": 120 },
+        { "item": "Curd Rice", "price": 179 },
+        { "item": "Vegetable Pulao", "price": 199 },
+        { "item": "Paneer Mutter Pulao", "price": 220 },
+        { "item": "Jeera Kaju Pulao", "price": 220 },
+        { "item": "Dal Khichidi", "price": 220 },
+        { "item": "Veg Biryani (Half/Full-Pan Fried)", "price": "220/270" }
+      ],
+      "Biryani & Pulao (Non-Veg)": [
+        { "item": "Egg Biryani (Half/Full)", "price": "239/299" },
+        { "item": "Chicken 65 Biryani", "price": 299 },
+        { "item": "Chilli Chicken Biryani", "price": 299 },
+        { "item": "Chicken Tikka Biryani", "price": 299 },
+        { "item": "Chicken Fried Piece Biryani", "price": 299 },
+        { "item": "Tandoori Chicken Biryani", "price": 299 },
+        { "item": "Chicken Tawa Pulao", "price": 299 },
+        { "item": "Casa Hyderabadi Dum Biryani", "price": 299 },
+        { "item": "Mutton Tawa Pulao", "price": 299 },
+        { "item": "Mutton Biryani - Pan Fried", "price": 299 },
+        { "item": "Prawns Tawa Pulao", "price": 299 },
+        { "item": "Prawns Biryani", "price": 299 }
+      ]
+    },
+    "Baked Bread": [
+      { "item": "Phulka", "price": 30 },
+      { "item": "Plain Roti/Butter", "price": "30/35" },
+      { "item": "Naan (Plain/Butter/Garlic)", "price": "50/55/60" },
+      { "item": "Naan (Cheese/Kheema)", "price": "60/65" },
+      { "item": "Paneer Paratha", "price": 100 },
+      { "item": "Aloo Paratha", "price": 100 },
+      { "item": "Plain Kulcha", "price": 75 },
+      { "item": "Masala Kulcha", "price": 75 }
+    ],
+    "Drinks": {
+      "Cold Treats & Shakes": [
+        { "item": "Vanilla Joy", "price": 69 },
+        { "item": "Choco Belgium", "price": 79 },
+        { "item": "Butterscotch Ribbon", "price": 99 },
+        { "item": "Casa Fruit Overloaded", "price": 99 },
+        { "item": "Vanilla Milkshake Magic", "price": 149 },
+        { "item": "Strawberry Bliss Milkshake", "price": 149 },
+        { "item": "Chocolate Milkshake", "price": 149 },
+        { "item": "Peach Keen Milkshake", "price": 149 },
+        { "item": "Kiwi Kick Milkshake", "price": 149 },
+        { "item": "Hazelnut Heaven Milkshake", "price": 149 },
+        { "item": "Mocha Milkshake with Coffee", "price": 149 },
+        { "item": "Caramel Chocolate Milkshake", "price": 149 },
+        { "item": "Kit Kat Crunch Milkshake", "price": 149 }
+      ],
+      "Hot Beverages": [
+        { "item": "Filter Coffee", "price": 70 },
+        { "item": "Tea (Plain/Masala/Ginger)", "price": "50/60/60" },
+        { "item": "Green Tea", "price": 60 },
+        { "item": "Black Tea", "price": 50 },
+        { "item": "Casa Ginger Tea", "price": 70 }
+      ],
+      "Mocktails": [
+        { "item": "Virgin Mojito (Watermelon/Orange/Kiwi)", "price": 149 },
+        { "item": "Fresh Lime Soda", "price": 100 },
+        { "item": "Blue Lagoon", "price": 149 },
+        { "item": "Fruit Punch", "price": 149 },
+        { "item": "Mango Kiwi Refresher", "price": 149 }
+      ],
+      "Soft Drinks": [
+        { "item": "Water Bottle 1 ltr", "price": 40 },
+        { "item": "Coke/Diet Coke/Sprite/Thums Up", "price": 70 },
+        { "item": "Red Bull", "price": 150 }
+      ]
+    }
+  }
+}

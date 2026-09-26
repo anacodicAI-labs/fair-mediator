@@ -1,0 +1,6 @@
+level,min_sat,min_sat_ci95,mean_sat,delta_vs_C4,n_groups
+venue whole-menu average (naive baseline),0.4593,0.0116,0.6413,0.3901,200
+"B1: random safe dish, per diner",0.4433,0.0283,0.7094,0.4061,200
+"B3: median-diner's best dish, shared",0.7626,0.0255,0.8468,0.0868,200
+B2: best shared dish (one for all),0.8428,0.0042,0.8787,0.0065,200
+per-diner best safe dish (C4),0.8494,0.0045,0.887,--,200

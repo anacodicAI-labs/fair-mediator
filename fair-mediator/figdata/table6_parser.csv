@@ -1,0 +1,7 @@
+category,n,label_accuracy,member_accuracy
+plain,62,91.9,100.0
+sarcasm,8,12.5,100.0
+hedge,10,70.0,100.0
+conditional,8,100.0,100.0
+other_member,12,83.3,100.0
+ALL,100,83.0,100.0

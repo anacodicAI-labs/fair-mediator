@@ -1,0 +1,258 @@
+
+{
+  "restaurant_name": "House of Chefs",
+  "menu": {
+    "finger_bites": [
+      { "item": "French Fries (Salted)", "price": 149 },
+      { "item": "French Fries (Peri Peri)", "price": 169 },
+      { "item": "Peri Peri Potato Wedges", "price": 169 },
+      { "item": "Jalapeno Cheese Poppers", "price": 179 },
+      { "item": "Chicken Nuggets", "price": 189 },
+      { "item": "Chicken Strips", "price": 199 },
+      { "item": "Garlic Bread", "price": 209 }
+    ],
+    "speciality_coffee": {
+      "hot_brew": [
+        { "item": "Espresso", "price": 119 },
+        { "item": "Americano", "price": 159 },
+        { "item": "Long Black", "price": 149 },
+        { "item": "Cappuccino", "price": 179 },
+        { "item": "Flat White", "price": 189 },
+        { "item": "Latte", "price": 229 },
+        { "item": "Mocha", "price": 229 },
+        { "item": "Hot Chocolate", "price": 229 },
+        { "item": "Barista's Choice (Seasonal)", "price": 249 }
+      ],
+      "cold_brew": [
+        { "item": "Iced Americano", "price": 179 },
+        { "item": "Aero Cano", "price": 189 },
+        { "item": "Iced Latte", "price": 229 },
+        { "item": "Iced Mocha", "price": 239 },
+        { "item": "Spanish Latte", "price": 239 },
+        { "item": "Vietnamese Latte", "price": 239 },
+        { "item": "Espresso Tonic", "price": 249 },
+        { "item": "Coconut Espresso", "price": 249 },
+        { "item": "Espresso Cranberry", "price": 249 },
+        { "item": "Espresso Sunrise", "price": 249 },
+        { "item": "Classic Cold Brew", "price": 199 },
+        { "item": "Cranberry Cold Fizz", "price": 229 },
+        { "item": "Barista's Choice (Seasonal)", "price": 249 }
+      ],
+      "manual_brew": [
+        { "item": "Pour Over", "price": 249 },
+        { "item": "French Press", "price": 249 },
+        { "item": "AeroPress", "price": 249 }
+      ]
+    },
+    "continental": {
+      "sandwiches": [
+        { "item": "Veg Club Sandwich", "price": 189 },
+        { "item": "Paneer Sandwich", "price": 229 },
+        { "item": "Paneer Tikka Sandwich", "price": 249 },
+        { "item": "Peri Peri Chicken Sandwich", "price": 229 },
+        { "item": "Chicken Tikka Sandwich", "price": 249 },
+        { "item": "Guntur Chicken Tikka Sandwich", "price": 269 }
+      ],
+      "burgers": [
+        { "item": "Veg Cheese Burger", "price": 199 },
+        { "item": "Paneer Tikka Burger", "price": 239 },
+        { "item": "Cottage Cheese Burger (Paneer)", "price": 249 },
+        { "item": "BBQ Chicken Burger", "price": 279 },
+        { "item": "Grilled Chicken Burger", "price": 289 },
+        { "item": "Chicken Tikka Burger", "price": 299 }
+      ],
+      "pizzas_12_inch": [
+        { "item": "Margherita", "price": 349 },
+        { "item": "Mediterranean", "price": 349 },
+        { "item": "Peri Peri Paneer", "price": 389 },
+        { "item": "Paneer Tikka", "price": 389 },
+        { "item": "Mushroom", "price": 389 },
+        { "item": "HOC Spl Pizza (Veg)", "price": 429 },
+        { "item": "Peri Peri Chicken", "price": 399 },
+        { "item": "Guntur Chicken", "price": 399 },
+        { "item": "BBQ Chicken", "price": 399 },
+        { "item": "Chicken Pepperoni", "price": 399 },
+        { "item": "Kheema", "price": 429 },
+        { "item": "Jalpari Zinga", "price": 449 },
+        { "item": "HOC Spl Pizza (Non-Veg)", "price": 449 }
+      ],
+      "pasta": [
+        { "item": "Alfredo (Veg/Chicken/Seafood)", "price": "279/329/369" },
+        { "item": "Arrabbiata (Veg/Chicken/Seafood)", "price": "279/329/369" },
+        { "item": "Basil Pesto (Veg/Chicken/Seafood)", "price": "319/369/429" }
+      ]
+    },
+    "indian_cuisine": {
+      "soups": [
+        { "item": "Sweet Corn", "price": 149 },
+        { "item": "Creamy Tomato", "price": 149 },
+        { "item": "Man-Chow (Veg/Non-Veg)", "price": "149/169" },
+        { "item": "Hot & Sour (Veg/Non-Veg)", "price": "149/169" },
+        { "item": "Cream of Mushroom (Veg/Non-Veg)", "price": "149/169" },
+        { "item": "Chicken Thopu", "price": 169 },
+        { "item": "Cream of Broccoli", "price": 199 }
+      ],
+      "salads": [
+        { "item": "Green Salad", "price": 119 },
+        { "item": "Quinoa Salad", "price": 229 },
+        { "item": "Cesar Salad (Veg/Non-Veg)", "price": "199/229" },
+        { "item": "Charumula Chicken Salad", "price": 229 }
+      ],
+      "starters_veg": [
+        { "item": "Hara Bhara Kabab", "price": 269 },
+        { "item": "Malai Broccoli", "price": 289 },
+        { "item": "Veg Manchurian", "price": 289 },
+        { "item": "Mix Veg Pakora", "price": 289 },
+        { "item": "Crispy Vegetable", "price": 289 },
+        { "item": "Honey Chilli Potato", "price": 289 },
+        { "item": "Gobi Manchurian", "price": 289 },
+        { "item": "Corn Kernels", "price": 289 },
+        { "item": "Baby Corn (Crispy/Chilli)", "price": 299 },
+        { "item": "Paneer (Chilli/65)", "price": 299 },
+        { "item": "Paneer Crunchers", "price": 299 },
+        { "item": "Chilli Honey Crispy Water Chestnut", "price": 299 },
+        { "item": "Mushroom (Shanghai/Chilli)", "price": 299 },
+        { "item": "Stuffed Mushrooms", "price": 329 },
+        { "item": "Tangy Paneer Tikka", "price": 349 },
+        { "item": "Achari Paneer Tikka", "price": 349 },
+        { "item": "Hariyali Paneer Tikka", "price": 349 }
+      ],
+      "starters_non_veg": [
+        { "item": "Chilli Butter Garlic Egg", "price": 269 },
+        { "item": "Chilli Egg Crunch", "price": 299 },
+        { "item": "Egg Manchurian", "price": 299 },
+        { "item": "Tandoori Chicken", "price": "329/699" },
+        { "item": "Chicken (Chilli/65)", "price": 329 },
+        { "item": "Lemon Chicken", "price": 329 },
+        { "item": "Dragon Chicken", "price": 329 },
+        { "item": "Chicken Pakora Pops", "price": "329/349" },
+        { "item": "Chicken Majestic", "price": 349 },
+        { "item": "Tangdi Kebab", "price": 349 },
+        { "item": "Kashmiri Chicken", "price": 349 },
+        { "item": "Gongura Chicken Tikka", "price": 349 },
+        { "item": "Lasooni Chicken Kebab", "price": 349 },
+        { "item": "Smoky Peri Peri Chicken Wings", "price": 369 },
+        { "item": "Chicken Lollipops", "price": 369 },
+        { "item": "Kaju Chicken Fry", "price": 369 },
+        { "item": "HOC Kodi Vepudu", "price": 369 },
+        { "item": "Thai Style Chicken Wings", "price": 369 },
+        { "item": "Pepper Mutton", "price": 389 },
+        { "item": "Mutton Vepudu", "price": 389 },
+        { "item": "Mutton Bhuna Gosht", "price": 389 },
+        { "item": "Prawns (Fried Garlic/Loose)", "price": 389 },
+        { "item": "Garlic Butter Chilli Prawns", "price": 389 },
+        { "item": "Crackling Prawn Fritters", "price": 389 },
+        { "item": "Fisherman's Pakora", "price": 389 },
+        { "item": "Bel Pepper Fish", "price": 389 },
+        { "item": "Apollo Fish", "price": 389 },
+        { "item": "Tandoori Pompret Fish", "price": 429 }
+      ],
+      "curries": {
+        "veg": [
+          { "item": "Dal Fry", "price": 249 },
+          { "item": "Dal Tadka", "price": 269 },
+          { "item": "Dal Makhani", "price": 279 },
+          { "item": "Dal Maharani", "price": 289 },
+          { "item": "Aloo Mutter/Jeera", "price": 289 },
+          { "item": "Mix Veg Curry", "price": 289 },
+          { "item": "Veg Jaipuri", "price": 289 },
+          { "item": "Mushroom Masala", "price": 329 },
+          { "item": "Paneer Butter Masala", "price": 329 },
+          { "item": "Methi Chaman", "price": 329 },
+          { "item": "Palak Paneer", "price": 349 },
+          { "item": "Veg Kolhapuri", "price": 349 },
+          { "item": "Diwani Handi", "price": 349 }
+        ],
+        "non_veg": [
+          { "item": "Egg Masala", "price": 269 },
+          { "item": "Chicken Tikka Masala", "price": 329 },
+          { "item": "Kadai Chicken", "price": 349 },
+          { "item": "Gongura Chicken", "price": 349 },
+          { "item": "Jungley Chicken", "price": 349 },
+          { "item": "Chicken Chettinad", "price": 349 },
+          { "item": "Methi Chicken", "price": 349 },
+          { "item": "Malai Chicken", "price": 349 },
+          { "item": "Telangana Chicken Curry", "price": 369 },
+          { "item": "Andhra Chicken Curry", "price": 369 },
+          { "item": "Dum Chicken Hyderabadi", "price": 369 },
+          { "item": "Balti Murg", "price": 369 },
+          { "item": "Kadai Mutton", "price": 399 },
+          { "item": "Mutton Rogan Gosh", "price": 429 },
+          { "item": "Mutton Kheema Masala", "price": 449 },
+          { "item": "Jalapari Jinga Masala", "price": 449 }
+        ]
+      },
+      "breads": [
+        { "item": "Pulka", "price": 20 },
+        { "item": "Tandoori Roti (Plain/Butter)", "price": "30/35" },
+        { "item": "Pudina Roti", "price": 35 },
+        { "item": "Naan (Plain/Butter)", "price": "49/59" },
+        { "item": "Naan (Garlic/Chilli/Cheese)", "price": "69/69/89" },
+        { "item": "Kulcha (Plain/Masala/Paneer)", "price": "79/99/129" },
+        { "item": "Paratha (Aloo/Gobi/Mix)", "price": "89/109/129" }
+      ],
+      "biryanis": [
+        { "item": "Veg Dum Biryani", "price": 269 },
+        { "item": "Veg Keema Biryani", "price": 329 },
+        { "item": "Paneer Biryani", "price": 289 },
+        { "item": "Egg Biryani", "price": 299 },
+        { "item": "Kaju Biryani", "price": 299 },
+        { "item": "Mushroom Biryani", "price": 329 },
+        { "item": "Chicken Dum Biryani", "price": "269/369" },
+        { "item": "Chicken Fry Piece Biryani", "price": "289/389" },
+        { "item": "Spl Chicken Biryani (BL)", "price": 389 },
+        { "item": "Chicken 65 Biryani", "price": 389 },
+        { "item": "Chicken Wings Biryani", "price": 389 },
+        { "item": "Chicken Tikka Biryani", "price": 389 },
+        { "item": "Mutton Dum Biryani", "price": 449 },
+        { "item": "Kheema Biryani", "price": 489 },
+        { "item": "Prawns Biryani", "price": 489 }
+      ],
+      "rice_and_noodles": [
+        { "item": "Plain Rice", "price": 69 },
+        { "item": "Jeera Rice", "price": 169 },
+        { "item": "Dal Khichdi", "price": 189 },
+        { "item": "Sambar Rice (Veg/Chicken)", "price": "189/289" },
+        { "item": "Curd Rice", "price": 199 },
+        { "item": "Pudhina Rice", "price": 199 },
+        { "item": "Tawa Pulao", "price": 229 },
+        { "item": "Chicken Tawa Pulao", "price": 299 },
+        { "item": "Fried Rice (Veg/Paneer/Egg/Chicken/Sea Food)", "price": "199/229/249/289/299" },
+        { "item": "Burnt Garlic Fried Rice (Veg/NV)", "price": "229/269" },
+        { "item": "Noodles (Veg/Paneer/Egg/Chicken/Sea Food)", "price": "199/229/249/289/299" }
+      ]
+    },
+    "platters": [
+      { "item": "Chinese Veg Platter", "price": 349 },
+      { "item": "Tandoori Veg Platter", "price": 399 },
+      { "item": "Chinese Non Veg Platter", "price": 449 },
+      { "item": "Tandoori Non Veg Platter", "price": 499 }
+    ],
+    "beverages": [
+      { "item": "Soft Drinks", "price": 25 },
+      { "item": "HOC Water Bottle", "price": 35 },
+      { "item": "Goli Soda", "price": 69 },
+      { "item": "Fresh Lime Soda", "price": 89 },
+      { "item": "Nannari Sharabath", "price": 89 },
+      { "item": "Butter Milk", "price": 89 },
+      { "item": "Fresh Juice (Orange/Watermelon/Pineapple)", "price": 119 },
+      { "item": "Red Bull", "price": 125 },
+      { "item": "Fruit Punch", "price": 149 }
+    ],
+    "desserts": [
+      { "item": "Gulab Jamun", "price": 129 },
+      { "item": "Gulab Jamun with Ice Cream", "price": 199 },
+      { "item": "Brownie with Ice Cream", "price": 269 },
+      { "item": "Ice Cream (Vanilla/Butter Scotch/Chocolate)", "price": 99 },
+      { "item": "Fruit Ninja Ice Cream", "price": 129 },
+      { "item": "Sitapal Ice Cream", "price": 129 },
+      { "item": "Belgium Dark Chocolate Ice Cream", "price": 199 }
+    ]
+  },
+  "notes": [
+    "Order takes minimum of 20mins to be served.",
+    "Spice levels can be altered upon request.",
+    "All prices exclude GST."
+  ]
+}
+

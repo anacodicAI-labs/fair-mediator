@@ -1,0 +1,221 @@
+
+{
+  "menu": {
+    "starters": {
+      "soups": [
+        { "item": "Tamatar Dhaniya Shorba", "price": 249, "special": true },
+        { "item": "Dal Shorba", "price": 249, "special": true },
+        { "item": "Tomato Egg White Shorba", "price": 249, "special": true },
+        { "item": "Sweet Corn Soup (Veg/Chicken/Prawns)", "price": "249/299/299", "special": true },
+        { "item": "Manchow Soup (Veg/Chicken/Prawns)", "price": "249/299/299", "special": true },
+        { "item": "Hot & Sour Soup (Veg/Chicken/Prawns)", "price": "249/299/299", "special": true },
+        { "item": "Kim-In Soup (Mushroom/Chicken)", "price": "259/299", "special": true },
+        { "item": "Lemon Coriander Soup (Veg/Chicken/Prawns)", "price": "249/299/299", "special": true }
+      ],
+      "vegetarian": [
+        { "item": "Paneer 65 / Gobi 65", "price": 449 },
+        { "item": "Kung Pao Paneer", "price": 449, "special": true },
+        { "item": "Crispy Mushroom (Konjee/Schezwan/Chilli Garlic/Salt N Paper)", "price": 449 },
+        { "item": "Veg Spring Roll", "price": 449 },
+        { "item": "Beet Root Tilwali Tikki", "price": 449 },
+        { "item": "Paneer Makai Kur Kure", "price": 449 },
+        { "item": "Crispy Garlic Corn", "price": 449 },
+        { "item": "Dilli Wale Soya Chap", "price": 449 },
+        { "item": "Malai Broccoli (Peri Peri/Kasundi)", "price": 449 },
+        { "item": "Paneer Tikka (Achari/Pachi Mirchi/Ajwaini/Lasooni)", "price": 449 },
+        { "item": "Duo Stuffed Mushroom", "price": 449 },
+        { "item": "Crispy Baby Corn", "price": 449 },
+        { "item": "Honey Chilli Potato", "price": 449 }
+      ],
+      "non_vegetarian": [
+        { "item": "Chicken Spring Roll", "price": 449 },
+        { "item": "Wild Pepper Chicken", "price": 549, "special": true },
+        { "item": "Red Chilli (Chicken/Fish/Prawns)", "price": 549, "special": true },
+        { "item": "Chicken Drumstick (Crispy/Chilli Plum/Hunan Schezwan/Bt. Garlic)", "price": 549 },
+        { "item": "Thai Basil Chicken", "price": 549, "special": true },
+        { "item": "Kung Pao (Chicken/Fish/Prawns)", "price": 549, "special": true },
+        { "item": "Loose Prawns", "price": 549, "special": true },
+        { "item": "Golden Fried Prawns", "price": 549, "special": true },
+        { "item": "Chilli Prawns", "price": 549, "special": true },
+        { "item": "Tempura Prawns", "price": 549, "special": true },
+        { "item": "Pandu Mirchi Kodi Vepudu", "price": 549, "special": true },
+        { "item": "Jeedi Pappu Kodi Pakodi", "price": 549 },
+        { "item": "Andhra Chicken Chicklu", "price": 549 },
+        { "item": "Telangana Chicken Pakodi", "price": 549, "special": true },
+        { "item": "Chicken Wings (Smokey/Vellulli Karam/Gunpowder)", "price": 549 },
+        { "item": "Santrewala Murgh Tikka", "price": 549 },
+        { "item": "Angare Murgh Kebab", "price": 549 },
+        { "item": "Chicken Tikka (Malai/Shikari/Pahari/Lasooni/Kalimirch/Pesto)", "price": 549, "special": true },
+        { "item": "Hyderabad 65 (Chicken/Prawns)", "price": 549, "special": true },
+        { "item": "Zafrani Tikka (Chicken/Fish)", "price": 549, "special": true },
+        { "item": "Gunpowder Chicken Legs", "price": 549, "special": true },
+        { "item": "Persian Kebab", "price": 549, "special": true },
+        { "item": "Mutton Seekh Kebab", "price": 699, "special": true },
+        { "item": "Mutton Ghee Roast", "price": 699, "special": true },
+        { "item": "Fish Fry", "price": 549, "special": true },
+        { "item": "Fish Tikka (Achari/Ajwaini/Kaundi/Hariyali)", "price": 549, "special": true },
+        { "item": "Murgh Afghani Kebab", "price": 549, "special": true },
+        { "item": "Tandoori Prawns (Kesari/Kari Patta/Sea)", "price": 549, "special": true }
+      ]
+    },
+    "main_course": {
+      "dal_and_curries": [
+        { "item": "Akukura Pappu", "price": 449, "special": true },
+        { "item": "Tomato Dal", "price": 449, "special": true },
+        { "item": "Lasooni Dal Tadka", "price": 449, "special": true },
+        { "item": "Egg Masala", "price": 499 },
+        { "item": "Kadai Veg", "price": 559, "special": true },
+        { "item": "Veg Korma", "price": 559, "special": true },
+        { "item": "Dahi Aloo", "price": 499 },
+        { "item": "Kaju Paneer Masala", "price": 559, "special": true },
+        { "item": "Gutti Vankaya Kura", "price": 499 },
+        { "item": "Badnekai Yenniegai", "price": 499 },
+        { "item": "Paneer Butter Masala", "price": 555, "special": true },
+        { "item": "Paneer Tikka Masala", "price": 559, "special": true },
+        { "item": "Mix Veg Curry", "price": 559, "special": true },
+        { "item": "Palak Paneer", "price": 559, "special": true },
+        { "item": "Kadai Paneer", "price": 649, "special": true },
+        { "item": "Mutton Rara Masala", "price": 559, "special": true },
+        { "item": "Hariyali Chicken", "price": 559 },
+        { "item": "Kadai Mutton", "price": 649, "special": true },
+        { "item": "Mutton Masala", "price": 649, "special": true },
+        { "item": "Andhra Kodi Kura", "price": 449 },
+        { "item": "Butter Chicken", "price": 599, "special": true },
+        { "item": "Chicken Chettinad", "price": 599, "special": true },
+        { "item": "Chicken Tikka Masala", "price": 599, "special": true },
+        { "item": "Dum Ka Chicken", "price": 599, "special": true },
+        { "item": "Afghani Chicken Curry", "price": 649, "special": true },
+        { "item": "Mutton Rogan Josh", "price": 649, "special": true },
+        { "item": "Malabar Fish Curry", "price": 649, "special": true },
+        { "item": "Prawns Masala", "price": 649 }
+      ],
+      "fried_rice_and_noodles": [
+        { "item": "Veg Manchurian (Dry/Wet)", "price": 449, "special": true },
+        { "item": "Chilli Paneer (Dry/Wet)", "price": 449 },
+        { "item": "Stir-Fried Vegetable in Garlic Sauce", "price": 449 },
+        { "item": "Veg Hakka Noodles", "price": 449, "special": true },
+        { "item": "Veg Fried Rice", "price": 399 },
+        { "item": "Chicken Manchurian (Dry/Wet)", "price": 449, "special": true },
+        { "item": "Chilli Chicken (Dry/Wet)", "price": 449, "special": true },
+        { "item": "Schezwan Chicken", "price": 449 },
+        { "item": "Fish in Hot Garlic Sauce", "price": 549, "special": true },
+        { "item": "Prawns in Hot Garlic Sauce", "price": 559, "special": true },
+        { "item": "Chicken Hakka Noodles", "price": 499 },
+        { "item": "Chicken Fried Rice", "price": 499, "special": true },
+        { "item": "Prawns Fried Rice", "price": 499 }
+      ],
+      "biryanis_and_pulao": [
+        { "item": "Egg Biryani", "price": 449 },
+        { "item": "Veg Pulao", "price": 449, "special": true },
+        { "item": "Veg Dum Biryani", "price": 449, "special": true },
+        { "item": "Paneer Dum Biryani", "price": 449, "special": true },
+        { "item": "Kaju Paneer Biryani", "price": 549, "special": true },
+        { "item": "Chicken Dum Biryani", "price": 549, "special": true },
+        { "item": "Fry Chicken Biryani", "price": 549 },
+        { "item": "Mutton Dum Biryani", "price": 699, "special": true },
+        { "item": "Delicia Kheema Biryani (Mutton/Chicken)", "price": 699, "special": true },
+        { "item": "Prawns Dum Biryani", "price": 699 },
+        { "item": "Kodi Pulav", "price": 549, "special": true }
+      ]
+    },
+    "breads_and_rice": {
+      "breads": [
+        { "item": "Nawabi Kulcha Khazana", "price": 399, "special": true },
+        { "item": "Ajwani Kulcha", "price": 99 },
+        { "item": "Nizami Kulcha", "price": 99 },
+        { "item": "Kalimirch Kulcha", "price": 99 },
+        { "item": "Butter Naan", "price": 99 },
+        { "item": "Garlic Naan", "price": 99 },
+        { "item": "Tandoori Roti (Butter/Plain)", "price": 99 },
+        { "item": "Paratha (Aloo/Gobi/Paneer/Methi)", "price": 229 },
+        { "item": "Lachha Paratha", "price": 99, "special": true }
+      ],
+      "rice": [
+        { "item": "Plain Rice", "price": 249 },
+        { "item": "Jeera Rice", "price": 349 },
+        { "item": "Ghee Rice", "price": 349, "special": true },
+        { "item": "Curd Rice", "price": 349, "special": true },
+        { "item": "Dal Khichidi", "price": 399, "special": true }
+      ]
+    },
+    "beverages_and_desserts": {
+      "beverages": [
+        { "item": "Lassi (Sweet/Salted)", "price": 249, "special": true },
+        { "item": "Butter Milk", "price": 199 },
+        { "item": "Masala Tea", "price": 149 },
+        { "item": "Tea", "price": 149 },
+        { "item": "Cold Coffee", "price": 299, "special": true },
+        { "item": "Soft Drinks", "price": 99, "special": true },
+        { "item": "Fresh Lime Soda", "price": 149 },
+        { "item": "Fresh Juice (Watermelon/Muskmelon)", "price": 299, "special": true },
+        { "item": "Can Juice (Orange/Apple/Mango)", "price": 199 },
+        { "item": "Fruits Punch", "price": 299 },
+        { "item": "Mango Milk Shake", "price": 299, "special": true }
+      ],
+      "mocktails": [
+        { "item": "Orange Blossom", "price": 299, "special": true },
+        { "item": "Passion Fruit Pop", "price": 299, "special": true },
+        { "item": "Pom Ale", "price": 299 },
+        { "item": "Virjin Mojito", "price": 299 },
+        { "item": "Pina Colada", "price": 299 },
+        { "item": "Berry Bliss", "price": 299 },
+        { "item": "Strawberry Delight", "price": 299 },
+        { "item": "Zamun Zamia", "price": 299 },
+        { "item": "Blue Moon", "price": 299 },
+        { "item": "Mango Mania", "price": 299 },
+        { "item": "Frosty Fizz", "price": 299, "special": true }
+      ],
+      "desserts": [
+        { "item": "Gulab Jamun", "price": 349 },
+        { "item": "Gulab Jamun with Ice Cream", "price": 399 },
+        { "item": "Hot Chocolate with Brownie", "price": 349 },
+        { "item": "Ice Cream Sundae", "price": 349, "special": true },
+        { "item": "Apricot Delight", "price": 349, "special": true }
+      ]
+    },
+    "childrens_menu": [
+      { "item": "Cheese Veg Sandwich", "price": 349, "special": true },
+      { "item": "French Fries (Salted/Peri Peri)", "price": 249, "special": true },
+      { "item": "Chicken Sandwich", "price": 399, "special": true },
+      { "item": "Chicken Popcorn", "price": 349 },
+      { "item": "Bread Butter Jam", "price": 199 },
+      { "item": "Bread Omelette", "price": 249, "special": true }
+    ],
+    "platters": [
+      { "item": "Delicia Veg Platters (Chefs Choice)", "price": 1999, "special": true },
+      { "item": "Delicia Non Veg Platters (Chefs Choice)", "price": 2599, "special": true }
+    ],
+    "accompaniments": [
+      { "item": "Raita (Mix Veg/Onion/Cucumber)", "price": 99, "special": true },
+      { "item": "Masala Papad", "price": 149 },
+      { "item": "Roasted Papad", "price": 99, "special": true },
+      { "item": "Fried Papad", "price": 99, "special": true },
+      { "item": "Green Salad", "price": 199 }
+    ]
+  },
+  "buffet_menu": {
+    "veg_buffet": {
+      "price": "799 + GST / Per Head",
+      "items": [
+        "Welcome Drinks", "Veg Manchaow Soup", "Green Salad", "Fresh Cut Fruit Mix",
+        "Gobi-65", "Crispy Corn", "Kadai Paneer", "Mix Veg Curry", "Veg Dum Biryani (Raita & Mirchi Salan)",
+        "Dal Fry", "Sambar", "Jeera Rice", "Steam Rice", "Papad", "Indian Breads- Roti / Naan",
+        "Veg Hakka Noodles", "Plain Curd", "Apricot Delight", "Gulab Jamun With Ice Cream"
+      ]
+    },
+    "non_veg_buffet": {
+      "price": "999 + GST / Per Head",
+      "items": [
+        "Chicken Manchow Soup / Veg Manchow Soup", "Welcome Drinks", "Green Salad",
+        "Indian Breads- Roti / Naan", "Veg Hakka Noodles", "Fresh Cut Fruit Mix",
+        "Chilli Wings / Gobi 65", "Chicken 65 / Crispy Corn", "Mutton Rogan Josh / Mix Veg Curry",
+        "Home Style Fish Curry / Kadai Paneer", "Chicken Hakka Noodles", "Chicken Dum Biryani (Raita & Mirchi Salan)",
+        "Steam Rice", "Dal Fry", "Sambar", "Papad", "Plain Curd", "Apricot Delight", "Gulab Jamun With Ice Cream"
+      ]
+    }
+  },
+  "general_info": {
+    "preparation_time": "20 TO 25 MINUTES",
+    "discounts": "10% Discount In Buffet for Corporate Booking Only"
+  }
+}

@@ -1,0 +1,93 @@
+
+{
+  "restaurant_menu": {
+    "sections": [
+      {
+        "name": "Arabic Menu",
+        "items": [
+          { "name": "Rooz Bukhari Rice", "price": "149/199" },
+          { "name": "Laham Roast Mandi With Rice", "price": "479/899" },
+          { "name": "Dajjaj Roast Mandi", "price": "449/779" },
+          { "name": "Haneed Mutton (Steamed) With Rice", "price": "429/799" },
+          { "name": "Haneed Mutton (Steamed) Without Rice", "price": "329/629" },
+          { "name": "Haneed Chicken (Steamed) With Rice", "price": "399/779" },
+          { "name": "Haneed Chicken (Steamed) Without Rice", "price": "299/599" },
+          { "name": "Faham Chicken Barbeque With Rice", "price": "429/799" },
+          { "name": "Faham Chicken Barbeque Without Rice", "price": "299/599" },
+          { "name": "Shawaya Chicken Grill With Rice", "price": "429/799" },
+          { "name": "Shawaya Chicken Grill Without Rice", "price": "299/599" },
+          { "name": "Juicy Mutton", "price": "499/949" },
+          { "name": "Juicy Mutton Extra Piece", "price": "349" },
+          { "name": "Juicy Chicken", "price": "449/899" },
+          { "name": "Juicy Chicken Extra Piece", "price": "329" },
+          { "name": "Nalli Barra Mandi", "price": "999" },
+          { "name": "Special Murgh Tandoori", "price": "449/899" },
+          { "name": "Khoorof Full Roasted Lamb With Rice & Salad", "price": "14999/-" },
+          { "name": "Khoorof Half Roasted Lamb With Rice & Salad", "price": "7999/-" },
+          { "name": "Peshawari Raan Lamb Leg Roasted with Rice", "price": "2199/-" },
+          { "name": "Lebanese Raan Lamb Leg Roasted with Rice", "price": "2299/-" },
+          { "name": "Kesari Raan Lamb Leg Roasted with Rice", "price": "2399/-" }
+        ]
+      },
+      {
+        "name": "Indian Mughlai - Kebabs & Starters",
+        "items": [
+          { "name": "Fish Tikka Amritsari", "price": "399/529" },
+          { "name": "Ajwani Jheenga", "price": "329/499" },
+          { "name": "Tandoori Pomfret", "price": "499/899" },
+          { "name": "Garlic Prawns", "price": "499/549" },
+          { "name": "Murgh Resham Kebab", "price": "399" },
+          { "name": "Murgh Malai Tikka", "price": "379" },
+          { "name": "Paneer Tikka Ajwani", "price": "329" },
+          { "name": "Murgh Mulayam Seekh", "price": "349" },
+          { "name": "Murgh Moroccan Kebab", "price": "499" },
+          { "name": "Tangdi Malai Kulfi", "price": "579" },
+          { "name": "Mutton Chops", "price": "649" },
+          { "name": "Chapli Kabab", "price": "699" }
+        ]
+      },
+      {
+        "name": "Main Course (Veg & Non-Veg)",
+        "items": [
+          { "name": "Malai Kofta", "price": "279.00/650" },
+          { "name": "Paneer Lawabdar", "price": "229/329" },
+          { "name": "Paneer Kadhai", "price": "249/299" },
+          { "name": "Murgh Kadhal", "price": "379.00" },
+          { "name": "Murgh Makhanwala (Butter Chicken)", "price": "399.00" },
+          { "name": "Murgh Awadhi", "price": "379.00" },
+          { "name": "Murgh Tikka Masala", "price": "379.00" },
+          { "name": "Gosht Korma", "price": "499.00" },
+          { "name": "Nalli Nahari", "price": "599.00" },
+          { "name": "Dal Bukhara", "price": "299.00" }
+        ]
+      },
+      {
+        "name": "Rice, Biryani & Breads",
+        "items": [
+          { "name": "Veg Biryani", "price": "279" },
+          { "name": "Chicken Biryani", "price": "349" },
+          { "name": "Mutton Biryani", "price": "499" },
+          { "name": "Nalli Biryani", "price": "649" },
+          { "name": "Afgani Raan Biryani", "price": "2299" },
+          { "name": "Tandoori Roti", "price": "29" },
+          { "name": "Butter Naan", "price": "69" },
+          { "name": "Garlic Naan", "price": "89" },
+          { "name": "Mulawah Roti", "price": "89/129" }
+        ]
+      },
+      {
+        "name": "Beverages & Desserts",
+        "items": [
+          { "name": "Sulemani Tea", "price": "49.00" },
+          { "name": "Virgin Mojito", "price": "150.00" },
+          { "name": "Kitkat Milkshake", "price": "150.00" },
+          { "name": "Baklawa", "price": "179" },
+          { "name": "Kunafa", "price": "349" },
+          { "name": "Shahi Gajar Ka Halwa", "price": "349" },
+          { "name": "Malai Firni", "price": "349" }
+        ]
+      }
+    ]
+  }
+}
+

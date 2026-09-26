@@ -1,0 +1,1353 @@
+[
+ {
+  "display_name": "Alice",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.6,
+   0.4,
+   0.2,
+   0.1,
+   0.9,
+   0.8
+  ]
+ },
+ {
+  "display_name": "Vihaan",
+  "diet_type": "veg",
+  "allergies": [],
+  "taste_vector": [
+   0.6,
+   0.5,
+   0.7,
+   0.3,
+   0.4,
+   0.8
+  ]
+ },
+ {
+  "display_name": "Kyle",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.1,
+   0.5,
+   0.1,
+   0.4,
+   0.1,
+   0.1
+  ]
+ },
+ {
+  "display_name": "Vincent",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.3,
+   0.2,
+   0.6,
+   0.1,
+   0.5,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Manisha",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.4,
+   0.8,
+   0.2,
+   0.3,
+   0.6,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Vasu",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.6,
+   0.4,
+   0.9,
+   0.1,
+   0.8,
+   0.3
+  ]
+ },
+ {
+  "display_name": "Tyler",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.2,
+   0.2,
+   0.3,
+   0.8,
+   0.2,
+   0.6
+  ]
+ },
+ {
+  "display_name": "Sophia",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.3,
+   0.8,
+   0.1,
+   0.9,
+   0.4,
+   0.6
+  ]
+ },
+ {
+  "display_name": "Liam",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.7,
+   0.2,
+   0.5,
+   0.6,
+   0.8,
+   0.1
+  ]
+ },
+ {
+  "display_name": "Olivia",
+  "diet_type": "veg",
+  "allergies": [],
+  "taste_vector": [
+   0.9,
+   0.4,
+   0.3,
+   0.2,
+   0.7,
+   0.5
+  ]
+ },
+ {
+  "display_name": "Noah",
+  "diet_type": "veg",
+  "allergies": [],
+  "taste_vector": [
+   0.1,
+   0.9,
+   0.6,
+   0.4,
+   0.2,
+   0.8
+  ]
+ },
+ {
+  "display_name": "Emma",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.5,
+   0.3,
+   0.8,
+   0.7,
+   0.1,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Jackson",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.5,
+   0.9,
+   0.4,
+   0.6,
+   0.1,
+   0.7
+  ]
+ },
+ {
+  "display_name": "Ava",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.8,
+   0.1,
+   0.9,
+   0.3,
+   0.6,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Aiden",
+  "diet_type": "veg",
+  "allergies": [],
+  "taste_vector": [
+   0.9,
+   0.1,
+   0.2,
+   0.8,
+   0.7,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Isabella",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.6,
+   0.9,
+   0.7,
+   0.1,
+   0.3,
+   0.2
+  ]
+ },
+ {
+  "display_name": "Lucas",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.5,
+   0.9,
+   0.6,
+   0.4,
+   0.3,
+   0.2
+  ]
+ },
+ {
+  "display_name": "Mia",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.3,
+   0.2,
+   0.6,
+   0.9,
+   0.7,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Ethan",
+  "diet_type": "non-veg",
+  "allergies": [],
+  "taste_vector": [
+   0.7,
+   0.1,
+   0.6,
+   0.9,
+   0.5,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Harper",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.5,
+   0.1,
+   0.9,
+   0.6,
+   0.3,
+   0.8
+  ]
+ },
+ {
+  "display_name": "Oliver",
+  "diet_type": "veg",
+  "allergies": [],
+  "taste_vector": [
+   0.2,
+   0.4,
+   0.3,
+   0.7,
+   0.9,
+   0.6
+  ]
+ },
+ {
+  "display_name": "Evelyn",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.8,
+   0.7,
+   0.5,
+   0.1,
+   0.4,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Elijah",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.4,
+   0.3,
+   0.8,
+   0.9,
+   0.6,
+   0.1
+  ]
+ },
+ {
+  "display_name": "Camila",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.6,
+   0.2,
+   0.1,
+   0.5,
+   0.8,
+   0.7
+  ]
+ },
+ {
+  "display_name": "James",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.9,
+   0.6,
+   0.7,
+   0.3,
+   0.2,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Gianna",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.1,
+   0.8,
+   0.4,
+   0.6,
+   0.5,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Benjamin",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.3,
+   0.5,
+   0.9,
+   0.2,
+   0.7,
+   0.1
+  ]
+ },
+ {
+  "display_name": "Eliana",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.7,
+   0.1,
+   0.2,
+   0.8,
+   0.4,
+   0.6
+  ]
+ },
+ {
+  "display_name": "Aria",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.2,
+   0.7,
+   0.8,
+   0.1,
+   0.9,
+   0.5
+  ]
+ },
+ {
+  "display_name": "Mason",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.8,
+   0.4,
+   0.3,
+   0.9,
+   0.1,
+   0.6
+  ]
+ },
+ {
+  "display_name": "Ella",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.4,
+   0.6,
+   0.5,
+   0.2,
+   0.8,
+   0.7
+  ]
+ },
+ {
+  "display_name": "Logan",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.9,
+   0.2,
+   0.1,
+   0.7,
+   0.6,
+   0.3
+  ]
+ },
+ {
+  "display_name": "Scarlett",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.1,
+   0.5,
+   0.9,
+   0.3,
+   0.4,
+   0.8
+  ]
+ },
+ {
+  "display_name": "Alexander",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.6,
+   0.3,
+   0.7,
+   0.8,
+   0.2,
+   0.5
+  ]
+ },
+ {
+  "display_name": "Abigail",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.3,
+   0.8,
+   0.2,
+   0.4,
+   0.9,
+   0.1
+  ]
+ },
+ {
+  "display_name": "Luna",
+  "diet_type": "veg",
+  "allergies": [],
+  "taste_vector": [
+   0.5,
+   0.4,
+   0.8,
+   0.1,
+   0.7,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Jacob",
+  "diet_type": "non-veg",
+  "allergies": [],
+  "taste_vector": [
+   0.2,
+   0.9,
+   0.4,
+   0.6,
+   0.3,
+   0.8
+  ]
+ },
+ {
+  "display_name": "Chloe",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.8,
+   0.2,
+   0.3,
+   0.7,
+   0.6,
+   0.1
+  ]
+ },
+ {
+  "display_name": "Michael",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.4,
+   0.7,
+   0.9,
+   0.5,
+   0.1,
+   0.2
+  ]
+ },
+ {
+  "display_name": "Mila",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.9,
+   0.1,
+   0.5,
+   0.3,
+   0.8,
+   0.6
+  ]
+ },
+ {
+  "display_name": "Daniel",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.1,
+   0.6,
+   0.2,
+   0.8,
+   0.4,
+   0.7
+  ]
+ },
+ {
+  "display_name": "Layla",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.6,
+   0.8,
+   0.7,
+   0.4,
+   0.2,
+   0.3
+  ]
+ },
+ {
+  "display_name": "Henry",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.3,
+   0.3,
+   0.1,
+   0.9,
+   0.5,
+   0.8
+  ]
+ },
+ {
+  "display_name": "Aaliyah",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.7,
+   0.5,
+   0.8,
+   0.2,
+   0.9,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Elena",
+  "diet_type": "veg",
+  "allergies": [],
+  "taste_vector": [
+   0.2,
+   0.2,
+   0.6,
+   0.1,
+   0.8,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Sebastian",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.8,
+   0.4,
+   0.9,
+   0.7,
+   0.3,
+   0.5
+  ]
+ },
+ {
+  "display_name": "Sarah",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.4,
+   0.7,
+   0.3,
+   0.5,
+   0.6,
+   0.2
+  ]
+ },
+ {
+  "display_name": "Zoe",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.1,
+   0.6,
+   0.8,
+   0.3,
+   0.5,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Matthew",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.6,
+   0.3,
+   0.5,
+   0.9,
+   0.4,
+   0.1
+  ]
+ },
+ {
+  "display_name": "Lily",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.3,
+   0.8,
+   0.1,
+   0.2,
+   0.9,
+   0.7
+  ]
+ },
+ {
+  "display_name": "Samuel",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.7,
+   0.5,
+   0.4,
+   0.6,
+   0.2,
+   0.8
+  ]
+ },
+ {
+  "display_name": "Emily",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.5,
+   0.9,
+   0.7,
+   0.1,
+   0.8,
+   0.3
+  ]
+ },
+ {
+  "display_name": "David",
+  "diet_type": "non-veg",
+  "allergies": [],
+  "taste_vector": [
+   0.2,
+   0.2,
+   0.9,
+   0.4,
+   0.3,
+   0.6
+  ]
+ },
+ {
+  "display_name": "Madelyn",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.8,
+   0.4,
+   0.6,
+   0.7,
+   0.1,
+   0.5
+  ]
+ },
+ {
+  "display_name": "Joseph",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.4,
+   0.7,
+   0.3,
+   0.8,
+   0.9,
+   0.2
+  ]
+ },
+ {
+  "display_name": "Stella",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.9,
+   0.1,
+   0.8,
+   0.2,
+   0.5,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Carter",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.1,
+   0.6,
+   0.4,
+   0.5,
+   0.7,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Maya",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.6,
+   0.3,
+   0.2,
+   0.9,
+   0.8,
+   0.1
+  ]
+ },
+ {
+  "display_name": "Owen",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.3,
+   0.8,
+   0.9,
+   0.1,
+   0.4,
+   0.7
+  ]
+ },
+ {
+  "display_name": "Paisley",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.6,
+   0.3,
+   0.4,
+   0.8,
+   0.5,
+   0.2
+  ]
+ },
+ {
+  "display_name": "Wyatt",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.5,
+   0.9,
+   0.6,
+   0.3,
+   0.8,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Athena",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.2,
+   0.2,
+   0.8,
+   0.7,
+   0.5,
+   0.1
+  ]
+ },
+ {
+  "display_name": "John",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.8,
+   0.4,
+   0.5,
+   0.4,
+   0.9,
+   0.6
+  ]
+ },
+ {
+  "display_name": "Penelope",
+  "diet_type": "non-veg",
+  "allergies": [],
+  "taste_vector": [
+   0.4,
+   0.7,
+   0.3,
+   0.9,
+   0.1,
+   0.8
+  ]
+ },
+ {
+  "display_name": "Jack",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.9,
+   0.1,
+   0.7,
+   0.2,
+   0.6,
+   0.5
+  ]
+ },
+ {
+  "display_name": "Arya",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.1,
+   0.6,
+   0.9,
+   0.5,
+   0.3,
+   0.2
+  ]
+ },
+ {
+  "display_name": "Luke",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.6,
+   0.3,
+   0.4,
+   0.8,
+   0.7,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Grace",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.3,
+   0.8,
+   0.2,
+   0.1,
+   0.5,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Jayden",
+  "diet_type": "veg",
+  "allergies": [],
+  "taste_vector": [
+   0.7,
+   0.5,
+   0.8,
+   0.6,
+   0.9,
+   0.1
+  ]
+ },
+ {
+  "display_name": "Natalie",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.5,
+   0.9,
+   0.1,
+   0.3,
+   0.4,
+   0.7
+  ]
+ },
+ {
+  "display_name": "Dylan",
+  "diet_type": "veg",
+  "allergies": [],
+  "taste_vector": [
+   0.2,
+   0.2,
+   0.6,
+   0.7,
+   0.8,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Addison",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.8,
+   0.4,
+   0.9,
+   0.4,
+   0.2,
+   0.3
+  ]
+ },
+ {
+  "display_name": "Grayson",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.4,
+   0.7,
+   0.5,
+   0.9,
+   0.1,
+   0.6
+  ]
+ },
+ {
+  "display_name": "Bella",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.9,
+   0.1,
+   0.3,
+   0.2,
+   0.7,
+   0.8
+  ]
+ },
+ {
+  "display_name": "Levi",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.1,
+   0.6,
+   0.8,
+   0.5,
+   0.6,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Nora",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.6,
+   0.3,
+   0.4,
+   0.8,
+   0.9,
+   0.2
+  ]
+ },
+ {
+  "display_name": "Isaac",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.3,
+   0.8,
+   0.9,
+   0.1,
+   0.5,
+   0.7
+  ]
+ },
+ {
+  "display_name": "Hazel",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.7,
+   0.5,
+   0.2,
+   0.6,
+   0.1,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Gabriel",
+  "diet_type": "non-veg",
+  "allergies": [],
+  "taste_vector": [
+   0.5,
+   0.9,
+   0.7,
+   0.3,
+   0.8,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Aurora",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.2,
+   0.2,
+   0.1,
+   0.7,
+   0.4,
+   0.6
+  ]
+ },
+ {
+  "display_name": "Julian",
+  "diet_type": "non-veg",
+  "allergies": [],
+  "taste_vector": [
+   0.8,
+   0.4,
+   0.6,
+   0.4,
+   0.9,
+   0.5
+  ]
+ },
+ {
+  "display_name": "Brooklyn",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.4,
+   0.7,
+   0.9,
+   0.9,
+   0.3,
+   0.1
+  ]
+ },
+ {
+  "display_name": "Mateo",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.9,
+   0.1,
+   0.5,
+   0.2,
+   0.8,
+   0.7
+  ]
+ },
+ {
+  "display_name": "Audrey",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.1,
+   0.6,
+   0.2,
+   0.5,
+   0.7,
+   0.3
+  ]
+ },
+ {
+  "display_name": "Anthony",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.6,
+   0.3,
+   0.8,
+   0.8,
+   0.2,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Savannah",
+  "diet_type": "non-veg",
+  "allergies": [
+   "shellfish"
+  ],
+  "taste_vector": [
+   0.3,
+   0.8,
+   0.4,
+   0.1,
+   0.6,
+   0.4
+  ]
+ },
+ {
+  "display_name": "Jaxon",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.7,
+   0.5,
+   0.1,
+   0.6,
+   0.9,
+   0.2
+  ]
+ },
+ {
+  "display_name": "Claire",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.5,
+   0.9,
+   0.9,
+   0.3,
+   0.4,
+   0.8
+  ]
+ },
+ {
+  "display_name": "Lincoln",
+  "diet_type": "veg",
+  "allergies": [
+   "gluten"
+  ],
+  "taste_vector": [
+   0.2,
+   0.2,
+   0.3,
+   0.7,
+   0.8,
+   0.1
+  ]
+ },
+ {
+  "display_name": "Skylar",
+  "diet_type": "vegan",
+  "allergies": [
+   "dairy"
+  ],
+  "taste_vector": [
+   0.8,
+   0.4,
+   0.7,
+   0.4,
+   0.1,
+   0.6
+  ]
+ },
+ {
+  "display_name": "Joshua",
+  "diet_type": "mix",
+  "allergies": [],
+  "taste_vector": [
+   0.4,
+   0.7,
+   0.5,
+   0.9,
+   0.6,
+   0.3
+  ]
+ },
+ {
+  "display_name": "Lucy",
+  "diet_type": "non-veg",
+  "allergies": [],
+  "taste_vector": [
+   0.9,
+   0.1,
+   0.2,
+   0.2,
+   0.7,
+   0.5
+  ]
+ },
+ {
+  "display_name": "Christopher",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.1,
+   0.6,
+   0.8,
+   0.5,
+   0.3,
+   0.9
+  ]
+ },
+ {
+  "display_name": "Andrew",
+  "diet_type": "veg",
+  "allergies": [],
+  "taste_vector": [
+   0.3,
+   0.8,
+   0.9,
+   0.1,
+   0.9,
+   0.7
+  ]
+ },
+ {
+  "display_name": "Everly",
+  "diet_type": "non-veg",
+  "allergies": [
+   "peanuts"
+  ],
+  "taste_vector": [
+   0.7,
+   0.5,
+   0.2,
+   0.6,
+   0.4,
+   0.1
+  ]
+ }
+]

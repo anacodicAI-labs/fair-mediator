@@ -1,0 +1,5 @@
+# Fair Mediator — no dependency beyond the standard library for 01-04.
+# jupyter/nbconvert are for running the notebooks; nothing in nbio.py imports them.
+jupyter
+nbconvert
+nbformat

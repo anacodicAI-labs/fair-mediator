@@ -1,0 +1,7 @@
+max_rounds,converged,pct_of_ceiling,cap_hit,cap_hit_but_solvable,candidates_exhausted
+2,102,99.0,98,1,0
+4,103,100.0,97,0,0
+8,103,100.0,97,0,0
+16,103,100.0,97,0,0
+32,103,100.0,97,0,0
+64,103,100.0,97,0,0

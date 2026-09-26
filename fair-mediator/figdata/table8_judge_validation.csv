@@ -1,0 +1,5 @@
+claim_id,source_paper,comparison,human_direction,judge_direction,agrees,margin,verified
+C1,"Barile, Tintarev et al. (2023)",least_misery vs average,a_fairer,a_fairer,True,0.067,pending
+C2,"Barile, Tintarev et al. (2023)",most_pleasure vs average,b_fairer,b_fairer,True,0.1,pending
+C3,"Waterschoot, Yera Toledo, Tintarev, Barile (UMAP 2025)",fair vs most_pleasure,a_fairer,a_fairer,True,0.2,pending
+C4,Quantitative Explanations on Fairness Perception in GRS (UMAP 2025),fair vs average,a_fairer,a_fairer,True,0.1,pending

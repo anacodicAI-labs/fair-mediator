@@ -1,0 +1,5 @@
+claim_id,source_paper,claim_text,test_selector_a,test_selector_b,human_direction,page_cite,verified
+C1,"Barile, Tintarev et al. (2023)","Explanations that surface the least-satisfied member raise perceived fairness relative to group-average framing; the underlying preference is for protecting the worst-off member.",least_misery,average,a_fairer,TODO,pending
+C2,"Barile, Tintarev et al. (2023)","Strategies that maximise one member's utility are perceived as less fair than balanced strategies.",most_pleasure,average,b_fairer,TODO,pending
+C3,"Waterschoot, Yera Toledo, Tintarev, Barile (UMAP 2025)","Group outcomes with a higher floor of per-member satisfaction are rated more consensual than outcomes with the same mean but a lower floor.",fair,most_pleasure,a_fairer,TODO,pending
+C4,"Quantitative Explanations on Fairness Perception in GRS (UMAP 2025)","Reducing the spread of per-member satisfaction raises fairness perception even when the mean is unchanged.",fair,average,a_fairer,TODO,pending

@@ -1,0 +1,84 @@
+
+{
+  "restaurant_name": "Ministry of South Bar and Kitchen",
+  "location": "Gachibowli, Hyderabad",
+  "menu_categories": [
+    {
+      "category": "South Indian Veg Starters",
+      "items": [
+        { "name": "Kaju Mushroom Pakoda", "price": 325 },
+        { "name": "Spicy Paneer Ghee Roast", "price": 375 },
+        { "name": "Pachi Mirchi Gobi", "price": 345 },
+        { "name": "Mokka Jonna Vada", "price": 325 },
+        { "name": "Paneer Mirchi Bajji", "price": 345 }
+      ]
+    },
+    {
+      "category": "Egg Starters",
+      "items": [
+        { "name": "Egg Vepudu", "price": 375 },
+        { "name": "Anda Pepper Fry", "price": 375 },
+        { "name": "Egg Pakodi", "price": 380 }
+      ]
+    },
+    {
+      "category": "Chicken Starters",
+      "items": [
+        { "name": "Khaju Chicken Pakoda (BL)", "price": 475 },
+        { "name": "Andhra Chicken Fry", "price": 425 },
+        { "name": "Guntur Kodi Vepedu (Fried)", "price": 425 },
+        { "name": "Neelagiri Chicken Fry (BL)", "price": 485 },
+        { "name": "Mirayala Kodi Vepudu", "price": 425 },
+        { "name": "Karvepaku Kodi Wings", "price": 430 },
+        { "name": "Kothimera Chicken Fry (BL)", "price": 475 }
+      ]
+    },
+    {
+      "category": "Mutton Starters",
+      "items": [
+        { "name": "Miryala Mutton Vepudu", "price": 495 },
+        { "name": "Mamsam Ghee Roast", "price": 485 }
+      ]
+    },
+    {
+      "category": "Thali",
+      "items": [
+        { "name": "South Indian Veg Thali", "price": 349 },
+        { "name": "North Indian Veg Thali", "price": 389 },
+        { "name": "South Indian Non Veg Thali", "price": 499 }
+      ]
+    },
+    {
+      "category": "Main Course - South Indian",
+      "sub_categories": [
+        {
+          "name": "Chicken Curries",
+          "items": [
+            { "name": "Andhra Chicken Curry", "price": 395 },
+            { "name": "Telangana Kodi Iguru", "price": 395 },
+            { "name": "Natu Kodi Pulusu", "price": 435 }
+          ]
+        },
+        {
+          "name": "Mutton Curries",
+          "items": [
+            { "name": "Andhra Mutton Curry", "price": 485 },
+            { "name": "Gonguru Mamsam Curry", "price": 485 },
+            { "name": "Mulakaya Mutton Curry", "price": 495 },
+            { "name": "Kheema Curry", "price": 499 }
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Desserts",
+      "items": [
+        { "name": "Apricot Delight", "price": 275 },
+        { "name": "Brownie With Ice Cream", "price": 275 },
+        { "name": "Malai Bread", "price": 275 },
+        { "name": "Qurbani Ka Meetha", "price": 265 },
+        { "name": "Penne Gulab Jamun", "price": 265 }
+      ]
+    }
+  ]
+}

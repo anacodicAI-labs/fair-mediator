@@ -1,0 +1,3 @@
+dataset,selector,mean_sat,min_sat,jain,n_groups
+potluck (5 menu-backed restaurants),fair,0.6413,0.4593,0.9547,200
+NOT YET SELECTED,--,--,--,--,0

@@ -1,0 +1,101 @@
+id,text,gold_label,gold_member,category,pred_label,pred_member,conf
+r001,sounds good to me,accept,SELF,plain,accept,SELF,0.95
+r002,yeah I'm happy with that,accept,SELF,plain,accept,SELF,0.95
+r003,"perfect, let's do it",accept,SELF,plain,accept,SELF,0.99
+r004,works for me,accept,SELF,plain,accept,SELF,0.95
+r005,great choice,accept,SELF,plain,accept,SELF,0.95
+r006,yes please,accept,SELF,plain,accept,SELF,0.99
+r007,I'm in,accept,SELF,plain,accept,SELF,0.99
+r008,that's fine by me,accept,SELF,plain,accept,SELF,0.95
+r009,love that place,accept,SELF,plain,accept,SELF,0.95
+r010,"sure, book it",accept,SELF,plain,accept,SELF,0.95
+r011,no objections here,accept,SELF,plain,accept,SELF,0.95
+r012,happy with either honestly,accept,SELF,plain,accept,SELF,0.95
+r013,"that works, I've been wanting to try it",accept,SELF,plain,accept,SELF,0.95
+r014,ok good,accept,SELF,plain,accept,SELF,0.9
+r015,fine with me,accept,SELF,plain,accept,SELF,0.95
+r016,"eh, not really feeling it",reject,SELF,plain,reject,SELF,0.9
+r017,could we look at something else,reject,SELF,plain,reject,SELF,0.9
+r018,I'd rather not,reject,SELF,plain,reject,SELF,0.9
+r019,not my first choice,reject,SELF,plain,reject,SELF,0.8
+r020,"hmm, maybe something different",reject,SELF,plain,reject,SELF,0.8
+r021,I'm lukewarm on that,reject,SELF,plain,reject,SELF,0.8
+r022,we were just there last week,reject,SELF,plain,reject,SELF,0.8
+r023,bit far for me,reject,SELF,plain,reject,SELF,0.9
+r024,not in the mood for that today,reject,SELF,plain,reject,SELF,0.9
+r025,can we see other options,reject,SELF,plain,reject,SELF,0.9
+r026,meh,reject,SELF,plain,reject,SELF,0.8
+r027,I'd prefer somewhere else,reject,SELF,plain,reject,SELF,0.95
+r028,not really what I had in mind,reject,SELF,plain,reject,SELF,0.9
+r029,pass,reject,SELF,plain,reject,SELF,0.8
+r030,I'm not sold,reject,SELF,plain,reject,SELF,0.8
+r031,rather do something else if that's ok,reject,SELF,plain,reject,SELF,0.9
+r032,it's a bit pricey for me,reject,SELF,plain,reject,SELF,0.9
+r033,nah,reject,SELF,plain,reject,SELF,0.9
+r034,"absolutely not, I hate that place",strong_dislike,SELF,plain,strong_dislike,SELF,0.99
+r035,"no way, the service there is awful",strong_dislike,SELF,plain,strong_dislike,SELF,0.95
+r036,I really can't stand their food,strong_dislike,SELF,plain,strong_dislike,SELF,0.95
+r037,that place made me ill last time,strong_dislike,SELF,plain,strong_dislike,SELF,0.9
+r038,please anywhere but there,strong_dislike,SELF,plain,reject,SELF,0.9
+r039,I strongly dislike that cuisine,strong_dislike,SELF,plain,strong_dislike,SELF,0.99
+r040,that's the worst option on the list,strong_dislike,SELF,plain,strong_dislike,SELF,0.95
+r041,ugh no,strong_dislike,SELF,plain,reject,SELF,0.9
+r042,I really don't want to go there,strong_dislike,SELF,plain,strong_dislike,SELF,0.95
+r043,hard no from me,strong_dislike,SELF,plain,veto,SELF,0.95
+r044,that would ruin the evening for me,strong_dislike,SELF,plain,strong_dislike,SELF,0.95
+r045,I detest that place,strong_dislike,SELF,plain,strong_dislike,SELF,0.99
+r046,"genuinely awful, please no",strong_dislike,SELF,plain,strong_dislike,SELF,0.95
+r047,I'd be miserable there,strong_dislike,SELF,plain,strong_dislike,SELF,0.95
+r048,that's a terrible pick,strong_dislike,SELF,plain,strong_dislike,SELF,0.95
+r049,"no thank you, really not",strong_dislike,SELF,plain,reject,SELF,0.9
+r050,I can't do that one,strong_dislike,SELF,plain,reject,SELF,0.9
+r051,I'm using my veto on this one,veto,SELF,plain,veto,SELF,0.99
+r052,vetoing that,veto,SELF,plain,veto,SELF,0.95
+r053,I'm going to veto,veto,SELF,plain,veto,SELF,1.0
+r054,that's a veto from me,veto,SELF,plain,veto,SELF,1.0
+r055,I'll spend my veto here,veto,SELF,plain,veto,SELF,0.99
+r056,"blocking this one, I have a nut allergy and they fry everything together",veto,SELF,plain,veto,SELF,0.99
+r057,"I have to veto, it's genuinely unsafe for me",veto,SELF,plain,veto,SELF,0.99
+r058,using my one veto,veto,SELF,plain,veto,SELF,0.99
+r059,veto,veto,SELF,plain,veto,SELF,1.0
+r060,I'm exercising my veto right,veto,SELF,plain,veto,SELF,1.0
+r061,"this one's a dealbreaker, veto",veto,SELF,plain,veto,SELF,0.99
+r062,"nope, veto, I can't eat anything there",veto,SELF,plain,veto,SELF,0.99
+r063,"oh great, sushi again",strong_dislike,SELF,sarcasm,strong_dislike,SELF,0.95
+r064,"wonderful, my favourite place in the world",strong_dislike,SELF,sarcasm,accept,SELF,1.0
+r065,"brilliant, exactly what I was hoping for",strong_dislike,SELF,sarcasm,accept,SELF,0.95
+r066,"oh fantastic, more noodles",strong_dislike,SELF,sarcasm,accept,SELF,0.95
+r067,yeah because that went so well last time,strong_dislike,SELF,sarcasm,accept,SELF,0.95
+r068,"sure, if we want to queue for an hour",reject,SELF,sarcasm,accept,SELF,0.9
+r069,"lovely, another salad bar",reject,SELF,sarcasm,accept,SELF,0.95
+r070,can't wait,strong_dislike,SELF,sarcasm,accept,SELF,0.95
+r071,"I mean, it's fine I guess",reject,SELF,hedge,accept,SELF,0.9
+r072,I don't hate it,accept,SELF,hedge,reject,SELF,0.8
+r073,could be worse,reject,SELF,hedge,reject,SELF,0.8
+r074,if everyone else wants it,accept,SELF,hedge,accept,SELF,0.9
+r075,I suppose that works,accept,SELF,hedge,accept,SELF,0.95
+r076,not amazing but okay,accept,SELF,hedge,accept,SELF,0.8
+r077,I'm not thrilled but I won't block it,reject,SELF,hedge,reject,SELF,0.9
+r078,whatever you all think,accept,SELF,hedge,accept,SELF,0.6
+r079,it's alright I guess,reject,SELF,hedge,accept,SELF,0.8
+r080,I could live with it,accept,SELF,hedge,accept,SELF,0.9
+r081,fine if they have something vegan,accept,SELF,conditional,accept,SELF,0.95
+r082,ok as long as they do gluten free,accept,SELF,conditional,accept,SELF,0.95
+r083,works if we can book a table before 7,accept,SELF,conditional,accept,SELF,0.95
+r084,yes but only if they have non-spicy options,accept,SELF,conditional,accept,SELF,0.95
+r085,sure provided it isn't the branch downtown,accept,SELF,conditional,accept,SELF,0.95
+r086,alright if someone checks they do dairy free,accept,SELF,conditional,accept,SELF,0.9
+r087,happy to if they take reservations,accept,SELF,conditional,accept,SELF,0.95
+r088,ok but I'll need to check the menu first,accept,SELF,conditional,accept,SELF,0.9
+r089,Cara won't eat that,reject,Cara,other_member,veto,Cara,0.99
+r090,"Ben's allergic to shellfish, that place is all seafood",veto,Ben,other_member,veto,Ben,0.99
+r091,Aisha can't have dairy and that's a cheese restaurant,veto,Aisha,other_member,veto,Aisha,0.99
+r092,I think Vihaan hates Thai food,strong_dislike,Vihaan,other_member,strong_dislike,Vihaan,0.9
+r093,"won't work for Vincent, he's vegan",veto,Vincent,other_member,veto,Vincent,0.99
+r094,Vasu said he didn't like it last time,reject,Vasu,other_member,reject,Vasu,0.9
+r095,"Cara is going to veto this, just warning you",veto,Cara,other_member,veto,Cara,0.95
+r096,Ann really doesn't do spicy,strong_dislike,Ann,other_member,reject,Ann,0.9
+r097,that's not going to work for Sofia,reject,Sofia,other_member,reject,Sofia,0.9
+r098,Ben would be fine with that one actually,accept,Ben,other_member,accept,Ben,0.95
+r099,Aisha loves that place,accept,Aisha,other_member,accept,Aisha,0.95
+r100,Marcus is gluten free so that's out,veto,Marcus,other_member,veto,Marcus,0.99
