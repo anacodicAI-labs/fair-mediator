@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+# runs/ is TRACKED on purpose -- it is not scratch space. The per-call logs
+# are the raw evidence behind the judge tables, and 07-judge/01 replays them
+# when no API key is present, so a fresh clone can rebuild Tables 9-10 offline.
+# Before committing a new run log, check it for keys: the logs store the raw
+# model replies, so anything a prompt echoed back ends up in here.
+.env
