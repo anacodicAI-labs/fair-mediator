@@ -307,7 +307,7 @@ def rank_candidates(candidate_taste_vectors: Dict[str, Sequence[float]],
 
 # ── Stage 2: the feasible set F ───────────────────────────────────────────────
 #
-# Original to this paper (Rashan), ported from potluck's
+# Original to this paper (Vihaan), ported from potluck's
 # backend/services/aggregation.py.
 
 NON_VEGAN_WORDS = ["paneer", "cheese", "butter", "ghee", "cream", "milk", "malai",
@@ -369,7 +369,7 @@ def build_feasible_set(catalog: Sequence[Dict], members: Sequence[Dict]) -> List
 
 # ── Stage 5: fairness metrics ─────────────────────────────────────────────────
 #
-# Original to this paper (Rashan), ported from potluck's
+# Original to this paper (Vihaan), ported from potluck's
 # backend/services/fairness_metrics.py.
 
 def min_sat(values: Sequence[float]) -> float:
