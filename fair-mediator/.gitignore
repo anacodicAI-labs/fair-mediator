@@ -4,3 +4,7 @@ data/external_cache/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+# Hand-check sheets quote Kaggle text (dish names, descriptions, ingredients); only
+# their scores are committed, in validation/README.md
+validation/*.csv
+.DS_Store

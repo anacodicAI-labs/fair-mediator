@@ -73,9 +73,12 @@ def load_run(stage: str, run_id: str = "demo") -> Any:
 
 def save_figdata(name: str, rows: list[dict]) -> Path:
     """Write one CSV that a paper table/figure reads. This is the ONLY path a
-    reported number may travel — see the repository's non-negotiables."""
+    reported number may travel — see the repository's non-negotiables.
+
+    FM_FIGDATA (a folder, relative to the repo) redirects the output, so runs
+    on different datasets do not overwrite each other's CSVs."""
     import csv
-    p = FIGDATA / name
+    p = HERE / os.environ["FM_FIGDATA"] / name if os.environ.get("FM_FIGDATA") else FIGDATA / name
     p.parent.mkdir(parents=True, exist_ok=True)
     if rows:
         with p.open("w", newline="") as f:
@@ -581,13 +584,33 @@ def load_catalog() -> List[Dict]:
 
         FM_DATASET unset / "potluck"  -> the 5 menus in data/Menu/ (default)
         FM_DATASET = "ubereats"       -> load_catalog_ubereats(FM_CITY)
+        FM_DATASET = "ubereats-shuffled" -> the same city with dishes dealt out
+                                         at random (random-menu control, §7.4)
     """
     dataset = (os.environ.get("FM_DATASET") or "potluck").strip().lower()
     if dataset == "potluck":
         return _load_catalog_potluck()
     if dataset == "ubereats":
         return load_catalog_ubereats(os.environ.get("FM_CITY"))
-    raise ValueError(f"FM_DATASET={dataset!r}: expected 'potluck' or 'ubereats'")
+    if dataset == "ubereats-shuffled":
+        return shuffle_menus(load_catalog_ubereats(os.environ.get("FM_CITY")),
+                             seed=int(os.environ.get("FM_SHUFFLE_SEED") or 7))
+    raise ValueError(f"FM_DATASET={dataset!r}: expected 'potluck', 'ubereats' or 'ubereats-shuffled'")
+
+
+def shuffle_menus(catalog: Sequence[Dict], seed: int = 7) -> List[Dict]:
+    """Random-menu control: the same restaurants and menu sizes, but every dish
+    is dealt to a random restaurant, so each one tastes like 'the average of
+    everything'. If lambda helps on the real catalog and not on this one, the
+    gain comes from real differences between restaurants."""
+    dishes = [d for o in catalog for d in o["menu"]]
+    _random.Random(seed).shuffle(dishes)
+    out, i = [], 0
+    for o in catalog:
+        menu = dishes[i:i + len(o["menu"])]
+        i += len(o["menu"])
+        out.append({**o, "menu": menu, "taste": _restaurant_taste(menu)})
+    return out
 
 
 def _restaurant_taste(menu: Sequence[Dict]) -> List[float]:
