@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+# runs/ is TRACKED on purpose -- it is not scratch space. The per-call logs
+# are the raw evidence behind the judge tables, and 07-judge/01 replays them
+# when no API key is present, so a fresh clone can rebuild Tables 9-10 offline.
+# Before committing a new run log, check it for keys: the logs store the raw
+# model replies, so anything a prompt echoed back ends up in here.
+.env
+# Kaggle-derived data never enters the repo (see data/README.md)
+data/external/
+data/external_cache/
+# Hand-check sheets quote Kaggle text (dish names, descriptions, ingredients); only
+# their scores are committed, in validation/README.md
+validation/*.csv

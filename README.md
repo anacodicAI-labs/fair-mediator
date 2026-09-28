@@ -11,9 +11,8 @@ Restaurant Recommendation under Inviolable Safety Constraints*
 
 This repository is cookbook-style: the maths lives in `nbio.py` and every
 notebook cell that runs it is real, executed output — nothing on screen is
-invented or seeded. See `rashan/how-to/How_to_write_notebooks.txt` for the
-rules this repo follows, and `AnacodicAI-Labs/docs/work-files/ai-in-food/research_fair-mediator/prds/` for the full
-plan and every pending task.
+invented or seeded. A notebook holds no logic of its own: it imports from
+`nbio.py` and shows what each step reads and writes.
 
 ## Run in 60 seconds
 
