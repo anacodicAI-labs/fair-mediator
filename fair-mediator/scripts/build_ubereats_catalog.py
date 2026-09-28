@@ -57,7 +57,7 @@ NON_DISH_ITEM = re.compile(
     r"^(side of |extra |add |no )|"
     r"\b(coke|coca[- ]cola|pepsi|sprite|dr\.? pepper|fanta|mountain dew|7[- ]?up|gatorade|"
     r"red bull|bottled water|water|soda|lemonade|iced tea|sweet tea|milkshake|smoothie|latte|"
-    r"cappuccino|americano|espresso|utensils?|napkins?|cutlery|straws?)\b", re.I)
+    r"cappuccino|americano|espresso|utensils?|silverware|napkins?|cutlery|straws?)\b", re.I)
 SAUCE_ONLY = re.compile(r"^\W*(\w+\W+){0,2}(sauce|dressing|dip|ketchup|ranch|mayo|salsa)\W*$", re.I)
 
 MIN_DISHES = 10

@@ -86,6 +86,14 @@ def score_bitter() -> None:
     print(f"labelled {len(lab)}/{len(rows)}")
     print(f"  precision   (scored bitter AND looks bitter)   {_fmt(tp, len(pos))}")
     print(f"  missed rate (scored 0 BUT looks bitter)        {_fmt(fn, len(neg))}")
+    # The score is graded (a pinch of zest gives 0.03), so "> 0" is the harshest
+    # cut. Precision/recall at higher cuts show whether the size of the score tracks taste.
+    print("  cut-off  scored>=cut  precision                      recall")
+    n_y = sum(r["looks_bitter"].strip().lower() == "y" for r in lab)
+    for t in (0.05, 0.1, 0.2, 0.3):
+        hit = [r for r in lab if float(r["bitter_score"]) >= t]
+        k = sum(r["looks_bitter"].strip().lower() == "y" for r in hit)
+        print(f"    {t:.2f}   {len(hit):>4}       {_fmt(k, len(hit)):<30} {_fmt(k, n_y)}")
 
 
 def score_match(city: str) -> None:
