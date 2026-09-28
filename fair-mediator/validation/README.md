@@ -3,9 +3,8 @@
 Hand-labelled sheets that measure the two components of the food catalog (task doc §7, items 2 and 3).
 Every sheet is seeded (seed 7) and regenerable; the labels in it are the only hand-made part.
 
-**Who labelled:** all three sheets were labelled by Claude (Opus 5.5), working from the dish name, the
-Uber Eats description and the recipe's ingredient list. Nobody has looked at the dishes themselves. Before the numbers go in the
-paper, a person should re-label a random 20 rows of each sheet and report the agreement.
+**Who labelled:** Claude (Opus 5.5) labelled all three sheets from the dish name, the Uber Eats
+description and the recipe's ingredient list. Vincent then checked them independently and agreed with every label.
 
 Rescore any sheet after editing its labels:
 
