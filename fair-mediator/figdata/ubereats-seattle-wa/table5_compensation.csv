@@ -1,0 +1,3 @@
+level,min_sat,mean_sat,n_groups
+restaurant (whole-menu avg),0.7004,0.8187,200
+dish-compensated (per diner),0.792,0.8719,200

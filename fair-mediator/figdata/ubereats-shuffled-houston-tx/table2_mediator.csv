@@ -1,0 +1,4 @@
+arm,rounds_mean,rounds_sd,converged_frac,pct_of_reachable,n_groups
+mediator_off (one-shot),1.0,0.0,1.0,100.0,200
+mediator_on,1.0,0.0,1.0,100.0,200
+ceiling (best option in F),--,--,1.0,100.0,200

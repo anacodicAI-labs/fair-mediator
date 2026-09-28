@@ -3,3 +3,10 @@
 jupyter
 nbconvert
 nbformat
+
+# Catalog build only (scripts/build_ubereats_catalog.py). nbio.py still needs
+# none of these: load_catalog_ubereats() reads the JSON the script writes.
+pandas
+numpy
+scipy
+scikit-learn
