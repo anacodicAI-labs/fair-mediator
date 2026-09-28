@@ -1,0 +1,76 @@
+ingredient,bitter,note
+bitter melon,0.95,
+bitter gourd,0.95,
+karela,0.95,Hindi name for bitter gourd
+angostura bitters,0.9,
+bitters,0.9,
+campari,0.9,
+coffee,0.9,covers instant/brewed/strong coffee
+espresso,0.9,
+cacao nibs,0.8,
+unsweetened cocoa,0.8,
+cocoa powder,0.8,
+cocoa,0.8,
+unsweetened chocolate,0.8,
+baking chocolate,0.8,
+tonic water,0.7,
+bittersweet chocolate,0.6,
+dark chocolate,0.6,
+radicchio,0.6,
+endive,0.6,
+chicory,0.6,
+escarole,0.6,
+frisee,0.6,
+broccoli rabe,0.6,
+rapini,0.6,
+dandelion greens,0.6,
+grapefruit,0.6,
+beer,0.6,
+stout,0.6,
+lager,0.6,
+fenugreek,0.6,
+methi,0.6,Hindi name for fenugreek
+kale,0.5,
+arugula,0.5,
+rocket,0.5,UK name for arugula
+matcha,0.5,
+mustard greens,0.5,
+green tea,0.4,
+black tea,0.4,
+tea bags,0.4,
+tea bag,0.4,
+collard greens,0.4,
+turnip greens,0.4,
+watercress,0.4,
+brussels sprouts,0.4,
+dry vermouth,0.4,
+semisweet chocolate,0.3,
+semi-sweet chocolate,0.3,
+coffee liqueur,0.3,sweetened; weaker than coffee itself
+turmeric,0.3,
+lemon zest,0.3,citrus pith/zest
+orange zest,0.3,
+lime zest,0.3,
+lemon peel,0.3,
+orange peel,0.3,
+zest of,0.3,"catches 'lemon, zest of'"
+orange marmalade,0.3,
+broccoli,0.2,
+eggplant,0.2,
+eggplants,0.2,
+saffron,0.2,
+white chocolate,0,exclusion: sweet not bitter
+milk chocolate,0,exclusion
+chocolate syrup,0,exclusion
+chocolate pudding,0,exclusion
+chocolate cake mix,0,exclusion
+chocolate ice cream,0,exclusion
+cocoa mix,0,exclusion: sweetened hot-cocoa mix
+hot cocoa,0,exclusion
+root beer,0,exclusion
+ginger beer,0,exclusion
+coffee creamer,0,exclusion
+coffee cake,0,exclusion
+coffee-mate,0,exclusion
+creme de cacao,0,exclusion: sweet liqueur
+green tea ice cream,0,exclusion

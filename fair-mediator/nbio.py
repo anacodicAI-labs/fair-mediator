@@ -575,6 +575,30 @@ import random as _random
 
 
 def load_catalog() -> List[Dict]:
+    """The option catalog the harness scores. Which dataset is chosen by the
+    FM_DATASET environment variable, so the notebooks run unedited on every
+    dataset (task doc §7.5):
+
+        FM_DATASET unset / "potluck"  -> the 5 menus in data/Menu/ (default)
+        FM_DATASET = "ubereats"       -> load_catalog_ubereats(FM_CITY)
+    """
+    dataset = (os.environ.get("FM_DATASET") or "potluck").strip().lower()
+    if dataset == "potluck":
+        return _load_catalog_potluck()
+    if dataset == "ubereats":
+        return load_catalog_ubereats(os.environ.get("FM_CITY"))
+    raise ValueError(f"FM_DATASET={dataset!r}: expected 'potluck' or 'ubereats'")
+
+
+def _restaurant_taste(menu: Sequence[Dict]) -> List[float]:
+    """Equation 1: a restaurant tastes like the mean of its dishes, skipping
+    dishes whose taste is unknown (all zeros). One definition for every
+    dataset, so the rule cannot differ between the two cities or sources."""
+    nz = [d["taste"] for d in menu if sum(abs(x) for x in d["taste"]) > 0]
+    return [sum(v[i] for v in nz) / len(nz) for i in range(6)] if nz else [0.0] * 6
+
+
+def _load_catalog_potluck() -> List[Dict]:
     """Build the option catalog from the real menus in data/Menu/.
 
     Each option carries per-dish taste vectors and a whole-menu average, the
@@ -606,14 +630,298 @@ def load_catalog() -> List[Dict]:
     for f in sorted((DATA / "Menu").glob("*.json")):
         names = [n for n in dish_names(json.loads(f.read_text())) if n]
         menu = [{"name": n, "taste": infer(n)} for n in names]
-        nz = [d["taste"] for d in menu if sum(abs(x) for x in d["taste"]) > 0]
-        avg = [sum(v[i] for v in nz) / len(nz) for i in range(6)] if nz else [0.0] * 6
-        catalog.append({"option_id": f.stem, "name": f.stem, "menu": menu, "taste": avg})
+        catalog.append({"option_id": f.stem, "name": f.stem, "menu": menu,
+                        "taste": _restaurant_taste(menu)})
     return catalog
 
 
 def load_personas() -> List[Dict]:
     return json.loads((DATA / "personas.json").read_text())
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# REAL FOOD DATA — Food.com recipe taste + Uber Eats restaurants
+#
+# Original to this paper (Vincent, wangvincentx-cmd), per the task doc's food
+# side: recipe_taste() is the ONE taste function both catalog (dish taste) and
+# personas (user taste = mean over 4+-star recipes) import. No Kaggle data is
+# committed — see data/README.md for where each file goes.
+# ═════════════════════════════════════════════════════════════════════════════
+
+import ast as _ast
+import functools as _functools
+import hashlib as _hashlib
+import re as _re
+import statistics as _statistics
+
+EXTERNAL = DATA / "external"              # gitignored: raw Kaggle-derived files
+EXTERNAL_CACHE = DATA / "external_cache"  # gitignored: catalogs built from them
+BITTER_CSV = DATA / "bitter-ingredients.csv"
+
+_RECIPES: Optional[Dict[int, Tuple[Dict[str, float], List[str]]]] = None
+
+
+def flavour_csv_path() -> Path:
+    return Path(os.environ.get("FM_FLAVOUR_CSV") or EXTERNAL / "recipes_with_flavour_profiles.csv")
+
+
+def _recipes() -> Dict[int, Tuple[Dict[str, float], List[str]]]:
+    """id -> (5-D flavour profile, ingredient list), loaded once on first use.
+
+    The profile's five dims are, measured on 300 random recipes, the mean of
+    data/ingredient-flavor.csv over the recipe ingredients whose exact name is
+    in that table (mean abs error 0.0012). bitter is added below by the same
+    rule."""
+    global _RECIPES
+    if _RECIPES is None:
+        path = flavour_csv_path()
+        if not path.exists():
+            raise FileNotFoundError(
+                f"{path} not found. Copy recipes_with_flavour_profiles.csv there "
+                f"(or set FM_FLAVOUR_CSV) — see data/README.md.")
+        _csv.field_size_limit(1 << 24)
+        out = {}
+        with open(path, newline="") as f:
+            for row in _csv.DictReader(f):
+                out[int(row["id"])] = (_ast.literal_eval(row["flavor_profile"]),
+                                       [i.strip().lower() for i in _ast.literal_eval(row["ingredients"])])
+        _RECIPES = out
+    return _RECIPES
+
+
+@_functools.lru_cache(maxsize=1)
+def _flavour_table_names() -> frozenset:
+    with open(DATA / "ingredient-flavor.csv") as f:
+        return frozenset((r.get("ingredient") or "").strip().lower() for r in _csv.DictReader(f))
+
+
+@_functools.lru_cache(maxsize=1)
+def _bitter_patterns() -> Tuple[Tuple[Any, float], ...]:
+    """Longest phrase first, so an exclusion ('white chocolate', 0) beats the
+    shorter bitter term it contains."""
+    with open(BITTER_CSV) as f:
+        rows = [(r["ingredient"].strip().lower(), float(r["bitter"])) for r in _csv.DictReader(f)]
+    rows.sort(key=lambda r: -len(r[0]))
+    return tuple((_re.compile(r"\b" + _re.escape(name) + r"\b"), w) for name, w in rows)
+
+
+@_functools.lru_cache(maxsize=None)
+def ingredient_bitter(ingredient: str) -> Optional[float]:
+    """Bitter weight of one ingredient from the hand-made list, or None if the
+    list does not mention it. Word-boundary match, longest phrase wins."""
+    s = (ingredient or "").strip().lower()
+    for pat, w in _bitter_patterns():
+        if pat.search(s):
+            return w
+    return None
+
+
+def _recipe_bitter(ingredients: Sequence[str]) -> float:
+    """Mean bitter weight over the ingredients we know anything about — those
+    in the flavour table or the bitter list — mirroring how the other five
+    dims average over known ingredients only."""
+    known, total = 0, 0.0
+    table = _flavour_table_names()
+    for ing in ingredients:
+        b = ingredient_bitter(ing)
+        if b is not None or ing in table:
+            known += 1
+            total += b or 0.0
+    return round(total / known, 4) if known else 0.0
+
+
+def recipe_taste(recipe_id: Any) -> List[float]:
+    """6-D taste [sweet, salty, sour, bitter, umami, spicy] of one Food.com
+    recipe. Unknown id -> all zeros (never NaN), which every consumer already
+    treats as 'taste unknown, skip'."""
+    try:
+        rec = _recipes().get(int(recipe_id))
+    except (TypeError, ValueError):
+        rec = None
+    if rec is None:
+        return [0.0] * 6
+    prof, ings = rec
+    vals = {d: float(prof.get(d, 0.0) or 0.0) for d in TASTE_DIMS if d != "bitter"}
+    vals["bitter"] = _recipe_bitter(ings)
+    return [vals[d] for d in TASTE_DIMS]
+
+
+def recipe_ingredients(recipe_id: Any) -> Optional[List[str]]:
+    """Ingredient list of one recipe, or None when the id is unknown — None
+    means 'ingredients unknown', which a safety filter must treat as unsafe."""
+    try:
+        rec = _recipes().get(int(recipe_id))
+    except (TypeError, ValueError):
+        return None
+    return list(rec[1]) if rec else None
+
+
+# FDA's nine major food allergens (FALCPA 2004 + FASTER Act 2021). Keyword
+# matching on ingredient names, deliberately conservative. Shellfish means
+# crustacean shellfish, as in the statute; coconut is not a tree nut (FDA
+# guidance, Jan 2025). One definition for catalog tagging and dish_is_safe.
+FDA_ALLERGEN_KEYWORDS: Dict[str, Dict[str, List[str]]] = {
+    "milk": {
+        "include": ["milk", "buttermilk", "butter", "cream", "cheese", "cheddar", "mozzarella",
+                    "parmesan", "parmigiano", "romano", "pecorino", "ricotta", "feta", "gouda",
+                    "brie", "camembert", "provolone", "gruyere", "monterey jack", "pepper jack",
+                    "colby", "mascarpone", "asiago", "havarti", "fontina", "queso", "velveeta",
+                    "yogurt", "yoghurt", "whey", "casein", "ghee", "paneer", "half-and-half",
+                    "half and half", "custard", "gelato", "kefir", "creme fraiche", "alfredo",
+                    "dulce de leche", "white chocolate", "milk chocolate"],
+        "exclude": ["coconut milk", "almond milk", "soy milk", "rice milk", "oat milk",
+                    "cashew milk", "coconut cream", "cream of coconut", "cream of tartar",
+                    "peanut butter", "almond butter", "cashew butter", "apple butter",
+                    "cocoa butter", "shea butter", "sunflower butter", "butternut",
+                    "butter beans", "butter bean", "cream soda", "creamed corn",
+                    "cream-style corn", "dairy-free", "non-dairy", "vegan"],
+    },
+    "egg": {
+        "include": ["egg", "egg white", "egg yolk", "mayonnaise", "mayo", "meringue",
+                    "eggnog", "aioli"],
+        "exclude": ["eggplant", "vegan mayo", "egg-free", "eggless"],
+    },
+    "fish": {
+        "include": ["fish", "salmon", "tuna", "cod", "halibut", "tilapia", "trout", "anchovy",
+                    "anchovies", "sardine", "mackerel", "haddock", "snapper", "catfish",
+                    "swordfish", "monkfish", "whitefish", "mahi", "flounder", "pollock",
+                    "herring", "bass", "fish sauce", "worcestershire", "bonito", "dashi", "lox",
+                    "caesar dressing", "surimi"],
+        "exclude": ["goldfish crackers", "shellfish"],
+    },
+    "shellfish": {
+        "include": ["shrimp", "prawn", "crab", "crabmeat", "lobster", "crawfish", "crayfish",
+                    "langoustine", "shellfish"],
+        "exclude": ["crab apple", "crabapple"],
+    },
+    "tree_nuts": {
+        "include": ["almond", "walnut", "pecan", "cashew", "pistachio", "hazelnut", "filbert",
+                    "macadamia", "brazil nut", "pine nut", "chestnut", "praline", "marzipan",
+                    "nutella", "nut", "mixed nuts", "amaretto"],
+        "exclude": ["nutmeg", "butternut", "water chestnut", "coconut", "doughnut", "donut",
+                    "peanut", "nutritional yeast"],
+    },
+    "peanuts": {
+        "include": ["peanut", "groundnut"],
+        "exclude": [],
+    },
+    "wheat": {
+        "include": ["wheat", "flour", "bread", "breadcrumbs", "bread crumbs", "panko", "pasta",
+                    "spaghetti", "macaroni", "noodle", "tortilla", "pita", "couscous", "bulgur",
+                    "semolina", "farina", "seitan", "cracker", "biscuit", "pie crust",
+                    "pie shell", "puff pastry", "phyllo", "filo", "crouton", "soy sauce",
+                    "teriyaki", "cake mix", "dough", "bagel", "bun", "english muffin",
+                    "wonton", "dumpling wrapper", "orzo", "gnocchi", "ramen", "udon",
+                    "lasagna", "fettuccine", "linguine", "penne", "rigatoni", "ziti",
+                    "tortellini", "ravioli", "graham"],
+        "exclude": ["rice flour", "corn flour", "almond flour", "coconut flour",
+                    "chickpea flour", "tapioca flour", "rice noodle", "rice noodles",
+                    "rice pasta", "corn tortilla", "corn tortillas", "buckwheat",
+                    "gluten-free", "gluten free", "breadfruit", "wheat-free"],
+    },
+    "soy": {
+        "include": ["soy", "soya", "soybean", "tofu", "edamame", "miso", "tempeh", "tamari",
+                    "soy sauce", "teriyaki", "hoisin", "shoyu", "textured vegetable protein"],
+        "exclude": [],
+    },
+    "sesame": {
+        "include": ["sesame", "tahini", "benne", "zaatar", "za'atar", "halvah", "halva",
+                    "furikake", "gomasio"],
+        "exclude": [],
+    },
+}
+
+
+@_functools.lru_cache(maxsize=1)
+def _allergen_patterns() -> Tuple[Tuple[str, Any, Any], ...]:
+    def alt(words):
+        if not words:
+            return None
+        body = "|".join(_re.escape(w) for w in sorted(words, key=len, reverse=True))
+        return _re.compile(r"\b(?:" + body + r")(?:s|es)?\b")
+    return tuple((a, alt(k["include"]), alt(k["exclude"])) for a, k in FDA_ALLERGEN_KEYWORDS.items())
+
+
+@_functools.lru_cache(maxsize=None)
+def ingredient_allergens(ingredient: str) -> Tuple[str, ...]:
+    """FDA allergens one ingredient name signals. Exclusion phrases are blanked
+    first, so 'coconut milk' is not milk but 'coconut milk and butter' is."""
+    s = (ingredient or "").strip().lower()
+    found = []
+    for allergen, inc, exc in _allergen_patterns():
+        text = exc.sub(" ", s) if exc is not None else s
+        if inc is not None and inc.search(text):
+            found.append(allergen)
+    return tuple(found)
+
+
+def dish_allergens(ingredients: Optional[Sequence[str]]) -> Optional[List[str]]:
+    """Sorted FDA allergens across an ingredient list. None in -> None out:
+    unknown ingredients must stay distinguishable from 'no allergens'."""
+    if ingredients is None:
+        return None
+    return sorted({a for ing in ingredients for a in ingredient_allergens(ing)})
+
+
+def bitter_list_sha() -> str:
+    """Fingerprint of the bitter list, stored in built catalogs so a stale
+    cache (built before the list changed) is detected, not silently used."""
+    return _hashlib.sha256(BITTER_CSV.read_bytes()).hexdigest()[:12]
+
+
+def city_slug(city: str) -> str:
+    return _re.sub(r"[^a-z0-9]+", "-", (city or "").strip().lower()).strip("-")
+
+
+def ubereats_cache_path(city: str) -> Path:
+    return EXTERNAL_CACHE / f"catalog_ubereats_{city_slug(city)}.json"
+
+
+def load_catalog_ubereats(city: Optional[str] = None) -> List[Dict]:
+    """Real Uber Eats restaurants for one city, in the shared catalog shape:
+    option_id, name, taste[6], menu[{name, taste[6], allergens, ...}].
+
+    Reads the catalog that scripts/build_ubereats_catalog.py built (the dish ->
+    Food.com recipe matching needs pandas/scikit-learn; loading does not).
+    Restaurant taste is recomputed here with _restaurant_taste, the same rule
+    the default catalog uses."""
+    if not city:
+        raise ValueError("load_catalog_ubereats needs a city (argument or FM_CITY).")
+    path = ubereats_cache_path(city)
+    if not path.exists():
+        raise FileNotFoundError(
+            f"{path} not found. Build it with:\n  python scripts/build_ubereats_catalog.py "
+            f"--city {city!r}\n(see data/README.md for the Kaggle downloads it needs).")
+    built = json.loads(path.read_text())
+    meta = built.get("meta", {})
+    if meta.get("bitter_list_sha") != bitter_list_sha():
+        print(f"[nbio] WARNING: {path.name} was built with a different bitter list; "
+              f"rebuild it so bitter values are current.", file=sys.stderr)
+    catalog = []
+    for r in built["restaurants"]:
+        menu = r["menu"]
+        catalog.append({**{k: v for k, v in r.items() if k != "menu"},
+                        "menu": menu, "taste": _restaurant_taste(menu)})
+    return catalog
+
+
+def taste_coverage(catalog: Sequence[Dict]) -> float:
+    """Share of all dishes with a real, non-zero taste vector (task doc §7.2)."""
+    dishes = [d for o in catalog for d in o.get("menu") or []]
+    if not dishes:
+        return 0.0
+    return sum(1 for d in dishes if sum(abs(x) for x in d["taste"]) > 0) / len(dishes)
+
+
+def taste_spread(catalog: Sequence[Dict]) -> Dict[str, Any]:
+    """How different the restaurants taste from each other (task doc §7.3):
+    per-dim population std of the restaurant vectors, and their mean. The
+    same function scores every dataset, so the numbers are comparable."""
+    vecs = [o["taste"] for o in catalog]
+    per_dim = {d: (_statistics.pstdev([v[i] for v in vecs]) if len(vecs) > 1 else 0.0)
+               for i, d in enumerate(TASTE_DIMS)}
+    return {"n_restaurants": len(vecs), "per_dim_std": per_dim,
+            "spread": sum(per_dim.values()) / len(per_dim)}
 
 
 def generate_groups(n_groups: int = 200, seed: int = 7, size_range: Tuple[int, int] = (3, 6),
