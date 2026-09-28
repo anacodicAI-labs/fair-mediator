@@ -1,0 +1,6 @@
+# Kaggle-derived data never enters the repo (see data/README.md)
+data/external/
+data/external_cache/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
