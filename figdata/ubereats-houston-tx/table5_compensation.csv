@@ -1,3 +1,6 @@
-level,min_sat,mean_sat,n_groups
-restaurant (whole-menu avg),0.7209,0.8256,200
-dish-compensated (per diner),0.8396,0.8993,200
+level,min_sat,min_sat_ci95,mean_sat,delta_vs_C4,n_groups
+venue whole-menu average (naive baseline),0.7209,0.0092,0.8256,0.1187,200
+"B1: random safe dish, per diner",0.5112,0.0189,0.6895,0.3284,200
+"B3: median-diner's best dish, shared",0.6944,0.0206,0.8218,0.1452,200
+B2: best shared dish (one for all),0.8134,0.0102,0.8706,0.0262,200
+per-diner best safe dish (C4),0.8396,0.0098,0.8993,--,200

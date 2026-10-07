@@ -1,0 +1,11 @@
+lambda,mean_sat,jain,min_sat,pick_id
+0,0.9335,0.9977,0.8906,aggregate_over_200_groups
+0.25,0.9335,0.9977,0.8907,aggregate_over_200_groups
+0.5,0.9335,0.9978,0.8919,aggregate_over_200_groups
+1,0.9335,0.9978,0.892,aggregate_over_200_groups
+2,0.9334,0.9979,0.8928,aggregate_over_200_groups
+5,0.9332,0.998,0.8947,aggregate_over_200_groups
+10,0.9327,0.998,0.8968,aggregate_over_200_groups
+25,0.931,0.9982,0.8984,aggregate_over_200_groups
+50,0.9296,0.9982,0.8989,aggregate_over_200_groups
+100,0.9286,0.9982,0.8989,aggregate_over_200_groups
