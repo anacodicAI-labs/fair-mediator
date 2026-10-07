@@ -659,7 +659,18 @@ def _load_catalog_potluck() -> List[Dict]:
 
 
 def load_personas() -> List[Dict]:
-    return json.loads((DATA / "personas.json").read_text())
+    """The diner pool the groups are drawn from. Which pool is chosen by the
+    FM_PERSONAS environment variable, so the notebooks run unedited:
+
+        FM_PERSONAS unset / "potluck" -> the 95 invented diners in data/personas.json
+        FM_PERSONAS = "foodcom"       -> real Food.com users, load_personas_foodcom()
+    """
+    pool = (os.environ.get("FM_PERSONAS") or "potluck").strip().lower()
+    if pool == "potluck":
+        return json.loads((DATA / "personas.json").read_text())
+    if pool == "foodcom":
+        return load_personas_foodcom()
+    raise ValueError(f"FM_PERSONAS={pool!r}: expected 'potluck' or 'foodcom'")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -944,6 +955,112 @@ def taste_spread(catalog: Sequence[Dict]) -> Dict[str, Any]:
     per_dim = {d: (_statistics.pstdev([v[i] for v in vecs]) if len(vecs) > 1 else 0.0)
                for i, d in enumerate(TASTE_DIMS)}
     return {"n_restaurants": len(vecs), "per_dim_std": per_dim,
+            "spread": sum(per_dim.values()) / len(per_dim)}
+
+
+# ── Real diners: Food.com users ───────────────────────────────────────────────
+#
+# A diner's taste is the mean recipe_taste() of the recipes they rated 4 or 5
+# stars -- the same taste function the dishes use, so diners and dishes live
+# in one space. Taste is REAL (from each user's own ratings). Diet and
+# allergies are SYNTHETIC: Food.com does not record them, so they are drawn at
+# approximate US adult rates with a fixed seed, and every persona carries
+# "diet_allergy_source": "synthetic" so no table can present them as observed.
+
+FOODCOM_INTERACTIONS = EXTERNAL / "foodcom" / "RAW_interactions.csv"
+FOODCOM_MIN_RATINGS = 10   # rated (1-5 stars) recipes a user needs to be kept
+FOODCOM_LIKE_STARS = 4     # a rating at or above this counts as "liked"
+
+# Approximate US adult rates. Diet: Gallup (2018), ~5% vegetarian, ~3% vegan.
+# Allergy: Gupta et al., JAMA Netw Open (2019), convincing adult food allergy.
+# Keys are the FDA-9 names dish_allergens() returns. Verify both sources
+# before quoting these rates in the paper.
+SYNTHETIC_DIET_RATES = {"vegetarian": 0.05, "vegan": 0.03}
+SYNTHETIC_ALLERGY_RATES = {"shellfish": 0.029, "milk": 0.019, "peanuts": 0.018,
+                           "tree_nuts": 0.012, "fish": 0.009, "egg": 0.008,
+                           "wheat": 0.008, "soy": 0.006, "sesame": 0.002}
+
+
+def foodcom_personas_cache_path() -> Path:
+    return EXTERNAL_CACHE / "personas_foodcom.json"
+
+
+def build_personas_foodcom(seed: int = 7) -> Dict[str, Any]:
+    """Build the real-diner pool from RAW_interactions.csv and cache it.
+
+    Kept: users with at least FOODCOM_MIN_RATINGS star ratings (0 = review
+    with no rating, ignored) and at least one liked recipe with known taste.
+    Deterministic: users are processed in id order and the synthetic diet and
+    allergy draws come from one seeded generator."""
+    if not FOODCOM_INTERACTIONS.exists():
+        raise FileNotFoundError(f"{FOODCOM_INTERACTIONS} not found. Download RAW_interactions.csv "
+                                "from Kaggle into data/external/foodcom/ (see data/README.md).")
+    rated: Dict[int, int] = {}
+    liked: Dict[int, List[int]] = {}
+    with open(FOODCOM_INTERACTIONS, newline="") as f:
+        for row in _csv.DictReader(f):
+            stars = int(row["rating"])
+            if stars <= 0:
+                continue
+            uid = int(row["user_id"])
+            rated[uid] = rated.get(uid, 0) + 1
+            if stars >= FOODCOM_LIKE_STARS:
+                liked.setdefault(uid, []).append(int(row["recipe_id"]))
+
+    rng = _random.Random(seed)
+    personas, dropped_no_taste = [], 0
+    for uid in sorted(u for u, n in rated.items() if n >= FOODCOM_MIN_RATINGS):
+        vecs = [v for v in (recipe_taste(r) for r in liked.get(uid, []))
+                if sum(abs(x) for x in v) > 0]
+        if not vecs:
+            dropped_no_taste += 1
+            continue
+        draw = rng.random()
+        diet, edge = "non-veg", 0.0
+        for name, rate in SYNTHETIC_DIET_RATES.items():
+            edge += rate
+            if draw < edge:
+                diet = name
+                break
+        allergies = [a for a, rate in SYNTHETIC_ALLERGY_RATES.items() if rng.random() < rate]
+        personas.append({
+            "display_name": f"fc{uid}",
+            "foodcom_user_id": uid,
+            "diet_type": diet,
+            "allergies": allergies,
+            "taste_vector": [round(sum(v[i] for v in vecs) / len(vecs), 6) for i in range(6)],
+            "n_rated": rated[uid],
+            "n_liked_with_taste": len(vecs),
+            "diet_allergy_source": "synthetic",
+        })
+    built = {"meta": {"source": "Food.com RAW_interactions.csv",
+                      "min_ratings": FOODCOM_MIN_RATINGS, "like_stars": FOODCOM_LIKE_STARS,
+                      "seed": seed, "n_personas": len(personas),
+                      "dropped_no_taste": dropped_no_taste,
+                      "bitter_list_sha": bitter_list_sha()},
+             "personas": personas}
+    path = foodcom_personas_cache_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(built))
+    return built
+
+
+def load_personas_foodcom() -> List[Dict]:
+    """Real Food.com diners, in the same shape as data/personas.json. Built on
+    first use and cached in data/external_cache/ (gitignored: derived from
+    Kaggle data)."""
+    path = foodcom_personas_cache_path()
+    built = json.loads(path.read_text()) if path.exists() else build_personas_foodcom()
+    return built["personas"]
+
+
+def persona_spread(personas: Sequence[Dict]) -> Dict[str, Any]:
+    """How different the diners taste from each other: the same per-dim std
+    taste_spread() reports for restaurants, so the two are comparable."""
+    vecs = [p["taste_vector"] for p in personas]
+    per_dim = {d: (_statistics.pstdev([v[i] for v in vecs]) if len(vecs) > 1 else 0.0)
+               for i, d in enumerate(TASTE_DIMS)}
+    return {"n_personas": len(vecs), "per_dim_std": per_dim,
             "spread": sum(per_dim.values()) / len(per_dim)}
 
 

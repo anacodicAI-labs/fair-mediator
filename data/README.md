@@ -87,6 +87,23 @@ python scripts/c1_report.py      # lambda moved %, MinSat gain + CI, formula A v
 `ubereats-shuffled` is the random-menu control: the same restaurants and menu sizes, with every dish
 dealt to a random restaurant (`FM_SHUFFLE_SEED`, default 7).
 
+## 3. Food.com users as real diners (needed by `load_personas_foodcom`)
+
+Download `RAW_interactions.csv` from the same Food.com Kaggle page into `data/external/foodcom/`.
+`nbio.build_personas_foodcom()` keeps every user with at least 10 star ratings (12,035 users) and sets
+their taste to the mean `recipe_taste()` of the recipes they rated 4 or 5 stars. The pool is cached in
+`data/external_cache/personas_foodcom.json` on first use (about 30 seconds).
+
+**Taste is real; diet and allergies are synthetic.** Food.com does not record them, so they are drawn
+with a fixed seed at approximate US adult rates (`SYNTHETIC_DIET_RATES`, `SYNTHETIC_ALLERGY_RATES` in
+`nbio.py`), and every persona carries `"diet_allergy_source": "synthetic"`.
+
+Switch the harness to real diners without editing any notebook:
+
+```bash
+FM_PERSONAS=foodcom FM_DATASET=ubereats FM_CITY="Houston, TX" ...
+```
+
 ## Licences
 
 Check each Kaggle page's licence before use. The terms are recorded in `journals.txt` (Rashan).
