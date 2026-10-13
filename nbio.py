@@ -22,6 +22,7 @@ import os
 import sys
 import textwrap
 import time
+import re
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Literal, Optional, Sequence, Tuple
 
@@ -327,27 +328,51 @@ def is_nonveg_text(text: str) -> bool:
     t = (text or "").lower()
     return any(w in t for w in NON_VEG_WORDS)
 
-
-def dish_is_safe(dish_name: str, diet: str, allergies: Sequence[str]) -> bool:
-    """True if one dish breaks neither the member's diet nor their allergy set.
-
-    Known limitation, measured and reported in this paper: this checks the
-    dish NAME only. A battered, fried dish with no allergen word in its name
-    passes for a gluten allergy. See 02-safety/01 for the demonstration."""
-    text = (dish_name or "").lower()
+ALLERGY_ALIASES = {"dairy": "milk", "gluten": "wheat", "peanut": "peanuts",
+                   "tree nuts": "tree_nuts", "tree nut": "tree_nuts"}
+ 
+ 
+def _has_word(texts: Sequence[str], words: Sequence[str]) -> bool:
+    """True if any whole word from `words` appears in any text (so "egg" does
+    not match "eggplant")."""
+    blob = " ".join(texts).lower()
+    return any(re.search(r"\b" + re.escape(w) + r"\b", blob) for w in words)
+ 
+ 
+def dish_is_safe(dish, diet: str, allergies: Sequence[str]) -> bool:
+    """True if one dish breaks neither the member's diet nor their allergies.
+ 
+    dish can be a dish dict or (old notebooks) just a dish name:
+      - dict WITH "allergens" (Uber Eats catalog): checked on INGREDIENTS.
+        Fail-closed: allergens None (ingredients unknown) -> UNSAFE.
+      - dict WITHOUT "allergens", or a plain name (5-restaurant catalog):
+        the older name-only check, kept so earlier results reproduce."""
+    diet = (diet or "mix").lower()
+    wanted = {ALLERGY_ALIASES.get(a.lower(), a.lower()) for a in (allergies or []) if a}
+    if isinstance(dish, dict) and "allergens" in dish:
+        if dish["allergens"] is None or dish.get("ingredients") is None:
+            return False                                   # unknown -> unsafe
+        if wanted & set(dish["allergens"]):
+            return False
+        ings = list(dish["ingredients"])
+        if diet in {"veg", "vegetarian"}:
+            return not _has_word(ings, NON_VEG_WORDS)
+        if diet == "vegan":
+            return not _has_word(ings, NON_VEG_WORDS) and not _has_word(ings, NON_VEGAN_WORDS)
+        return True
+    text = ((dish.get("name", "") if isinstance(dish, dict) else dish) or "").lower()
     for allergen in allergies or []:
         if allergen and allergen.lower() in text:
             return False
-    diet = (diet or "mix").lower()
     if diet in {"veg", "vegetarian"}:
         return not is_nonveg_text(text)
     if diet == "vegan":
         return not is_nonveg_text(text) and not any(w in text for w in NON_VEGAN_WORDS)
     return True
-
-
+ 
+ 
 def safe_dishes_for(member: Dict, menu: Sequence[Dict]) -> List[Dict]:
-    return [d for d in menu if dish_is_safe(d.get("name", ""), member.get("diet", "mix"),
+    return [d for d in menu if dish_is_safe(d, member.get("diet", "mix"),
                                              member.get("allergies", []))]
 
 
