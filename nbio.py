@@ -539,7 +539,7 @@ DEFAULT_MAX_ROUNDS = 8
 
 
 def mediate(satisfaction: Dict[str, Dict[str, float]], member_ids: Sequence[str], *,
-            bar: float = 0.45, max_rounds: int = DEFAULT_MAX_ROUNDS,
+            bar: Optional[float] = None, max_rounds: int = DEFAULT_MAX_ROUNDS,
             eta: float = 0.5, lam: float = 0.5, use_veto: bool = False,
             reaction: str = "strong_dislike") -> Dict:
     """Run the closed loop to consensus, the round cap, or candidate exhaustion.
@@ -547,7 +547,10 @@ def mediate(satisfaction: Dict[str, Dict[str, float]], member_ids: Sequence[str]
     Terminates by construction: every path out of the loop is bounded by
     `max_rounds`. Returns the termination reason so the caller can report the
     three endings separately rather than lumping them into "did not converge".
+    `bar` defaults to the group's own pass mark, consensus_bar().
     """
+    if bar is None:
+        bar = consensus_bar(satisfaction, member_ids)
     med = Mediator(member_ids, satisfaction, learning_rate=eta, fairness_lambda=lam)
     candidates = list(satisfaction.keys())
     history = []
@@ -576,17 +579,38 @@ def mediate(satisfaction: Dict[str, Dict[str, float]], member_ids: Sequence[str]
 
 
 def solvable(satisfaction: Dict[str, Dict[str, float]], member_ids: Sequence[str],
-             bar: float = 0.45) -> bool:
+             bar: Optional[float] = None) -> bool:
     """Is ANY option good enough to clear the bar for the worst-off member?
 
     The ceiling control. If this is False the group is unsatisfiable and no
     mediator, however clever, could have converged -- so it must not be
-    counted against the mediator."""
+    counted against the mediator. With the default group-relative bar it is
+    True for every group by construction."""
+    if bar is None:
+        bar = consensus_bar(satisfaction, member_ids)
     return any(min(satisfaction[o][m] for m in member_ids) >= bar
                for o in satisfaction)
 
 
-def consensus_reached(worst_score: float, bar: float = 0.6) -> bool:
+# The pass mark is relative to the group. A fixed 0.45 sits far below what real
+# Food.com diners score (~0.9), so every real group cleared it in round 1 and
+# the negotiation never ran. FM_CONSENSUS_MARGIN overrides the margin, so the
+# margin sensitivity runs (0.005 / 0.02) need no notebook edits.
+DEFAULT_CONSENSUS_MARGIN = float(os.environ.get("FM_CONSENSUS_MARGIN") or 0.01)
+
+
+def consensus_bar(satisfaction: Dict[str, Dict[str, float]], member_ids: Sequence[str],
+                  margin: Optional[float] = None) -> float:
+    """The group's pass mark: the best worst-off satisfaction any option in F
+    offers (Least-Misery's floor) minus a small margin. Relative to the group,
+    so it cannot be passed by every group in round 1 the way a fixed 0.45 is."""
+    if margin is None:
+        margin = DEFAULT_CONSENSUS_MARGIN
+    best_floor = max(min(satisfaction[o][m] for m in member_ids) for o in satisfaction)
+    return best_floor - margin
+
+
+def consensus_reached(worst_score: float, bar: float) -> bool:
     """A round-stop rule: the worst-off member's satisfaction on the current
     pick has crossed an acceptance bar. Original to this repo — Vihaan's
     prototype leaves the stop condition to the caller; this names one."""
