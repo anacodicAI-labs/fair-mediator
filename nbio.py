@@ -651,15 +651,25 @@ def shuffle_menus(catalog: Sequence[Dict], seed: int = 7) -> List[Dict]:
     """Random-menu control: the same restaurants and menu sizes, but every dish
     is dealt to a random restaurant, so each one tastes like 'the average of
     everything'. If lambda helps on the real catalog and not on this one, the
-    gain comes from real differences between restaurants."""
-    dishes = [d for o in catalog for d in o["menu"]]
+    gain comes from real differences between restaurants.
+
+    The dishes are sorted before shuffling, so the result depends only on the
+    seed and the catalog's contents, not on the order a build happened to list
+    them in (two builds once gave 25.5% vs 25.0%). Restaurants are dealt to in
+    option_id order for the same reason. Name alone does not break ties: some
+    restaurants list the same dish name twice."""
+    def key(pair):
+        oid, d = pair
+        return (str(oid), d.get("name") or "", d.get("description") or "",
+                str(d.get("recipe_id") or ""), d.get("taste") or [])
+    dishes = [d for _, d in sorted(((o["option_id"], d) for o in catalog for d in o["menu"]), key=key)]
     _random.Random(seed).shuffle(dishes)
-    out, i = [], 0
-    for o in catalog:
-        menu = dishes[i:i + len(o["menu"])]
+    dealt, i = {}, 0
+    for o in sorted(catalog, key=lambda o: str(o["option_id"])):   # deal in a fixed order too
+        dealt[o["option_id"]] = dishes[i:i + len(o["menu"])]
         i += len(o["menu"])
-        out.append({**o, "menu": menu, "taste": _restaurant_taste(menu)})
-    return out
+    return [{**o, "menu": dealt[o["option_id"]], "taste": _restaurant_taste(dealt[o["option_id"]])}
+            for o in catalog]
 
 
 def _restaurant_taste(menu: Sequence[Dict]) -> List[float]:
