@@ -1,0 +1,3 @@
+city,median_dish_price,within_option_sd,achievable,lam_matched,pct_matched,pct_lo,pct_hi,cost_share_matched,gain_matched,pct_lam5,cost_share_lam5,avg_minsat,lm_minsat,mp_minsat,lm_agree_exact,med_agree_exact,med_rounds_exact,lm_agree_noise,med_agree_noise,med_rounds_noise
+"Houston, TX",10.79,0.0872,0.0162,10.0,64.3,55.0,72.7,31.1,0.0104,45.2,15.9,0.9177,0.9339,0.8068,100.0,99.5,1.74,58.0,96.5,2.47
+"Seattle, WA",12.99,0.0884,0.0146,8.254,65.7,54.8,74.8,27.2,0.0096,42.7,12.3,0.9166,0.9312,0.7785,100.0,100.0,1.81,67.5,97.0,2.16

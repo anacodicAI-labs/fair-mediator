@@ -1,4 +1,4 @@
-"""PRD-14: test the theory section (Propositions 1-4) on real diners.
+"""Test the theory section (Propositions 1-4) on real diners.
 
     python scripts/pareto_check.py        # Food.com diners on Uber Eats Houston + Seattle
 

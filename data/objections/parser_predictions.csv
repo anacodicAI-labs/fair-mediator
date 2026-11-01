@@ -90,9 +90,9 @@ r088,ok but I'll need to check the menu first,accept,SELF,conditional,accept,SEL
 r089,Cara won't eat that,reject,Cara,other_member,veto,Cara,0.99
 r090,"Ben's allergic to shellfish, that place is all seafood",veto,Ben,other_member,veto,Ben,0.99
 r091,Aisha can't have dairy and that's a cheese restaurant,veto,Aisha,other_member,veto,Aisha,0.99
-r092,I think Vihaan hates Thai food,strong_dislike,Vihaan,other_member,strong_dislike,Vihaan,0.9
-r093,"won't work for Vincent, he's vegan",veto,Vincent,other_member,veto,Vincent,0.99
-r094,Vasu said he didn't like it last time,reject,Vasu,other_member,reject,Vasu,0.9
+r092,I think Ravi hates Thai food,strong_dislike,Ravi,other_member,strong_dislike,Ravi,0.9
+r093,"won't work for Marco, he's vegan",veto,Marco,other_member,veto,Marco,0.99
+r094,Omar said he didn't like it last time,reject,Omar,other_member,reject,Omar,0.9
 r095,"Cara is going to veto this, just warning you",veto,Cara,other_member,veto,Cara,0.95
 r096,Ann really doesn't do spicy,strong_dislike,Ann,other_member,reject,Ann,0.9
 r097,that's not going to work for Sofia,reject,Sofia,other_member,reject,Sofia,0.9

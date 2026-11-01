@@ -1,7 +1,7 @@
-"""C1 on real restaurants (task doc §7.4-7.7): the numbers the harness does not
+"""C1 on real restaurants: the numbers the harness does not
 print directly, computed with the same nbio functions and the same seeded groups.
 
-    python scripts/c1_report.py            # potluck + Houston + Seattle, real and shuffled
+    python scripts/c1_report.py            # small catalog + Houston + Seattle, real and shuffled
 
 For every dataset it reports:
   - moved     % of groups where the pick at lambda=0 differs from lambda=5
@@ -11,7 +11,7 @@ For every dataset it reports:
   - achieved  the gain as a % of the achievable gap: least-misery's MinSat
               minus Average's, i.e. the most any option could lift the
               worst-off diner (ratio of sums, bootstrap CI over groups)
-  - formula   the same under both satisfaction formulas (§7.6):
+  - formula   the same under both satisfaction formulas:
                 A whole menu   s_i(x) = cos(t_i, mean taste of all dishes at x)
                 B safe subset  s_i(x) = cos(t_i, mean taste of i's safe dishes at x)
 
@@ -40,7 +40,7 @@ N_BOOT = 10_000
 OUT = ROOT / "figdata" / "ubereats"
 
 DATASETS = [
-    ("potluck (5 restaurants)", "potluck", None),
+    ("small catalog (5 restaurants)", "small", None),
     ("Houston, TX", "ubereats", "Houston, TX"),
     ("Houston, TX shuffled", "ubereats-shuffled", "Houston, TX"),
     ("Seattle, WA", "ubereats", "Seattle, WA"),

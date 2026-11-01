@@ -15,7 +15,7 @@
   ]
  },
  {
-  "display_name": "Vihaan",
+  "display_name": "Ravi",
   "diet_type": "veg",
   "allergies": [],
   "taste_vector": [
@@ -43,7 +43,7 @@
   ]
  },
  {
-  "display_name": "Vincent",
+  "display_name": "Marco",
   "diet_type": "vegan",
   "allergies": [
    "dairy"
@@ -73,7 +73,7 @@
   ]
  },
  {
-  "display_name": "Vasu",
+  "display_name": "Omar",
   "diet_type": "mix",
   "allergies": [],
   "taste_vector": [

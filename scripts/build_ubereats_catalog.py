@@ -4,8 +4,8 @@ matched to its closest Food.com recipe, dish taste = nbio.recipe_taste(recipe).
     python scripts/build_ubereats_catalog.py --list-cities
     python scripts/build_ubereats_catalog.py --city "Houston" [--n 300 --seed 7]
 
-Writes data/external_cache/catalog_ubereats_<city>.json (gitignored — derived
-from Kaggle data) and validation/match_check_<city>.csv, 100 seeded dishes for
+Writes data/shared/cache/catalog_ubereats_<city>.json (derived from Kaggle
+data) and validation/match_check_<city>.csv, 100 seeded dishes for
 hand-checking the matcher. nbio.load_catalog_ubereats() reads the catalog.
 
 Matching is TF-IDF: word 1-2-grams plus character 3-5-grams, fitted on the
@@ -14,7 +14,6 @@ description is used only when the name alone scores below the threshold.
 Below the threshold a dish stays on the menu but unmatched: taste all zeros,
 ingredients and allergens None (unknown, so a safety filter fails closed).
 
-Original to this paper (Vincent, wangvincentx-cmd).
 """
 
 from __future__ import annotations

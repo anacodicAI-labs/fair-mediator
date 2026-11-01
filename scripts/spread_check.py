@@ -1,4 +1,4 @@
-"""Task 6 — check the spread before anything else (task doc §7.3).
+"""Check how much the restaurants differ in taste (the spread).
 
     python scripts/spread_check.py                 # today's catalog + every built city
     python scripts/spread_check.py "Houston, TX"   # just one city
@@ -38,7 +38,7 @@ def report(label: str, catalog) -> dict:
 
 
 def main():
-    base = report("potluck (today: data/Menu, 5 restaurants)", nbio._load_catalog_potluck())
+    base = report("small catalog (5 restaurants)", nbio._load_catalog_small())
     if len(sys.argv) > 1:
         cities = sys.argv[1:]
     else:

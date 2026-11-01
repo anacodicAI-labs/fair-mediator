@@ -1,0 +1,5 @@
+city,truth,proposals,repeated_rejected,pct
+"Houston, TX",exact,697,334,47.9
+"Houston, TX",noise sd=0.01,1074,623,58.0
+"Seattle, WA",exact,703,335,47.7
+"Seattle, WA",noise sd=0.01,1066,651,61.1

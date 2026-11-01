@@ -1,0 +1,21 @@
+city,arm,n,agree,pct_agree,rounds_agree,rounds_capped,exhausted,final_minsat,final_mean,final_jain
+"Houston, TX",one-shot Average,200,95,47.5,1.0,1.0,0,0.8857,0.9533,0.9962
+"Houston, TX",one-shot Fair (lambda=0.5),200,98,49.0,1.0,1.0,0,0.8904,0.9532,0.9968
+"Houston, TX",one-shot Fair (lambda=5),200,123,61.5,1.0,1.0,0,0.9126,0.9498,0.9988
+"Houston, TX",one-shot Least-Misery,200,200,100.0,1.0,1.0,0,0.9258,0.9439,0.9992
+"Houston, TX",oracle: best mean subject to the bar,200,200,100.0,1.0,1.0,0,0.9226,0.9461,0.9992
+"Houston, TX",mediator (paper),200,180,90.0,2.35,2.92,0,0.9197,0.9452,0.9991
+"Houston, TX",mediator + veto (paper),200,187,93.5,1.91,2.31,0,0.9204,0.9443,0.9991
+"Houston, TX",removal only (g=0.5),200,187,93.5,2.29,2.66,0,0.9204,0.9452,0.9991
+"Houston, TX","larger gradient only (g=1.5, no removal)",200,183,91.5,1.91,2.43,0,0.9205,0.945,0.9992
+"Houston, TX",memory: never re-propose an objected pick,200,200,100.0,2.34,2.34,0,0.9228,0.9457,0.9992
+"Seattle, WA",one-shot Average,200,94,47.0,1.0,1.0,0,0.891,0.9533,0.9969
+"Seattle, WA",one-shot Fair (lambda=0.5),200,95,47.5,1.0,1.0,0,0.8934,0.9532,0.9972
+"Seattle, WA",one-shot Fair (lambda=5),200,120,60.0,1.0,1.0,0,0.9132,0.9505,0.9989
+"Seattle, WA",one-shot Least-Misery,200,200,100.0,1.0,1.0,0,0.9268,0.9439,0.9994
+"Seattle, WA",oracle: best mean subject to the bar,200,200,100.0,1.0,1.0,0,0.9236,0.9464,0.9993
+"Seattle, WA",mediator (paper),200,180,90.0,2.35,2.92,0,0.9209,0.9457,0.9992
+"Seattle, WA",mediator + veto (paper),200,190,95.0,1.99,2.3,0,0.9223,0.9456,0.9992
+"Seattle, WA",removal only (g=0.5),200,185,92.5,2.27,2.7,0,0.9211,0.9453,0.9992
+"Seattle, WA","larger gradient only (g=1.5, no removal)",200,180,90.0,1.82,2.44,0,0.9207,0.9454,0.9992
+"Seattle, WA",memory: never re-propose an objected pick,200,198,99.0,2.33,2.38,0,0.9234,0.9461,0.9993

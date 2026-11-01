@@ -1,0 +1,6 @@
+test,taste_vector,auc,n_pairs,n_users
+rating,personal,0.4898,200000,12035
+rating,everyone,0.4892,200000,12035
+choice,personal,0.5382,144253,12035
+choice,everyone,0.5107,144253,12035
+choice,centred,0.5707,144253,12035

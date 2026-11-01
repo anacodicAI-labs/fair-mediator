@@ -1,9 +1,9 @@
-"""The loader contract (task doc §7.2): what every catalog must satisfy before
+"""The loader contract: what every catalog must satisfy before
 the harness is allowed to score it.
 
     python tests/test_loader_contract.py      # or: pytest tests/
 
-Checks every Uber Eats catalog built in data/external_cache/ (or only FM_CITY
+Checks every Uber Eats catalog built in data/shared/cache/ (or only FM_CITY
 when set), plus recipe_taste itself. Anything needing Kaggle data that is not
 on this machine is skipped with a message, not failed.
 """
@@ -101,8 +101,8 @@ def test_ubereats_catalogs():
 
 
 def test_default_catalog_shape():
-    """The Potluck catalog predates the contract: shape only, no coverage
-    floor (it is 47%, one reason the old results were null)."""
+    """The small catalog predates the contract: shape only, no coverage
+    floor (it is 47%)."""
     for o in nbio.load_catalog():
         assert _finite6(o["taste"]) and o["menu"]
         assert all(_finite6(d["taste"]) for d in o["menu"])

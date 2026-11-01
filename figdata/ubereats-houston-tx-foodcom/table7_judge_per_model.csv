@@ -1,0 +1,13 @@
+model,selector,fairness,satisfaction,consensus
+allam-2-7b,average,5.936,6.0,6.0
+allam-2-7b,fair,5.986,6.0,6.0
+allam-2-7b,least_misery,5.979,6.0,6.0
+allam-2-7b,most_pleasure,5.643,5.929,5.929
+gpt-4o-mini,average,7.0,6.643,6.643
+gpt-4o-mini,fair,6.993,6.621,6.614
+gpt-4o-mini,least_misery,6.993,6.786,6.793
+gpt-4o-mini,most_pleasure,6.664,6.279,6.129
+qwen/qwen3.8-27b,average,6.75,6.429,6.75
+qwen/qwen3.8-27b,fair,6.786,6.429,6.75
+qwen/qwen3.8-27b,least_misery,6.9,6.607,6.9
+qwen/qwen3.8-27b,most_pleasure,5.986,5.786,5.821

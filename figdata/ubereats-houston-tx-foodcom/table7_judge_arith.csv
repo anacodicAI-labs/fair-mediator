@@ -1,0 +1,5 @@
+selector,min_sat,jain,mean_sat
+average,0.8884,0.9966,0.9432
+fair,0.8977,0.9979,0.9431
+least_misery,0.9231,0.9995,0.9366
+most_pleasure,0.7836,0.9788,0.8679

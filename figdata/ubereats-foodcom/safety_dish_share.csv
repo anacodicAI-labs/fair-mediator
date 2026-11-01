@@ -1,0 +1,8 @@
+profile,city,n_restaurants,share_of_menu_unsafe
+milk allergy,"Houston, TX",60,0.536
+wheat allergy,"Houston, TX",60,0.497
+vegetarian,"Houston, TX",60,0.607
+vegan,"Houston, TX",60,0.818
+milk + egg + wheat allergies,"Houston, TX",60,0.767
+vegan + wheat + soy allergies,"Houston, TX",60,0.879
+average restricted Food.com diner,"Houston, TX",60,0.409

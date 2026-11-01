@@ -1,4 +1,4 @@
-"""The shuffled-menu control is the same on every machine (task doc, Step 2).
+"""The shuffled-menu control is the same on every machine .
 
     python tests/test_shuffle.py      # or: pytest tests/
 

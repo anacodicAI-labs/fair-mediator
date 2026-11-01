@@ -1,4 +1,4 @@
-"""The mediator's pass mark (task doc, Step 1): relative to the group, not fixed.
+"""The mediator's pass mark: relative to the group, not fixed.
 
     python tests/test_mediation.py      # or: pytest tests/
 

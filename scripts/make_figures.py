@@ -1,12 +1,12 @@
-"""Figures 2-5 of "Should the Mediator Be Fair?" for general readers (PRD-13).
+"""Figures 2-5 of "Should the Mediator Be Fair?" for general readers.
 
     python scripts/make_figures.py                       # writes into the paper folder
     python scripts/make_figures.py --out some/dir        # anywhere else
     python scripts/make_figures.py --plot-only           # skip step 1, plot from the CSVs
 
-Two steps, so every plotted number lives in a CSV first (PRD-13 section 3):
+Two steps, so every plotted number lives in a CSV first:
 
-  1. COMPUTE (needs the gitignored Uber Eats + Food.com caches in data/external_cache/)
+  1. COMPUTE (needs the gitignored Uber Eats + Food.com caches in data/shared/cache/)
      writes three intermediates under figdata/ubereats-foodcom/:
        fig_taste_map.csv       restaurants and the example group's diners on a 2-D
                                taste map (PCA of the 6-D taste vectors, unit-normalised)
