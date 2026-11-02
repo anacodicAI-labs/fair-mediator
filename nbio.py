@@ -203,6 +203,105 @@ def cost_meter(budget_usd: float = 0.50) -> Meter:
     return Meter(budget_usd)
 
 
+# ── OpenAI spending cap ───────────────────────────────────────────────────────
+#
+# Every OpenAI call made through openai_client() is charged, from the token
+# counts the API returns, to a small ledger file that persists across notebook
+# sessions. A call is refused BEFORE it is sent if its worst-case cost would
+# take the total over the budget, so the budget cannot be exceeded.
+#
+#   budget: FM_OPENAI_BUDGET_USD in .env (default 5.00)
+#   ledger: .openai_spend.json in the repo root (gitignored)
+#   check:  nbio.openai_spend()
+#
+# Prices are USD per 1M tokens (input, output). Only the models listed here can
+# be called; check https://openai.com/api/pricing before adding one.
+
+OPENAI_PRICES_PER_M = {
+    "gpt-4o-mini": (0.15, 0.60),
+}
+OPENAI_LEDGER = HERE / ".openai_spend.json"
+DEFAULT_OPENAI_BUDGET_USD = 5.00
+
+
+def _openai_ledger_read() -> Dict[str, Any]:
+    if OPENAI_LEDGER.exists():
+        return json.loads(OPENAI_LEDGER.read_text())
+    return {"spent_usd": 0.0, "calls": 0, "by_model": {}}
+
+
+def _openai_ledger_add(model: str, cost: float) -> Dict[str, Any]:
+    led = _openai_ledger_read()
+    led["spent_usd"] = round(led["spent_usd"] + cost, 6)
+    led["calls"] += 1
+    m = led["by_model"].setdefault(model, {"spent_usd": 0.0, "calls": 0})
+    m["spent_usd"] = round(m["spent_usd"] + cost, 6)
+    m["calls"] += 1
+    tmp = OPENAI_LEDGER.with_suffix(".tmp")
+    tmp.write_text(json.dumps(led, indent=1))
+    tmp.replace(OPENAI_LEDGER)
+    return led
+
+
+def openai_budget() -> float:
+    return float(os.environ.get("FM_OPENAI_BUDGET_USD") or DEFAULT_OPENAI_BUDGET_USD)
+
+
+def openai_spend() -> str:
+    """How much of the OpenAI budget has been used so far (all sessions)."""
+    led = _openai_ledger_read()
+    return (f"OpenAI spend ${led['spent_usd']:.4f} of ${openai_budget():.2f} budget "
+            f"across {led['calls']} call(s)")
+
+
+class CappedOpenAI:
+    """An OpenAI client that cannot spend more than the budget.
+
+    Use exactly like the OpenAI client: client.chat.completions.create(...)."""
+
+    def __init__(self, client, budget_usd: Optional[float] = None):
+        self._client = client
+        self._budget = budget_usd
+        self.chat = self
+        self.completions = self
+
+    def _limit(self) -> float:
+        return self._budget if self._budget is not None else openai_budget()
+
+    def create(self, **kw):
+        model = kw.get("model")
+        if model not in OPENAI_PRICES_PER_M:
+            raise ValueError(f"model {model!r} has no price in nbio.OPENAI_PRICES_PER_M; "
+                             f"allowed: {sorted(OPENAI_PRICES_PER_M)}")
+        p_in, p_out = OPENAI_PRICES_PER_M[model]
+        # worst case: ~1 token per 3 characters of prompt, plus the full output allowance
+        chars = sum(len(str(m.get("content", ""))) for m in kw.get("messages", []))
+        max_out = kw.get("max_tokens") or kw.get("max_completion_tokens") or 1024
+        worst = (chars / 3 * p_in + max_out * p_out) / 1e6
+        spent = _openai_ledger_read()["spent_usd"]
+        if spent + worst > self._limit():
+            raise BudgetExceeded(f"OpenAI budget reached: spent ${spent:.4f} of ${self._limit():.2f}; "
+                                 f"this call could cost up to ${worst:.4f}. Raise FM_OPENAI_BUDGET_USD "
+                                 f"only if that is intended.")
+        r = self._client.chat.completions.create(**kw)
+        u = getattr(r, "usage", None)
+        cost = (((getattr(u, "prompt_tokens", 0) or 0) * p_in
+                 + (getattr(u, "completion_tokens", 0) or 0) * p_out) / 1e6) if u else worst
+        _openai_ledger_add(model, cost)
+        return r
+
+
+def openai_client(budget_usd: Optional[float] = None) -> CappedOpenAI:
+    """The only way notebooks should create an OpenAI client: key from .env
+    (OPENAI_API_KEY), spending capped by FM_OPENAI_BUDGET_USD."""
+    from openai import OpenAI
+    key = os.environ.get("OPENAI_API_KEY", "")
+    if not key:
+        raise RuntimeError("OPENAI_API_KEY is not set; put it in .env")
+    print(openai_spend())
+    return CappedOpenAI(OpenAI(api_key=key, timeout=60), budget_usd)
+
+
 # ═════════════════════════════════════════════════════════════════════════════
 # DOMAIN LOGIC — shared across notebooks, defined here exactly once
 # ═════════════════════════════════════════════════════════════════════════════
