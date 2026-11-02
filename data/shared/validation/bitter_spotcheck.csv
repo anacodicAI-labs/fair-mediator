@@ -1,101 +1,101 @@
 recipe_id,recipe_name,ingredients,bitter_score,bitter_ingredients,looks_bitter,notes
-341814,turkey medallions with caramelized onion cider sauce,flour; salt; fresh ground black pepper; turkey breast tenderloins; olive oil; onions; garlic clove; dried thyme; low-fat chicken broth; apple cider,0.0,,
-81824,broccoli cheddar soup,onion; broccoli; potatoes; garlic powder; water; chicken bouillon; cheez whiz; pepper; margarine; flour; milk,0.0667,broccoli,,broccoli minor
-280348,cola french onion soup,butter; onions; beef broth; coca-cola; salt; vinegar; pepper; crouton; swiss cheese; parmesan cheese,0.0,,
-456101,skewered coconut shrimp,oil; flour; garlic salt; cayenne; eggs; sweetened flaked coconut; raw shrimp; skewers; salt and pepper,0.0,,
-35623,easy baked apple oatmeal breakfast,eggs; applesauce; brown sugar; baking powder; salt; oatmeal; milk,0.0,,
-37533,spicy bloody mary mix,tomato juice; lime juice; juice; vinegar; sugar; prepared horseradish; salt; pepper; onion powder; garlic powder,0.0,,,
-44920,strawberry pastries with lemon cream,"frozen puff pastry shells; plain low-fat yogurt; honey; lemon, zest of; lemon juice; strawberries; sugar",0.1,"lemon, zest of",,
-295852,elk meat chili,ground elk; onion; garlic cloves; diced tomatoes; pork & beans; salsa; brown sugar; chili powder; garlic salt; pepper,0.0,,
-252909,peanut butter  honey and chocolate chip wrap,tortilla; peanut butter; honey; semi-sweet chocolate chips,0.075,semi-sweet chocolate chips,,
-369943,spanish hot chocolate,semisweet chocolate; milk; sugar; cinnamon,0.075,semisweet chocolate,,semisweet + sugar
-60725,swedish saffranspannkaka    saffron cake,short-grain rice; salt; water; cream; milk; saffron strand; sugar; almonds; eggs,0.0333,saffron strand,,
-160289,southwestern chicken   barley soup,yellow onion; celery; green pepper; olive oil; water; low-sodium chicken bouillon cubes; skinless chicken breast halves; diced tomatoes; whole kernel corn; black beans; dried ancho chiles; black pepper; barley; green zucchini; yellow squash; lime,0.0,,
-234677,my family s favorite meatloaf,lean ground turkey; rolled oats; egg white substitute; frozen peppers and onions; ketchup; prepared mustard; salt; pepper; zucchini; yellow squash,0.0,,
-165874,praline sauce,butter; whipping cream; brown sugar; vanilla,0.0,,
-407162,chinese orange barbecue cashew chicken,canola oil; boneless skinless chicken breasts; salt and pepper; red bell pepper; onion; garlic cloves; ginger; hot sauce; soy sauce; hoisin sauce; orange marmalade; chicken stock; cashews; scallions,0.0333,orange marmalade,,
-41907,okie tacos,ground beef; salsa; refried beans; corn tortilla; oil,0.0,,
-62661,hot pepper mustard,habanero peppers; vinegar; salt; water; sugar; flour; turmeric; dry mustard; mustard,0.06,turmeric,,
-452783,quick   easy gluten free apple crisp,apples; sugar; water; cornstarch; ground cinnamon; nutmeg; almond flour; old fashioned oats; brown sugar; cinnamon; unsalted butter,0.0,,
-54709,french vanilla cafe mix,instant coffee; powdered milk; powdered coffee creamer; sugar; vanilla instant pudding mix,0.3,instant coffee,,coffee drink
-234888,fried asparagus,all-purpose flour; cornstarch; salt; baking powder; baking soda; garlic salt; pepper; beer; egg whites; fresh asparagus; oil; ranch salad dressing,0.0857,beer,,beer batter not bitter
-39711,chinese chicken lettuce cups,rice noodles; olive oil; lean ground chicken; garlic cloves; ginger; sweet chili sauce; fish sauce; soy sauce; coriander leaves; lettuce cups,0.0,,
-183866,paul prudhomme s blackened seasoning blend,sweet paprika; salt; onion powder; garlic powder; ground red pepper; white pepper; fresh ground black pepper; dried thyme leaves; dried oregano leaves,0.0,,
-52922,vegetarian eggs benedict,fresh basil leaf; garlic; pine nuts; salt and pepper; olive oil; parmesan cheese; tomatoes; eggplants; english muffins; eggs,0.04,eggplants,,
-508748,viennese coffee bon apetit,whipping cream; semisweet chocolate; brewed coffee; whipped cream; ground cinnamon; sugar,0.4,semisweet chocolate; brewed coffee,,coffee + dark chocolate drink
-284208,amish chicken corn soup,water; boneless skinless chicken breasts; onion; celery; carrot; chicken bouillon cubes; cream-style corn; egg noodles; butter; salt; pepper,0.0,,
-457864,orange spice tea mix,instant tang orange drink; instant tea; sugar; cinnamon; ground allspice; ground cloves,0.0,,,instant tea not scored; sweet mix anyway
-33452,amish brown sugar pie,unbaked 8-inch pie shell; brown sugar; all-purpose flour; salt; evaporated milk; butter; ground cinnamon,0.0,,
-167280,chocolate and peanut butter bars,butter; sugar; brown sugar; creamy peanut butter; egg; vanilla extract; flour; quick-cooking oats; baking soda; salt; semi-sweet chocolate chips; confectioners' sugar; milk,0.0429,semi-sweet chocolate chips,,
-122085,cranberry orange bran muffins,plain fat-free yogurt; all-bran cereal; all-purpose flour; whole wheat flour; baking powder; baking soda; salt; orange juice; honey; butter; egg; orange zest; dried cranberries,0.0375,orange zest,,
-72573,perciatelli w  roasted chestnuts  butternut squash  goat cheese,fresh chestnuts; unsalted butter; extra virgin olive oil; leeks; garlic cloves; butternut squash; dry vermouth; chicken stock; perciatelli; goat cheese; fresh basil leaf,0.1,dry vermouth,,
-502407,baby back ribs,baby back ribs; orange juice; margarita mix; honey; ketchup; worcestershire sauce; instant coffee powder; cayenne pepper; salt; dark brown sugar; chili powder; garlic powder; ground thyme; allspice,0.1125,instant coffee powder,,
-116677,herbed lemon pepper rub,"lemon pepper seasoning; lemon, zest of; garlic powder; onion powder; mixed italian herbs; dried parsley",0.3,"lemon, zest of",,zest minor in a rub
-79166,linzertorte bars,unsalted butter; sugar; egg; toasted hazelnuts; dark unsweetened cocoa; nutmeg; ground cinnamon; ground cloves; all-purpose flour; seedless raspberry jam; confectioners' sugar,0.2,dark unsweetened cocoa,,
-390814,london s borough market chocolate brownies,dark chocolate; unsalted butter; eggs; egg yolks; caster sugar; cocoa powder; plain flour,0.7,dark chocolate; cocoa powder,,dark chocolate + cocoa brownies
-44075,pizza grilled cheese,butter; bread; provolone cheese; pepperoni; pizza sauce,0.0,,
-494996,felix s simple white bread,white bread flour; warm water; olive oil; salt; dry yeast,0.0,,
-179144,tiramisu cheesecake cupcakes,vanilla wafers; instant coffee; hot water; cream cheese; granulated sugar; sour cream; pure vanilla extract; eggs; cool whip; unsweetened cocoa powder,0.425,instant coffee; unsweetened cocoa powder,,coffee-soaked tiramisu note
-185022,pepperoni rolls,water; sugar; yeast; salt; flour; mozzarella cheese; pepperoni,0.0,,
-62515,creme fraiche,buttermilk; heavy cream,0.0,,
-43848,creamy turkey vegetable soup,onion; butter; sweet potatoes; zucchini; carrots; broccoli; turkey broth; potatoes; celery; salt; cayenne pepper; turkey; pepper; light cream,0.025,broccoli,,
-232310,patatas payesa,potatoes; bell pepper; smoked paprika; olive oil; salt & pepper,0.0,,
-96780,cinna chocolate dream not the same old mayonnaise cake,boiling water; raisins; baking soda; mayonnaise; vanilla; white sugar; cinnamon; cocoa powder; flour; walnuts,0.1143,cocoa powder,,
-51616,ora s favorite frosting,all-purpose flour; cocoa powder; salt; milk; shortening; margarine; granulated sugar; vanilla,0.16,cocoa powder,,
-101388,marbled green tea cake,all-purpose flour; baking powder; eggs; granulated sugar; plain yogurt; vanilla extract; butter; green tea powder; water; cream,0.08,green tea powder,,matcha light in a sweet cake
-347638,siamese chicken drumettes,"light coconut cream; soy sauce; limes, juice of; red curry paste; chicken drummettes; bean sprouts; cashews; coriander leaves",0.0,,
-55339,so good beef and broccoli salad,cooked beef; fresh broccoli; green onions; marinated artichoke hearts; chicken rice-a-roni; mayonnaise; cherry tomatoes,0.1,fresh broccoli,,
-333007,ghirardelli english toffee,bittersweet chocolate; pecans; butter; sugar; water; salt; pure vanilla extract,0.12,bittersweet chocolate,,toffee dominates
-145827,ganache dark fudgy brownies,cocoa powder; baking soda; butter; boiling water; sugar; eggs; all-purpose flour; vanilla extract; salt; hershey's semi-sweet chocolate chips; whipping cream; fresh strawberries,0.1571,cocoa powder; hershey's semi-sweet chocolate chips,,dark cocoa brownies
-42437,easy spicy curried peas,coconut milk; red chili powder; coriander powder; turmeric powder; salt; vegetable oil; onion; cinnamon stick; cumin seed; tomatoes; frozen peas,0.06,turmeric powder,,
-253047,spicy turkey angel hair pasta,angel hair pasta; garlic cloves; shallot; olive oil; diced tomatoes; ground turkey; olive; roasted red pepper; capers; parsley; chicken stock; salt; red pepper flakes,0.0,,
-329348,tuscan chicken pasta,penne pasta; chicken breasts; spinach leaves; cannellini beans; olive oil; garlic clove; rosemary; red bell peppers; parmesan cheese,0.0,,
-359773,king arthur flour s faux reos,granulated sugar; butter; salt; espresso powder; egg; cold water; vanilla extract; unbleached all-purpose flour; dark cocoa; candy canes; confectioners' sugar; vegetable shortening,0.425,espresso powder; dark cocoa,,black cocoa + espresso wafers
-285327,italian harvest soup,salami; onion; carrots; olive oil; beef broth; diced tomatoes with juice; cayenne pepper; salt; oregano; marjoram; summer savory; green beans; mushrooms; cabbage; french bread; mozzarella cheese,0.0,,
-152777,quick ranch chicken,chicken drumsticks; ranch dressing; breadcrumbs,0.0,,
-309958,parisan warm chocolate,whole milk; heavy cream; sugar; semisweet chocolate,0.1,semisweet chocolate,,
-87233,paula s carrot cake,carrots; all-purpose flour; sugar; baking soda; baking powder; salt; ground cinnamon; eggs; oil; vanilla; powdered sugar; cream cheese; butter; pecans,0.0,,
-359347,shamrock toasties   kids st  patrick s day,green pepper; english muffins; cheddar cheese,0.0,,
-267033,polish babka  robert strybel  no knead  easy,flour; salt; dry yeast; granulated sugar; unsalted butter; milk; raisins; lemon peel; eggs; vanilla extract; icing; lemon juice; confectioners' sugar; water,0.075,lemon peel,,
-491929,light  crisp waffles,all-purpose flour; cornstarch; salt; baking powder; baking soda; buttermilk; milk; vegetable oil; egg; sugar; vanilla extract,0.0,,
-448398,better homes and gardens banana bread,all-purpose flour; baking powder; baking soda; cinnamon; salt; egg; bananas; sugar; cooking oil; lemon peel; walnuts,0.0375,lemon peel,,
-142362,warm egg salad on whole wheat toast,eggs; onions; celery; fresh basil; dijon mustard; salt; pepper; mayonnaise; whole wheat bread; lettuce leaves,0.0,,
-463117,coffee cookie buns   aka mexican coffee buns  rotiboy  copycat,water; bread flour; instant yeast; caster sugar; warm water; salt; unsalted butter; vital wheat gluten; eggs; ice cubes; liquid honey; powdered milk; salted butter; icing sugar; instant coffee; hot water; all-purpose flour,0.225,instant coffee,,"sweet bun, coffee topping"
-35177,olive garden pollo limone  lemon chicken,boneless skinless chicken breasts; all-purpose flour; extra virgin olive oil; green onion; minced garlic cloves; chicken broth; dry white wine; fresh lemon juice; fresh parsley; lemon zest; salt; pepper,0.075,lemon zest,,
-270154,sam s favorite boneless pork loin chops,boneless pork chops; soy sauce; brown sugar; fresh gingerroot; brown ale,0.0,,
-52552,middle eastern lentil   kofta bowl by sy,"chicken stock; lentils; celery rib; onion; tomato paste; green zucchini; red pepper; butter; garlic cloves; lemon, juice of; lemon zest; olive oil; ground cumin; ginger; ground turkey; ground coriander; black pepper; parsley; oil",0.03,lemon zest,,
-354032,pumpkin honey chocolate chip cookies,all-purpose flour; sugar; ground cardamom; ground nutmeg; ground cinnamon; ground ginger; baking soda; baking powder; salt; eggs; canned pumpkin; baby carrots; honey; butter; semi-sweet chocolate chips,0.0375,semi-sweet chocolate chips,,
-300597,late fall garden soup with kale and rice,olive oil; leeks; baking potatoes; water; kale; long-grain rice; sea salt; dried thyme; fresh ground black pepper; garlic clove; vegetable bouillon cubes; asiago cheese,0.1667,kale,,kale mild in potato soup
-401820,italian tuna fish salad,tuna fish; black olives; orange; celery; sweet onion; olive oil,0.0,,
-128203,marie s coleslaw lemon dressing,mayonnaise; sugar; white wine; lemon juice; lemon rind; salt & freshly ground black pepper,0.0,,
-22926,pumpkin fruitcake,butter; golden syrup; sugar; mixed fruit; eggs; pumpkin; self-raising flour; plain flour; cinnamon; nutmeg; salt,0.0,,
-422978,bauernfruhstuck,bacon; butter; onion; potatoes; eggs; salt; black pepper; milk,0.0,,
-343049,autumn creamy pumpkin pie dip,pumpkin puree; cream cheese; golden brown sugar; vanilla extract; pumpkin pie spice,0.0,,
-76353,russian tea,cloves; cinnamon sticks; water; tea bags; orange juice; lemon juice; sugar; pineapple juice,0.1333,tea bags,,spiced sweet tea
-86171,the best chocolate souffle ever,sugar; bittersweet chocolate; egg yolks; egg whites,0.3,bittersweet chocolate,,bittersweet chocolate is the main ingredient
-80453,crispy deep fried cod fish,soya oil; cod fish fillets; self-rising flour; mustard powder; water; egg; sugar; salt,0.0,,
-94654,savory grilled steak with bleu cheese garlic butter,cloves; onion powder; mccormick's montreal brand steak seasoning; butter; blue cheese; dried thyme; filet mignon steaks; garlic; seasoning salt; black pepper; soy sauce; cooking spray,0.0,,
-435745,gluten free southern cornbread,cooking oil; cornmeal; brown rice flour; sorghum flour; salt; baking powder; baking soda; dry buttermilk; xanthan gum; brown sugar; eggs; water,0.0,,
-454603,balsamic   lime vinaigrette,balsamic vinegar; agave nectar; fresh lime juice; olive oil; coarse salt; fresh ground black pepper,0.0,,
-173942,japanese stir fry,boneless skinless chicken breasts; green bell pepper; white onion; carrots; red bell pepper; broccoli; sesame oil; shoyu; rice vinegar; mirin; sugar; ginger; garlic cloves,0.0333,broccoli,,
-50382,my favorite lasagna,ground beef; onion; olive oil; diced tomatoes; tomato paste; water; parsley; salt; sugar; garlic powder; pepper; oregano; ricotta cheese; mozzarella cheese; lasagna noodles,0.0,,
-189785,easy cheesy fruit dip,cream cheese; sour cream; whipping cream; brown sugar; white sugar; maple syrup; pure vanilla extract,0.0,,
-130710,cathy s taco dip,sour cream; cream cheese; lettuce; diced tomato; cheddar cheese; taco seasoning,0.0,,
-526717,hp guinness sauce,tomato paste; tomato sauce; white vinegar; light brown sugar; dark molasses; beer; onion powder; garlic powder; salt; black pepper; cold water; cornstarch,0.1,beer,,"sauce, beer minor"
-194807,chocolate cups,semi-sweet chocolate chips; shortening; cupcake liners,0.3,semi-sweet chocolate chips,,semisweet chips
-345992,oven o rings  onion rings,cornmeal; dried chipotle powder; all-purpose flour; buttermilk; onion,0.0,,
-108296,low fat low carb protein brownies,baking cocoa; apples; egg whites; vanilla extract; splenda granular; soy protein isolate; wheat gluten flour; rye flour; low sodium salt; nuts,0.8,baking cocoa,,"unsweetened cocoa, little sugar"
-304237,mincemeat coffee cake,biscuit mix; granulated sugar; milk; orange marmalade; mincemeat; powdered sugar; orange extract,0.1,orange marmalade,,
-370780,candied baked sweet potatoes  oven or grill,sweet potatoes; salt; butter; brown sugar; ground cinnamon; corn syrup,0.0,,
-353435,beer dogs,hot dogs; water; beer; mustard powder; seasoning salt; hot sauce,0.3,beer,,beer cooks off
-168411,meatloaf  yes  simple  yet  to die for,hamburger; onion soup mix; breadcrumbs; eggs; catsup; water,0.0,,
-181196,goat cheese  lemon  and chive turnovers,fresh goat cheese; fresh chives; yellow onion; lemon zest; kosher salt; fresh ground black pepper; flour; frozen puff pastry,0.15,lemon zest,,
-257843,maple cashew goodies,paper baking cups; marshmallow creme; butter; maple flavoring; powdered sugar; semi-sweet chocolate chips; shortening; salted cashews,0.1,semi-sweet chocolate chips,,
-185833,chipotle raspberry pork roast,pork roast; dry onion soup mix; raspberry chipotle sauce,0.0,,
-330913,easy mexican mac and cheese,penne pasta; lager beer; bacon; tomatoes and green chilies; cream cheese; milk; monterey jack pepper cheese; green onion; tortilla chips,0.15,lager beer,,
-362750,no bake boiled chocolate fudge oatmeal cookies  peanut butter op,granulated sugar; cocoa; milk; butter; quick-cooking oats; vanilla extract; peanut butter; nuts,0.2,cocoa,,
-257987,susan s cranberry apple crisp,green apples; cranberries; brown sugar; flour; oats; cinnamon; nutmeg; butter,0.0,,
-245066,bitter queen,vodka; campari; limoncello; fresh orange juice; lime slice,0.9,campari,,campari cocktail
-418841,venison bourguignon  venison stew,venison; bacon drippings; carrot; onion; salt; pepper; flour; red wine; beef stock; tomato paste; garlic cloves; thyme; oregano; basil; bay leaves; white onions; mushroom; butter,0.0,,
-151498,cauliflower and  peas curry,oil; whole cumin seed; onions; garlic cloves; fresh ginger; tomatoes; ground coriander; ground turmeric; ground cumin; ground cayenne pepper; black cardamom pods; salt; cauliflower; frozen peas; coriander,0.075,ground turmeric,,
-305640,middle eastern chicken salad wraps,romaine lettuce; cooked chicken; roasted red pepper; light caesar salad dressing; garlic hummus; whole wheat sandwich wraps,0.0,,
+341814,turkey medallions with caramelized onion cider sauce,flour; salt; fresh ground black pepper; turkey breast tenderloins; olive oil; onions; garlic clove; dried thyme; low-fat chicken broth; apple cider,0.0,,n,
+81824,broccoli cheddar soup,onion; broccoli; potatoes; garlic powder; water; chicken bouillon; cheez whiz; pepper; margarine; flour; milk,0.0667,broccoli,n,broccoli minor
+280348,cola french onion soup,butter; onions; beef broth; coca-cola; salt; vinegar; pepper; crouton; swiss cheese; parmesan cheese,0.0,,n,
+456101,skewered coconut shrimp,oil; flour; garlic salt; cayenne; eggs; sweetened flaked coconut; raw shrimp; skewers; salt and pepper,0.0,,n,
+35623,easy baked apple oatmeal breakfast,eggs; applesauce; brown sugar; baking powder; salt; oatmeal; milk,0.0,,n,
+37533,spicy bloody mary mix,tomato juice; lime juice; juice; vinegar; sugar; prepared horseradish; salt; pepper; onion powder; garlic powder,0.0,,n,
+44920,strawberry pastries with lemon cream,"frozen puff pastry shells; plain low-fat yogurt; honey; lemon, zest of; lemon juice; strawberries; sugar",0.1,"lemon, zest of",n,
+295852,elk meat chili,ground elk; onion; garlic cloves; diced tomatoes; pork & beans; salsa; brown sugar; chili powder; garlic salt; pepper,0.0,,n,
+252909,peanut butter  honey and chocolate chip wrap,tortilla; peanut butter; honey; semi-sweet chocolate chips,0.075,semi-sweet chocolate chips,n,
+369943,spanish hot chocolate,semisweet chocolate; milk; sugar; cinnamon,0.075,semisweet chocolate,n,semisweet + sugar
+60725,swedish saffranspannkaka    saffron cake,short-grain rice; salt; water; cream; milk; saffron strand; sugar; almonds; eggs,0.0333,saffron strand,n,
+160289,southwestern chicken   barley soup,yellow onion; celery; green pepper; olive oil; water; low-sodium chicken bouillon cubes; skinless chicken breast halves; diced tomatoes; whole kernel corn; black beans; dried ancho chiles; black pepper; barley; green zucchini; yellow squash; lime,0.0,,n,
+234677,my family s favorite meatloaf,lean ground turkey; rolled oats; egg white substitute; frozen peppers and onions; ketchup; prepared mustard; salt; pepper; zucchini; yellow squash,0.0,,n,
+165874,praline sauce,butter; whipping cream; brown sugar; vanilla,0.0,,n,
+407162,chinese orange barbecue cashew chicken,canola oil; boneless skinless chicken breasts; salt and pepper; red bell pepper; onion; garlic cloves; ginger; hot sauce; soy sauce; hoisin sauce; orange marmalade; chicken stock; cashews; scallions,0.0333,orange marmalade,n,
+41907,okie tacos,ground beef; salsa; refried beans; corn tortilla; oil,0.0,,n,
+62661,hot pepper mustard,habanero peppers; vinegar; salt; water; sugar; flour; turmeric; dry mustard; mustard,0.06,turmeric,n,
+452783,quick   easy gluten free apple crisp,apples; sugar; water; cornstarch; ground cinnamon; nutmeg; almond flour; old fashioned oats; brown sugar; cinnamon; unsalted butter,0.0,,n,
+54709,french vanilla cafe mix,instant coffee; powdered milk; powdered coffee creamer; sugar; vanilla instant pudding mix,0.3,instant coffee,y,coffee drink
+234888,fried asparagus,all-purpose flour; cornstarch; salt; baking powder; baking soda; garlic salt; pepper; beer; egg whites; fresh asparagus; oil; ranch salad dressing,0.0857,beer,n,beer batter not bitter
+39711,chinese chicken lettuce cups,rice noodles; olive oil; lean ground chicken; garlic cloves; ginger; sweet chili sauce; fish sauce; soy sauce; coriander leaves; lettuce cups,0.0,,n,
+183866,paul prudhomme s blackened seasoning blend,sweet paprika; salt; onion powder; garlic powder; ground red pepper; white pepper; fresh ground black pepper; dried thyme leaves; dried oregano leaves,0.0,,n,
+52922,vegetarian eggs benedict,fresh basil leaf; garlic; pine nuts; salt and pepper; olive oil; parmesan cheese; tomatoes; eggplants; english muffins; eggs,0.04,eggplants,n,
+508748,viennese coffee bon apetit,whipping cream; semisweet chocolate; brewed coffee; whipped cream; ground cinnamon; sugar,0.4,semisweet chocolate; brewed coffee,y,coffee + dark chocolate drink
+284208,amish chicken corn soup,water; boneless skinless chicken breasts; onion; celery; carrot; chicken bouillon cubes; cream-style corn; egg noodles; butter; salt; pepper,0.0,,n,
+457864,orange spice tea mix,instant tang orange drink; instant tea; sugar; cinnamon; ground allspice; ground cloves,0.0,,n,instant tea not scored; sweet mix anyway
+33452,amish brown sugar pie,unbaked 8-inch pie shell; brown sugar; all-purpose flour; salt; evaporated milk; butter; ground cinnamon,0.0,,n,
+167280,chocolate and peanut butter bars,butter; sugar; brown sugar; creamy peanut butter; egg; vanilla extract; flour; quick-cooking oats; baking soda; salt; semi-sweet chocolate chips; confectioners' sugar; milk,0.0429,semi-sweet chocolate chips,n,
+122085,cranberry orange bran muffins,plain fat-free yogurt; all-bran cereal; all-purpose flour; whole wheat flour; baking powder; baking soda; salt; orange juice; honey; butter; egg; orange zest; dried cranberries,0.0375,orange zest,n,
+72573,perciatelli w  roasted chestnuts  butternut squash  goat cheese,fresh chestnuts; unsalted butter; extra virgin olive oil; leeks; garlic cloves; butternut squash; dry vermouth; chicken stock; perciatelli; goat cheese; fresh basil leaf,0.1,dry vermouth,n,
+502407,baby back ribs,baby back ribs; orange juice; margarita mix; honey; ketchup; worcestershire sauce; instant coffee powder; cayenne pepper; salt; dark brown sugar; chili powder; garlic powder; ground thyme; allspice,0.1125,instant coffee powder,n,
+116677,herbed lemon pepper rub,"lemon pepper seasoning; lemon, zest of; garlic powder; onion powder; mixed italian herbs; dried parsley",0.3,"lemon, zest of",n,zest minor in a rub
+79166,linzertorte bars,unsalted butter; sugar; egg; toasted hazelnuts; dark unsweetened cocoa; nutmeg; ground cinnamon; ground cloves; all-purpose flour; seedless raspberry jam; confectioners' sugar,0.2,dark unsweetened cocoa,n,
+390814,london s borough market chocolate brownies,dark chocolate; unsalted butter; eggs; egg yolks; caster sugar; cocoa powder; plain flour,0.7,dark chocolate; cocoa powder,y,dark chocolate + cocoa brownies
+44075,pizza grilled cheese,butter; bread; provolone cheese; pepperoni; pizza sauce,0.0,,n,
+494996,felix s simple white bread,white bread flour; warm water; olive oil; salt; dry yeast,0.0,,n,
+179144,tiramisu cheesecake cupcakes,vanilla wafers; instant coffee; hot water; cream cheese; granulated sugar; sour cream; pure vanilla extract; eggs; cool whip; unsweetened cocoa powder,0.425,instant coffee; unsweetened cocoa powder,y,coffee-soaked tiramisu note
+185022,pepperoni rolls,water; sugar; yeast; salt; flour; mozzarella cheese; pepperoni,0.0,,n,
+62515,creme fraiche,buttermilk; heavy cream,0.0,,n,
+43848,creamy turkey vegetable soup,onion; butter; sweet potatoes; zucchini; carrots; broccoli; turkey broth; potatoes; celery; salt; cayenne pepper; turkey; pepper; light cream,0.025,broccoli,n,
+232310,patatas payesa,potatoes; bell pepper; smoked paprika; olive oil; salt & pepper,0.0,,n,
+96780,cinna chocolate dream not the same old mayonnaise cake,boiling water; raisins; baking soda; mayonnaise; vanilla; white sugar; cinnamon; cocoa powder; flour; walnuts,0.1143,cocoa powder,n,
+51616,ora s favorite frosting,all-purpose flour; cocoa powder; salt; milk; shortening; margarine; granulated sugar; vanilla,0.16,cocoa powder,n,
+101388,marbled green tea cake,all-purpose flour; baking powder; eggs; granulated sugar; plain yogurt; vanilla extract; butter; green tea powder; water; cream,0.08,green tea powder,n,matcha light in a sweet cake
+347638,siamese chicken drumettes,"light coconut cream; soy sauce; limes, juice of; red curry paste; chicken drummettes; bean sprouts; cashews; coriander leaves",0.0,,n,
+55339,so good beef and broccoli salad,cooked beef; fresh broccoli; green onions; marinated artichoke hearts; chicken rice-a-roni; mayonnaise; cherry tomatoes,0.1,fresh broccoli,n,
+333007,ghirardelli english toffee,bittersweet chocolate; pecans; butter; sugar; water; salt; pure vanilla extract,0.12,bittersweet chocolate,n,toffee dominates
+145827,ganache dark fudgy brownies,cocoa powder; baking soda; butter; boiling water; sugar; eggs; all-purpose flour; vanilla extract; salt; hershey's semi-sweet chocolate chips; whipping cream; fresh strawberries,0.1571,cocoa powder; hershey's semi-sweet chocolate chips,y,dark cocoa brownies
+42437,easy spicy curried peas,coconut milk; red chili powder; coriander powder; turmeric powder; salt; vegetable oil; onion; cinnamon stick; cumin seed; tomatoes; frozen peas,0.06,turmeric powder,n,
+253047,spicy turkey angel hair pasta,angel hair pasta; garlic cloves; shallot; olive oil; diced tomatoes; ground turkey; olive; roasted red pepper; capers; parsley; chicken stock; salt; red pepper flakes,0.0,,n,
+329348,tuscan chicken pasta,penne pasta; chicken breasts; spinach leaves; cannellini beans; olive oil; garlic clove; rosemary; red bell peppers; parmesan cheese,0.0,,n,
+359773,king arthur flour s faux reos,granulated sugar; butter; salt; espresso powder; egg; cold water; vanilla extract; unbleached all-purpose flour; dark cocoa; candy canes; confectioners' sugar; vegetable shortening,0.425,espresso powder; dark cocoa,y,black cocoa + espresso wafers
+285327,italian harvest soup,salami; onion; carrots; olive oil; beef broth; diced tomatoes with juice; cayenne pepper; salt; oregano; marjoram; summer savory; green beans; mushrooms; cabbage; french bread; mozzarella cheese,0.0,,n,
+152777,quick ranch chicken,chicken drumsticks; ranch dressing; breadcrumbs,0.0,,n,
+309958,parisan warm chocolate,whole milk; heavy cream; sugar; semisweet chocolate,0.1,semisweet chocolate,n,
+87233,paula s carrot cake,carrots; all-purpose flour; sugar; baking soda; baking powder; salt; ground cinnamon; eggs; oil; vanilla; powdered sugar; cream cheese; butter; pecans,0.0,,n,
+359347,shamrock toasties   kids st  patrick s day,green pepper; english muffins; cheddar cheese,0.0,,n,
+267033,polish babka  robert strybel  no knead  easy,flour; salt; dry yeast; granulated sugar; unsalted butter; milk; raisins; lemon peel; eggs; vanilla extract; icing; lemon juice; confectioners' sugar; water,0.075,lemon peel,n,
+491929,light  crisp waffles,all-purpose flour; cornstarch; salt; baking powder; baking soda; buttermilk; milk; vegetable oil; egg; sugar; vanilla extract,0.0,,n,
+448398,better homes and gardens banana bread,all-purpose flour; baking powder; baking soda; cinnamon; salt; egg; bananas; sugar; cooking oil; lemon peel; walnuts,0.0375,lemon peel,n,
+142362,warm egg salad on whole wheat toast,eggs; onions; celery; fresh basil; dijon mustard; salt; pepper; mayonnaise; whole wheat bread; lettuce leaves,0.0,,n,
+463117,coffee cookie buns   aka mexican coffee buns  rotiboy  copycat,water; bread flour; instant yeast; caster sugar; warm water; salt; unsalted butter; vital wheat gluten; eggs; ice cubes; liquid honey; powdered milk; salted butter; icing sugar; instant coffee; hot water; all-purpose flour,0.225,instant coffee,n,"sweet bun, coffee topping"
+35177,olive garden pollo limone  lemon chicken,boneless skinless chicken breasts; all-purpose flour; extra virgin olive oil; green onion; minced garlic cloves; chicken broth; dry white wine; fresh lemon juice; fresh parsley; lemon zest; salt; pepper,0.075,lemon zest,n,
+270154,sam s favorite boneless pork loin chops,boneless pork chops; soy sauce; brown sugar; fresh gingerroot; brown ale,0.0,,n,
+52552,middle eastern lentil   kofta bowl by sy,"chicken stock; lentils; celery rib; onion; tomato paste; green zucchini; red pepper; butter; garlic cloves; lemon, juice of; lemon zest; olive oil; ground cumin; ginger; ground turkey; ground coriander; black pepper; parsley; oil",0.03,lemon zest,n,
+354032,pumpkin honey chocolate chip cookies,all-purpose flour; sugar; ground cardamom; ground nutmeg; ground cinnamon; ground ginger; baking soda; baking powder; salt; eggs; canned pumpkin; baby carrots; honey; butter; semi-sweet chocolate chips,0.0375,semi-sweet chocolate chips,n,
+300597,late fall garden soup with kale and rice,olive oil; leeks; baking potatoes; water; kale; long-grain rice; sea salt; dried thyme; fresh ground black pepper; garlic clove; vegetable bouillon cubes; asiago cheese,0.1667,kale,n,kale mild in potato soup
+401820,italian tuna fish salad,tuna fish; black olives; orange; celery; sweet onion; olive oil,0.0,,n,
+128203,marie s coleslaw lemon dressing,mayonnaise; sugar; white wine; lemon juice; lemon rind; salt & freshly ground black pepper,0.0,,n,
+22926,pumpkin fruitcake,butter; golden syrup; sugar; mixed fruit; eggs; pumpkin; self-raising flour; plain flour; cinnamon; nutmeg; salt,0.0,,n,
+422978,bauernfruhstuck,bacon; butter; onion; potatoes; eggs; salt; black pepper; milk,0.0,,n,
+343049,autumn creamy pumpkin pie dip,pumpkin puree; cream cheese; golden brown sugar; vanilla extract; pumpkin pie spice,0.0,,n,
+76353,russian tea,cloves; cinnamon sticks; water; tea bags; orange juice; lemon juice; sugar; pineapple juice,0.1333,tea bags,n,spiced sweet tea
+86171,the best chocolate souffle ever,sugar; bittersweet chocolate; egg yolks; egg whites,0.3,bittersweet chocolate,y,bittersweet chocolate is the main ingredient
+80453,crispy deep fried cod fish,soya oil; cod fish fillets; self-rising flour; mustard powder; water; egg; sugar; salt,0.0,,n,
+94654,savory grilled steak with bleu cheese garlic butter,cloves; onion powder; mccormick's montreal brand steak seasoning; butter; blue cheese; dried thyme; filet mignon steaks; garlic; seasoning salt; black pepper; soy sauce; cooking spray,0.0,,n,
+435745,gluten free southern cornbread,cooking oil; cornmeal; brown rice flour; sorghum flour; salt; baking powder; baking soda; dry buttermilk; xanthan gum; brown sugar; eggs; water,0.0,,n,
+454603,balsamic   lime vinaigrette,balsamic vinegar; agave nectar; fresh lime juice; olive oil; coarse salt; fresh ground black pepper,0.0,,n,
+173942,japanese stir fry,boneless skinless chicken breasts; green bell pepper; white onion; carrots; red bell pepper; broccoli; sesame oil; shoyu; rice vinegar; mirin; sugar; ginger; garlic cloves,0.0333,broccoli,n,
+50382,my favorite lasagna,ground beef; onion; olive oil; diced tomatoes; tomato paste; water; parsley; salt; sugar; garlic powder; pepper; oregano; ricotta cheese; mozzarella cheese; lasagna noodles,0.0,,n,
+189785,easy cheesy fruit dip,cream cheese; sour cream; whipping cream; brown sugar; white sugar; maple syrup; pure vanilla extract,0.0,,n,
+130710,cathy s taco dip,sour cream; cream cheese; lettuce; diced tomato; cheddar cheese; taco seasoning,0.0,,n,
+526717,hp guinness sauce,tomato paste; tomato sauce; white vinegar; light brown sugar; dark molasses; beer; onion powder; garlic powder; salt; black pepper; cold water; cornstarch,0.1,beer,n,"sauce, beer minor"
+194807,chocolate cups,semi-sweet chocolate chips; shortening; cupcake liners,0.3,semi-sweet chocolate chips,n,semisweet chips
+345992,oven o rings  onion rings,cornmeal; dried chipotle powder; all-purpose flour; buttermilk; onion,0.0,,n,
+108296,low fat low carb protein brownies,baking cocoa; apples; egg whites; vanilla extract; splenda granular; soy protein isolate; wheat gluten flour; rye flour; low sodium salt; nuts,0.8,baking cocoa,y,"unsweetened cocoa, little sugar"
+304237,mincemeat coffee cake,biscuit mix; granulated sugar; milk; orange marmalade; mincemeat; powdered sugar; orange extract,0.1,orange marmalade,n,
+370780,candied baked sweet potatoes  oven or grill,sweet potatoes; salt; butter; brown sugar; ground cinnamon; corn syrup,0.0,,n,
+353435,beer dogs,hot dogs; water; beer; mustard powder; seasoning salt; hot sauce,0.3,beer,n,beer cooks off
+168411,meatloaf  yes  simple  yet  to die for,hamburger; onion soup mix; breadcrumbs; eggs; catsup; water,0.0,,n,
+181196,goat cheese  lemon  and chive turnovers,fresh goat cheese; fresh chives; yellow onion; lemon zest; kosher salt; fresh ground black pepper; flour; frozen puff pastry,0.15,lemon zest,n,
+257843,maple cashew goodies,paper baking cups; marshmallow creme; butter; maple flavoring; powdered sugar; semi-sweet chocolate chips; shortening; salted cashews,0.1,semi-sweet chocolate chips,n,
+185833,chipotle raspberry pork roast,pork roast; dry onion soup mix; raspberry chipotle sauce,0.0,,n,
+330913,easy mexican mac and cheese,penne pasta; lager beer; bacon; tomatoes and green chilies; cream cheese; milk; monterey jack pepper cheese; green onion; tortilla chips,0.15,lager beer,n,
+362750,no bake boiled chocolate fudge oatmeal cookies  peanut butter op,granulated sugar; cocoa; milk; butter; quick-cooking oats; vanilla extract; peanut butter; nuts,0.2,cocoa,n,
+257987,susan s cranberry apple crisp,green apples; cranberries; brown sugar; flour; oats; cinnamon; nutmeg; butter,0.0,,n,
+245066,bitter queen,vodka; campari; limoncello; fresh orange juice; lime slice,0.9,campari,y,campari cocktail
+418841,venison bourguignon  venison stew,venison; bacon drippings; carrot; onion; salt; pepper; flour; red wine; beef stock; tomato paste; garlic cloves; thyme; oregano; basil; bay leaves; white onions; mushroom; butter,0.0,,n,
+151498,cauliflower and  peas curry,oil; whole cumin seed; onions; garlic cloves; fresh ginger; tomatoes; ground coriander; ground turmeric; ground cumin; ground cayenne pepper; black cardamom pods; salt; cauliflower; frozen peas; coriander,0.075,ground turmeric,n,
+305640,middle eastern chicken salad wraps,romaine lettuce; cooked chicken; roasted red pepper; light caesar salad dressing; garlic hummus; whole wheat sandwich wraps,0.0,,n,
