@@ -1,7 +1,7 @@
 # validation/
 
 Hand-labelled sheets that measure the two components of the food catalog: the dish-to-recipe matcher and the bitter dimension.
-Every sheet is seeded (seed 7) and regenerable; the labels in it are the only hand-made part.
+The sheets themselves are in `data/shared/validation/`. Every sheet is seeded (seed 7) and regenerable; the labels in it are the only hand-made part.
 
 **How the sheets were labelled:** all three sheets were first labelled with AI assistance from the dish name,
 the Uber Eats description and the recipe's ingredient list. Every label was then checked by one author and

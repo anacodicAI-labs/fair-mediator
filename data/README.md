@@ -21,6 +21,7 @@ this one folder:
 |---|---|
 | `shared/external/` | Kaggle downloads and the Food.com recipe flavour table |
 | `shared/cache/` | the Uber Eats catalogs and the Food.com diner pool built from them |
+| `shared/validation/` | the hand-check sheets behind the scores in `validation/README.md` |
 | `shared/small_catalog/` | the five-restaurant catalog (`menus/`, `restaurants.csv`) and its 95 synthetic diners (`personas.json`) |
 
 ## 1. Food.com recipe flavours (needed by `nbio.recipe_taste`)
