@@ -1,0 +1,4 @@
+claim_id,source_paper,comparison,human_direction,judge_direction,agrees,margin,page_cite,verified
+H1,Barile et al. (2024),most_pleasure vs average,b_fairer,b_fairer,True,0.464,Study 1 Sect. 3.3 p. 15; Study 2 Sect. 4.3 p. 27,verified
+H2,Barile et al. (2024),most_pleasure vs least_misery,b_fairer,b_fairer,True,0.526,Study 1 Sect. 3.3 p. 15,verified
+H3,Barile et al. (2024),least_misery vs average,no_difference,no_difference,True,0.062,Study 1 Sect. 3.3 p. 15,verified

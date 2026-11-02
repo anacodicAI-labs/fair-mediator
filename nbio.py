@@ -1,6 +1,6 @@
 """nbio — shared plumbing for the Fair Mediator notebooks.
 
-Two jobs, same as the cookbook's nbio.py:
+Two jobs:
 
 1. DISPLAY  — io() bands, tables, cost metering, run artifacts under runs/.
 2. DOMAIN LOGIC that is genuinely shared across notebooks — cosine similarity,
@@ -9,9 +9,6 @@ Two jobs, same as the cookbook's nbio.py:
    This is the one file in the repository allowed to hold logic; everything
    else is a notebook.
 
-Each function below is either original to this paper or ported from a named
-contributor's code, with the source commit/file cited in its docstring.
-Attribution travels with the code.
 """
 
 from __future__ import annotations
@@ -28,6 +25,10 @@ from typing import Any, Dict, Iterable, List, Literal, Optional, Sequence, Tuple
 
 HERE = Path(__file__).resolve().parent
 DATA = HERE / "data"
+SHARED = DATA / "shared"                  # third-party-derived data, kept in one place
+SMALL_CATALOG = SHARED / "small_catalog"
+SMALL_MENUS = SMALL_CATALOG / "menus"
+SMALL_PERSONAS = SMALL_CATALOG / "personas.json"
 RUNS = HERE / "runs"
 FIGDATA = HERE / "figdata"
 
@@ -41,7 +42,7 @@ def bootstrap() -> Path:
     """Confirm the repo layout and report what is on disk. Call first in every notebook."""
     for d in (DATA, RUNS, FIGDATA):
         d.mkdir(parents=True, exist_ok=True)
-    menus = sorted((DATA / "Menu").glob("*.json")) if (DATA / "Menu").exists() else []
+    menus = sorted(SMALL_MENUS.glob("*.json")) if SMALL_MENUS.exists() else []
     print(f"repo     : {HERE}")
     print(f"data     : {DATA.relative_to(HERE)}  "
           f"(ingredient-flavor.csv: {'found' if (DATA/'ingredient-flavor.csv').exists() else 'MISSING'}, "
@@ -74,7 +75,7 @@ def load_run(stage: str, run_id: str = "demo") -> Any:
 
 def save_figdata(name: str, rows: list[dict]) -> Path:
     """Write one CSV that a paper table/figure reads. This is the ONLY path a
-    reported number may travel — see the repository's non-negotiables.
+    reported number may travel.
 
     FM_FIGDATA (a folder, relative to the repo) redirects the output, so runs
     on different datasets do not overwrite each other's CSVs."""
@@ -205,14 +206,10 @@ def cost_meter(budget_usd: float = 0.50) -> Meter:
 
 # ── taste similarity ──────────────────────────────────────────────────────────
 #
-# Ported from services/taste_service.py (potluck, main). `resolve_taste_vector`
-# and the neutral-fallback constant are Vincent's (wangvincentx-cmd, commit
-# 86124d4, 2026-08-14): "Add neutral default vectors, remove persona
-# duplicates, and make fairness lambda adjustable per session".
+# Cosine taste similarity with a neutral fallback for members without taste data.
 
 def calculate_cosine_similarity(v1: Sequence[float], v2: Sequence[float]) -> float:
-    """cosine(v1, v2). Potluck's services/integrations/embeddings.py, ported
-    without the numpy/sklearn dependency so this notebook needs no install."""
+    """cosine(v1, v2), without a numpy/sklearn dependency."""
     if not v1 or not v2:
         return 0.0
     dot = sum(a * b for a, b in zip(v1, v2))
@@ -226,9 +223,9 @@ def calculate_cosine_similarity(v1: Sequence[float], v2: Sequence[float]) -> flo
 def resolve_taste_vector(vec: Optional[Sequence[float]]) -> List[float]:
     """Return `vec` if it has any signal, else the neutral fallback.
 
-    Vincent, potluck main, services/taste_service.py:27, commit 86124d4. Before
-    this fix a member with no taste data scored 0.0 against everything rather
-    than the neutral midpoint, which silently penalised new/anonymous members.
+    Without the fallback a member with no taste data would score 0.0 against
+    everything rather than the neutral midpoint, which would silently penalise
+    new or anonymous members.
     """
     if vec and any(v != 0.0 for v in vec):
         return list(vec)
@@ -241,10 +238,7 @@ def taste_similarity(user_vec: Sequence[float], item_vec: Sequence[float]) -> fl
 
 # ── C1: the four aggregation selectors ────────────────────────────────────────
 #
-# Ported verbatim (renamed for this repo's notation) from Vincent's
-# backend/services/fairness_service.py (potluck main, commit 3c32c76,
-# "Add per-member F0 taste vectors and C1 fairness aggregation selectors",
-# 2026-08-02). Docstrings are his.
+# Average, Least-Misery, Most-Pleasure and the Fair objective mean - lambda * Var.
 
 AggregationMethod = Literal["average", "least_misery", "most_pleasure", "fair"]
 DEFAULT_LAMBDA = 0.5
@@ -300,7 +294,7 @@ def rank_candidates(candidate_taste_vectors: Dict[str, Sequence[float]],
                      method: AggregationMethod = "fair",
                      lam: float = DEFAULT_LAMBDA) -> List[Tuple[str, float]]:
     """Rank candidates (already restricted to the safe set F) by aggregated
-    group score. Vincent, fairness_service.py."""
+    group score."""
     ranked = []
     for cid, vec in candidate_taste_vectors.items():
         scores = [taste_similarity(mv, vec) for mv in member_taste_vectors]
@@ -311,8 +305,7 @@ def rank_candidates(candidate_taste_vectors: Dict[str, Sequence[float]],
 
 # ── Stage 2: the feasible set F ───────────────────────────────────────────────
 #
-# Original to this paper (Vihaan), ported from potluck's
-# backend/services/aggregation.py.
+# A restaurant enters F only if every member has at least one safe dish.
 
 NON_VEGAN_WORDS = ["paneer", "cheese", "butter", "ghee", "cream", "milk", "malai",
                    "curd", "yogurt", "yoghurt", "dahi", "khoya", "mawa", "honey",
@@ -397,8 +390,7 @@ def build_feasible_set(catalog: Sequence[Dict], members: Sequence[Dict]) -> List
 
 # ── Stage 5: fairness metrics ─────────────────────────────────────────────────
 #
-# Original to this paper (Vihaan), ported from potluck's
-# backend/services/fairness_metrics.py.
+# MinSat, Jain index, Gini coefficient and maximum envy.
 
 def min_sat(values: Sequence[float]) -> float:
     return min(values) if values else 0.0
@@ -441,12 +433,8 @@ def max_envy(matrix_: Dict[str, Dict[str, float]], pick_id: str, member_ids: Seq
 
 # ── C2 + C5: the mediation loop ───────────────────────────────────────────────
 #
-# Ported from Vihaan's mediator_loop_veto_token.py (potluck, branch
-# research-tasks, commit f045279, "Add files via upload", 2026-07-17), a Colab
-# export. Recoverable at that SHA even after the branch is removed:
-#   git show f045279:mediator_loop_veto_token.py
-# Renamed/typed for this repo; the objective, the reweight rule, the reaction
-# gradients and the veto mechanic are unchanged from the original.
+# The weighted fairness objective, the exponentiated-gradient reweighting rule,
+# the reaction gradients and the one-time veto token.
 
 REACTION_GRADIENT = {"accept": 0.0, "reject": 0.2, "strong_dislike": 0.5, "veto": 1.5}
 
@@ -454,11 +442,9 @@ REACTION_GRADIENT = {"accept": 0.0, "reject": 0.2, "strong_dislike": 0.5, "veto"
 class Mediator:
     """C1's fairness objective plus C2's reweighting loop and C5's veto token.
 
-    Vihaan, mediator_loop_veto_token.py. `calculate_score` is the same
-    mean-minus-lambda-variance objective as fairness_score/aggregate above,
-    written independently in numpy; kept in his own class shape here rather
-    than merged into aggregate(), so the notebook that recovers his prototype
-    can assert it reproduces his original printed output line for line.
+    `calculate_score` is the same mean-minus-lambda-variance objective as
+    fairness_score/aggregate above, written independently and kept in its own
+    class so the mediation notebook can check it line for line.
     """
 
     def __init__(self, users: Sequence[str], satisfaction: Dict[str, Dict[str, float]],
@@ -505,12 +491,7 @@ class Mediator:
         """One mediation round: propose -> veto -> re-propose if vetoed -> reweight.
 
         NOTE ON SEMANTICS: `candidates` is mutated IN PLACE when a veto is
-        spent, matching Vihaan's original (mediator_loop_veto_token.py passes
-        the caller's list straight into apply_veto, whose .remove() mutates
-        it). A vetoed option therefore stays removed for every later round.
-        An earlier port here copied the list, which silently made every veto
-        last exactly one round and produced veto/no-veto arms that were
-        numerically identical -- a porting bug, not a finding."""
+        spent, so a vetoed option stays removed for every later round."""
         choice, _ = self.recommend(candidates)
         self.apply_veto(choice, reactions, candidates)   # in place, by design
         if choice not in candidates:
@@ -612,13 +593,12 @@ def consensus_bar(satisfaction: Dict[str, Dict[str, float]], member_ids: Sequenc
 
 def consensus_reached(worst_score: float, bar: float) -> bool:
     """A round-stop rule: the worst-off member's satisfaction on the current
-    pick has crossed an acceptance bar. Original to this repo — Vihaan's
-    prototype leaves the stop condition to the caller; this names one."""
+    pick has crossed an acceptance bar."""
     return worst_score >= bar
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# EVALUATION HARNESS (PRD-5) — synthetic groups, catalog loading, one-group run
+# EVALUATION HARNESS — synthetic groups, catalog loading, one-group run
 # Original to this paper. Everything here is deterministic given a seed.
 # ═════════════════════════════════════════════════════════════════════════════
 
@@ -629,22 +609,22 @@ import random as _random
 def load_catalog() -> List[Dict]:
     """The option catalog the harness scores. Which dataset is chosen by the
     FM_DATASET environment variable, so the notebooks run unedited on every
-    dataset (task doc §7.5):
+    dataset:
 
-        FM_DATASET unset / "potluck"  -> the 5 menus in data/Menu/ (default)
+        FM_DATASET unset / "small"    -> the 5 menus in data/shared/small_catalog/menus/ (default)
         FM_DATASET = "ubereats"       -> load_catalog_ubereats(FM_CITY)
         FM_DATASET = "ubereats-shuffled" -> the same city with dishes dealt out
-                                         at random (random-menu control, §7.4)
+                                         at random (random-menu control)
     """
-    dataset = (os.environ.get("FM_DATASET") or "potluck").strip().lower()
-    if dataset == "potluck":
-        return _load_catalog_potluck()
+    dataset = (os.environ.get("FM_DATASET") or "small").strip().lower()
+    if dataset == "small":
+        return _load_catalog_small()
     if dataset == "ubereats":
         return load_catalog_ubereats(os.environ.get("FM_CITY"))
     if dataset == "ubereats-shuffled":
         return shuffle_menus(load_catalog_ubereats(os.environ.get("FM_CITY")),
                              seed=int(os.environ.get("FM_SHUFFLE_SEED") or 7))
-    raise ValueError(f"FM_DATASET={dataset!r}: expected 'potluck', 'ubereats' or 'ubereats-shuffled'")
+    raise ValueError(f"FM_DATASET={dataset!r}: expected 'small', 'ubereats' or 'ubereats-shuffled'")
 
 
 def shuffle_menus(catalog: Sequence[Dict], seed: int = 7) -> List[Dict]:
@@ -680,8 +660,8 @@ def _restaurant_taste(menu: Sequence[Dict]) -> List[float]:
     return [sum(v[i] for v in nz) / len(nz) for i in range(6)] if nz else [0.0] * 6
 
 
-def _load_catalog_potluck() -> List[Dict]:
-    """Build the option catalog from the real menus in data/Menu/.
+def _load_catalog_small() -> List[Dict]:
+    """Build the option catalog from the five menus in data/shared/small_catalog/menus/.
 
     Each option carries per-dish taste vectors and a whole-menu average, the
     same construction 01-taste/02 performs — kept here so the harness and the
@@ -709,7 +689,7 @@ def _load_catalog_potluck() -> List[Dict]:
                 yield from dish_names(v)
 
     catalog = []
-    for f in sorted((DATA / "Menu").glob("*.json")):
+    for f in sorted(SMALL_MENUS.glob("*.json")):
         names = [n for n in dish_names(json.loads(f.read_text())) if n]
         menu = [{"name": n, "taste": infer(n)} for n in names]
         catalog.append({"option_id": f.stem, "name": f.stem, "menu": menu,
@@ -721,22 +701,21 @@ def load_personas() -> List[Dict]:
     """The diner pool the groups are drawn from. Which pool is chosen by the
     FM_PERSONAS environment variable, so the notebooks run unedited:
 
-        FM_PERSONAS unset / "potluck" -> the 95 invented diners in data/personas.json
+        FM_PERSONAS unset / "small"   -> the 95 synthetic diners in data/shared/small_catalog/personas.json
         FM_PERSONAS = "foodcom"       -> real Food.com users, load_personas_foodcom()
     """
-    pool = (os.environ.get("FM_PERSONAS") or "potluck").strip().lower()
-    if pool == "potluck":
-        return json.loads((DATA / "personas.json").read_text())
+    pool = (os.environ.get("FM_PERSONAS") or "small").strip().lower()
+    if pool == "small":
+        return json.loads(SMALL_PERSONAS.read_text())
     if pool == "foodcom":
         return load_personas_foodcom()
-    raise ValueError(f"FM_PERSONAS={pool!r}: expected 'potluck' or 'foodcom'")
+    raise ValueError(f"FM_PERSONAS={pool!r}: expected 'small' or 'foodcom'")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
 # REAL FOOD DATA — Food.com recipe taste + Uber Eats restaurants
 #
-# Original to this paper (Vincent, wangvincentx-cmd), per the task doc's food
-# side: recipe_taste() is the ONE taste function both catalog (dish taste) and
+# recipe_taste() is the ONE taste function both catalog (dish taste) and
 # personas (user taste = mean over 4+-star recipes) import. No Kaggle data is
 # committed — see data/README.md for where each file goes.
 # ═════════════════════════════════════════════════════════════════════════════
@@ -747,8 +726,8 @@ import hashlib as _hashlib
 import re as _re
 import statistics as _statistics
 
-EXTERNAL = DATA / "external"              # gitignored: raw Kaggle-derived files
-EXTERNAL_CACHE = DATA / "external_cache"  # gitignored: catalogs built from them
+EXTERNAL = SHARED / "external"            # Kaggle downloads and the recipe flavour table
+EXTERNAL_CACHE = SHARED / "cache"         # catalogs and diner pool built from them
 BITTER_CSV = DATA / "bitter-ingredients.csv"
 
 _RECIPES: Optional[Dict[int, Tuple[Dict[str, float], List[str]]]] = None
@@ -999,7 +978,7 @@ def load_catalog_ubereats(city: Optional[str] = None) -> List[Dict]:
 
 
 def taste_coverage(catalog: Sequence[Dict]) -> float:
-    """Share of all dishes with a real, non-zero taste vector (task doc §7.2)."""
+    """Share of all dishes with a real, non-zero taste vector."""
     dishes = [d for o in catalog for d in o.get("menu") or []]
     if not dishes:
         return 0.0
@@ -1007,7 +986,7 @@ def taste_coverage(catalog: Sequence[Dict]) -> float:
 
 
 def taste_spread(catalog: Sequence[Dict]) -> Dict[str, Any]:
-    """How different the restaurants taste from each other (task doc §7.3):
+    """How different the restaurants taste from each other:
     per-dim population std of the restaurant vectors, and their mean. The
     same function scores every dataset, so the numbers are comparable."""
     vecs = [o["taste"] for o in catalog]
@@ -1053,7 +1032,7 @@ def build_personas_foodcom(seed: int = 7) -> Dict[str, Any]:
     allergy draws come from one seeded generator."""
     if not FOODCOM_INTERACTIONS.exists():
         raise FileNotFoundError(f"{FOODCOM_INTERACTIONS} not found. Download RAW_interactions.csv "
-                                "from Kaggle into data/external/foodcom/ (see data/README.md).")
+                                "from Kaggle into data/shared/external/foodcom/ (see data/README.md).")
     rated: Dict[int, int] = {}
     liked: Dict[int, List[int]] = {}
     with open(FOODCOM_INTERACTIONS, newline="") as f:
@@ -1105,9 +1084,8 @@ def build_personas_foodcom(seed: int = 7) -> Dict[str, Any]:
 
 
 def load_personas_foodcom() -> List[Dict]:
-    """Real Food.com diners, in the same shape as data/personas.json. Built on
-    first use and cached in data/external_cache/ (gitignored: derived from
-    Kaggle data)."""
+    """Real Food.com diners, in the same shape as the small-catalog personas.
+    Built on first use and cached in data/shared/cache/."""
     path = foodcom_personas_cache_path()
     built = json.loads(path.read_text()) if path.exists() else build_personas_foodcom()
     return built["personas"]
@@ -1130,7 +1108,7 @@ def generate_groups(n_groups: int = 200, seed: int = 7, size_range: Tuple[int, i
 
     A group is 'adversarial' when it deliberately mixes diners whose taste
     vectors point in different directions -- without those, every selector
-    agrees and the comparison is vacuous (PRD-5 §3). Seeded: the same seed
+    agrees and the comparison is vacuous. Seeded: the same seed
     reproduces the same groups exactly.
     """
     rng = _random.Random(seed)
@@ -1220,7 +1198,7 @@ def paired_bootstrap_p(a: Sequence[float], b: Sequence[float], n_boot: int = 100
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# C4 DISH ASSIGNMENT + LIKE-FOR-LIKE BASELINES (PRD-11)
+# C4 DISH ASSIGNMENT + LIKE-FOR-LIKE BASELINES
 #
 # The naive C4 comparison comes out at +0.390 MinSat, which is NOT an effect
 # size: it compares cos(diner, ONE DISH chosen to fit them) against
@@ -1322,7 +1300,7 @@ def assign_dishes_median_diner(members: Sequence[Dict], pick: Dict,
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# C2: THE OBJECTION PARSER (PRD-10)
+# C2: THE OBJECTION PARSER
 #
 # The one piece that makes the mediation loop conversational. Division of
 # labour, and it is the paper's central design claim:
@@ -1333,7 +1311,7 @@ def assign_dishes_median_diner(members: Sequence[Dict], pick: Dict,
 
 VALID_LABELS = ("accept", "reject", "strong_dislike", "veto")
 
-# Committed BEFORE any ratings were collected (PRD-10 §3 control 5).
+# Committed BEFORE any ratings were collected (control 5).
 # If this string changes, re-collect from scratch under a new version.
 OBJECTION_PROMPT_VERSION = "v1"
 OBJECTION_PROMPT = """You classify one person's reaction to a restaurant suggestion.
@@ -1418,7 +1396,7 @@ def objection_to_reaction(parsed: Dict) -> str:
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# LLM-AS-JUDGE PROXY (PRD-9)
+# LLM-AS-JUDGE PROXY
 #
 # Stands in for a human study we cannot run before submission. An ensemble of
 # models rates each group recommendation for perceived fairness, satisfaction
@@ -1430,7 +1408,7 @@ def objection_to_reaction(parsed: Dict) -> str:
 
 JUDGE_PROMPT_VERSION = "v1"
 
-# Committed BEFORE any ratings are collected (PRD-9 §5 control 5).
+# Committed BEFORE any ratings are collected (control 5).
 # If this string changes, bump the version and re-collect from scratch.
 JUDGE_PROMPT = """You are evaluating how a group of diners would feel about a restaurant
 recommendation made on their behalf.
@@ -1457,7 +1435,7 @@ Reply with ONLY a JSON object, no prose, no markdown fence:
 def _judge_render(group: Dict, option: Dict, satisfactions: Dict[str, float],
                   reverse_order: bool = False) -> str:
     """Build the prompt. `reverse_order` flips diner presentation order, which
-    is the order-bias control (PRD-9 §5 control 2) -- a judge whose rating
+    is the order-bias control (control 2) -- a judge whose rating
     depends on who is listed first is not measuring the recommendation."""
     members = list(group["members"])
     if reverse_order:
@@ -1478,7 +1456,7 @@ def judge_recommendation(group: Dict, option: Dict, satisfactions: Dict[str, flo
                          reverse_order: bool = False) -> Dict:
     """Rate one (group, recommendation) pair on three 1..7 scales.
 
-    Degradation contract (PRD-9 §2): a malformed reply, an out-of-range
+    Degradation contract: a malformed reply, an out-of-range
     rating, or an API failure returns ok=False and the item is DROPPED by the
     caller -- never coerced to a midpoint. Substituting 4/7 for a failed call
     would invent data; reporting the drop rate does not.
@@ -1575,7 +1553,7 @@ def judge_aggregate(rows: Sequence[Dict], order_tolerance: float = 1.0) -> Dict:
 
 def spearman(a: Sequence[float], b: Sequence[float]) -> float:
     """Rank correlation, used for inter-model agreement on the selector
-    ranking (PRD-9 §5 control 1). No scipy dependency."""
+    ranking (control 1). No scipy dependency."""
     def ranks(xs):
         order = sorted(range(len(xs)), key=lambda i: xs[i])
         r = [0.0] * len(xs)

@@ -1,0 +1,5 @@
+setting,city,n_groups,F_mean,F_min,groups_losing_any,groups_empty,one_pick_agree,mediator_agree,veto_agree,fair_pct_of_achievable,fair_minsat_gain
+realistic,"Houston, TX",200,298.8,291,26,0,98,180,187,67.1,0.0269
+realistic,"Seattle, WA",200,298.4,289,58,0,95,180,190,61.9,0.0222
+stress,"Houston, TX",200,292.4,277,146,0,99,180,187,67.1,0.0271
+stress,"Seattle, WA",200,290.4,272,198,0,94,180,191,63.1,0.0226

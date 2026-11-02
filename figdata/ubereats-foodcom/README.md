@@ -43,8 +43,8 @@ most of the gain comes from real differences between restaurants.
 | B2 best shared dish, one for all | 0.840 | 0.853 |
 | **C4 each diner's own best safe dish** | **0.955** | **0.957** |
 
-C4 beats the best shared dish by +0.114 (Houston) and +0.104 (Seattle). On the five Potluck
-restaurants the same gap was +0.0065, so on real menus personalising the dish matters.
+C4 beats the best shared dish by +0.114 (Houston) and +0.104 (Seattle). On the five-restaurant
+catalog the same gap was +0.0065, so on real menus personalising the dish matters.
 
 ## Not yet meaningful
 

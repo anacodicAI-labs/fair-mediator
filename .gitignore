@@ -8,9 +8,9 @@ __pycache__/
 # Before committing a new run log, check it for keys: the logs store the raw
 # model replies, so anything a prompt echoed back ends up in here.
 .env
-# Kaggle-derived data never enters the repo (see data/README.md)
-data/external/
-data/external_cache/
+# Raw Kaggle downloads (see data/README.md)
+data/shared/external/foodcom/
+data/shared/external/ubereats/
 # Hand-check sheets quote Kaggle text (dish names, descriptions, ingredients); only
 # their scores are committed, in validation/README.md
 validation/*.csv

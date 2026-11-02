@@ -1,12 +1,12 @@
 # validation/
 
-Hand-labelled sheets that measure the two components of the food catalog (task doc §7, items 2 and 3).
+Hand-labelled sheets that measure the two components of the food catalog: the dish-to-recipe matcher and the bitter dimension.
 Every sheet is seeded (seed 7) and regenerable; the labels in it are the only hand-made part.
 
-**Who labelled:** all three sheets were first labelled with AI assistance from the dish name, the Uber Eats
-description and the recipe's ingredient list. Vincent then checked them independently and agreed with every label.
-Vihaan then reviewed all 300 rows a second time (October 2026). He agreed with every label except one Seattle
-match ("Chicken with Vegetables" → "roast chicken with vegetables", p → y). Disputed calls followed the rules
+**How the sheets were labelled:** all three sheets were first labelled with AI assistance from the dish name,
+the Uber Eats description and the recipe's ingredient list. Every label was then checked by one author and
+reviewed a second time by another; the second review changed one Seattle match ("Chicken with Vegetables" →
+"roast chicken with vegetables", p → y). Disputed calls followed the rules
 below. For bitter, "can you notice the bitterness?", not "is bitter the strongest taste?". For matches, a
 similar name is not a similar dish.
 

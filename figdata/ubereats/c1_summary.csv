@@ -1,8 +1,8 @@
 dataset,formula,lambda,n_groups,mean_F,pct_moved_0_vs_5,pct_moved_any_lambda,pct_pick_differs_from_avg,minsat_avg,minsat_fair,minsat_gain,minsat_gain_ci_lo,minsat_gain_ci_hi,meansat_change,jain_change,minsat_achievable_gap,pct_of_achievable,pct_of_achievable_ci_lo,pct_of_achievable_ci_hi,meansat_change_least_misery
-potluck (5 restaurants),whole menu,0.5,200,5.0,3.5,37.5,0.5,0.7,0.7007,0.0007,0.0,0.0021,-0.0,0.0001,0.0028,24.4,0.0,59.9,-0.0009
-potluck (5 restaurants),whole menu,5,200,5.0,3.5,37.5,3.5,0.7,0.7018,0.0018,0.0001,0.0041,-0.0002,0.0002,0.0028,62.3,5.6,85.2,-0.0009
-potluck (5 restaurants),safe subset,0.5,200,5.0,6.5,47.5,0.0,0.6995,0.6995,0.0,0.0,0.0,0.0,0.0,0.0035,0.0,0.0,0.0,-0.002
-potluck (5 restaurants),safe subset,5,200,5.0,6.5,47.5,6.5,0.6995,0.7012,0.0018,0.0005,0.0033,-0.0004,0.0004,0.0035,49.6,19.0,77.9,-0.002
+small catalog (5 restaurants),whole menu,0.5,200,5.0,3.5,37.5,0.5,0.7,0.7007,0.0007,0.0,0.0021,-0.0,0.0001,0.0028,24.4,0.0,59.9,-0.0009
+small catalog (5 restaurants),whole menu,5,200,5.0,3.5,37.5,3.5,0.7,0.7018,0.0018,0.0001,0.0041,-0.0002,0.0002,0.0028,62.3,5.6,85.2,-0.0009
+small catalog (5 restaurants),safe subset,0.5,200,5.0,6.5,47.5,0.0,0.6995,0.6995,0.0,0.0,0.0,0.0,0.0,0.0035,0.0,0.0,0.0,-0.002
+small catalog (5 restaurants),safe subset,5,200,5.0,6.5,47.5,6.5,0.6995,0.7012,0.0018,0.0005,0.0033,-0.0004,0.0004,0.0035,49.6,19.0,77.9,-0.002
 "Houston, TX",whole menu,0.5,200,298.8,41.5,84.5,7.0,0.8857,0.8904,0.0048,0.0023,0.0076,-0.0001,0.0007,0.0402,11.8,6.0,18.0,-0.0094
 "Houston, TX",whole menu,5,200,298.8,41.5,84.5,41.5,0.8857,0.9126,0.0269,0.0208,0.0335,-0.0034,0.0026,0.0402,67.1,61.1,72.2,-0.0094
 "Houston, TX",safe subset,0.5,200,298.8,39.0,75.5,8.0,0.8877,0.8928,0.005,0.0024,0.0082,-0.0001,0.0007,0.0384,13.1,6.7,20.1,-0.0093

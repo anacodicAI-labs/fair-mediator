@@ -1,0 +1,5 @@
+selector,n_items,n_calls,fairness_mean,fairness_ci95,satisfaction_mean,satisfaction_ci95,consensus_mean,consensus_ci95,drop_rate
+least_misery,14,420,6.624,0.057,6.464,0.133,6.564,0.094,0.0
+fair,14,420,6.588,0.063,6.35,0.147,6.455,0.114,0.0
+average,14,420,6.562,0.099,6.357,0.146,6.464,0.114,0.0
+most_pleasure,14,420,6.098,0.36,5.998,0.297,5.96,0.355,0.0

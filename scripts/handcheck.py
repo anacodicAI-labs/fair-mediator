@@ -1,6 +1,6 @@
 """Hand-check sheets and their scores — the two measured components of the
-food catalog (task doc: "spot-check 100 dishes by hand", "hand-check 100
-matches and report the accuracy").
+food catalog: a spot-check of 100 dishes and a hand-check of 100 matches,
+with the accuracy of each.
 
     python scripts/handcheck.py bitter-sheet            # writes validation/bitter_spotcheck.csv
     python scripts/handcheck.py score-bitter            # after filling looks_bitter (y/n)
