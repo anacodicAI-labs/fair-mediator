@@ -11,3 +11,6 @@ numpy
 scipy
 scikit-learn
 matplotlib
+
+# LLM calls (05-mediate, 07-judge): the objection parser, the AI diner and the judge.
+openai

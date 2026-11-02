@@ -1,0 +1,9 @@
+city,arm,n,agree,pct_agree,rounds_agree,rounds_capped,exhausted,final_minsat,final_mean,final_jain,style,n_messages,reader_wrong,pct_reader_wrong,pct_wrong_objections,pct_wrong_accepts,n_objection_read_as_accept,n_fallback,n_member_wrong
+"Houston, TX",  + live AI diner,5,3,60.0,4.0,5.6,0,0.8325,0.8963,0.9974,plain,115,25,21.7,100.0,0.0,0,0,0
+"Houston, TX",  + live AI diner + veto token,5,3,60.0,2.0,4.4,0,0.8405,0.8937,0.9979,plain,97,14,14.4,73.7,0.0,6,0,0
+"Houston, TX",  + live AI diner,5,3,60.0,4.0,5.6,0,0.8325,0.8963,0.9974,polite,115,25,21.7,100.0,0.0,0,0,0
+"Houston, TX",  + live AI diner + veto token,5,3,60.0,3.0,5.0,0,0.8352,0.894,0.9975,polite,106,19,17.9,86.4,0.0,3,0,0
+"Houston, TX",  + live AI diner,5,3,60.0,4.0,5.6,0,0.8325,0.8963,0.9974,vague,115,25,21.7,100.0,0.0,0,0,0
+"Houston, TX",  + live AI diner + veto token,5,3,60.0,4.0,5.6,0,0.8325,0.8963,0.9974,vague,115,25,21.7,100.0,0.0,0,0,0
+"Houston, TX",  + live AI diner,5,4,80.0,3.5,4.4,0,0.8427,0.8927,0.998,sarcastic,90,1,1.1,5.6,0.0,0,0,0
+"Houston, TX",  + live AI diner + veto token,5,5,100.0,3.8,3.8,0,0.8488,0.8863,0.9982,sarcastic,70,2,2.9,14.3,0.0,0,0,0

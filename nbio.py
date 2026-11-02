@@ -223,6 +223,10 @@ OPENAI_PRICES_PER_M = {
 OPENAI_LEDGER = HERE / ".openai_spend.json"
 DEFAULT_OPENAI_BUDGET_USD = 5.00
 
+import threading as _threading
+_OPENAI_LOCK = _threading.Lock()   # the ledger is read-modify-write; calls may run in threads
+_openai_reserved = 0.0             # worst-case cost of calls in flight
+
 
 def _openai_ledger_read() -> Dict[str, Any]:
     if OPENAI_LEDGER.exists():
@@ -278,16 +282,26 @@ class CappedOpenAI:
         chars = sum(len(str(m.get("content", ""))) for m in kw.get("messages", []))
         max_out = kw.get("max_tokens") or kw.get("max_completion_tokens") or 1024
         worst = (chars / 3 * p_in + max_out * p_out) / 1e6
-        spent = _openai_ledger_read()["spent_usd"]
-        if spent + worst > self._limit():
-            raise BudgetExceeded(f"OpenAI budget reached: spent ${spent:.4f} of ${self._limit():.2f}; "
-                                 f"this call could cost up to ${worst:.4f}. Raise FM_OPENAI_BUDGET_USD "
-                                 f"only if that is intended.")
-        r = self._client.chat.completions.create(**kw)
+        global _openai_reserved
+        with _OPENAI_LOCK:
+            spent = _openai_ledger_read()["spent_usd"]
+            if spent + _openai_reserved + worst > self._limit():
+                raise BudgetExceeded(f"OpenAI budget reached: spent ${spent:.4f} of ${self._limit():.2f}; "
+                                     f"this call could cost up to ${worst:.4f}. Raise FM_OPENAI_BUDGET_USD "
+                                     f"only if that is intended.")
+            _openai_reserved += worst
+        try:
+            r = self._client.chat.completions.create(**kw)
+        except BaseException:
+            with _OPENAI_LOCK:
+                _openai_reserved -= worst
+            raise
         u = getattr(r, "usage", None)
         cost = (((getattr(u, "prompt_tokens", 0) or 0) * p_in
                  + (getattr(u, "completion_tokens", 0) or 0) * p_out) / 1e6) if u else worst
-        _openai_ledger_add(model, cost)
+        with _OPENAI_LOCK:
+            _openai_reserved -= worst
+            _openai_ledger_add(model, cost)
         return r
 
 
@@ -624,13 +638,16 @@ DEFAULT_MAX_ROUNDS = 8
 def mediate(satisfaction: Dict[str, Dict[str, float]], member_ids: Sequence[str], *,
             bar: Optional[float] = None, max_rounds: int = DEFAULT_MAX_ROUNDS,
             eta: float = 0.5, lam: float = 0.5, use_veto: bool = False,
-            reaction: str = "strong_dislike") -> Dict:
+            reaction: str = "strong_dislike", talk=None) -> Dict:
     """Run the closed loop to consensus, the round cap, or candidate exhaustion.
 
     Terminates by construction: every path out of the loop is bounded by
     `max_rounds`. Returns the termination reason so the caller can report the
     three endings separately rather than lumping them into "did not converge".
     `bar` defaults to the group's own pass mark, consensus_bar().
+    `talk`, if given, is function(label, member_id, pick, round) -> label: each
+    diner's intended label is said in words and read back (DinerChat), and the
+    loop reweights on what was read. None (default) hands the labels over directly.
     """
     if bar is None:
         bar = consensus_bar(satisfaction, member_ids)
@@ -652,8 +669,10 @@ def mediate(satisfaction: Dict[str, Dict[str, float]], member_ids: Sequence[str]
             return {"converged": True, "reason": "consensus", "rounds": rnd,
                     "pick": pick, "worst_sat": worst, "history": history}
         react = "veto" if (use_veto and med.veto_tokens.get(worst_id, 0) > 0) else reaction
-        med.run_round(candidates, {m: (react if m == worst_id else "accept")
-                                   for m in member_ids})
+        reactions = {m: (react if m == worst_id else "accept") for m in member_ids}
+        if talk is not None:
+            reactions = {m: talk(l, m, pick, rnd) for m, l in reactions.items()}
+        med.run_round(candidates, reactions)
 
     return {"converged": False, "reason": "round_cap", "rounds": max_rounds,
             "pick": history[-1]["pick"] if history else None,
@@ -1439,7 +1458,8 @@ Reaction: <<TEXT>>"""
 
 
 def parse_objection(text: str, member_names: Sequence[str], *, client=None,
-                    model: str = None, temperature: float = 0.0) -> Dict:
+                    model: str = None, temperature: float = 0.0,
+                    seed: Optional[int] = None) -> Dict:
     """Free text -> {member, label, confidence, raw}.
 
     Degrades safely and deliberately:
@@ -1458,10 +1478,11 @@ def parse_objection(text: str, member_names: Sequence[str], *, client=None,
     # .replace, not .format -- the prompt contains literal JSON braces
     prompt = (OBJECTION_PROMPT.replace("<<MEMBERS>>", ", ".join(member_names))
                               .replace("<<TEXT>>", text))
+    kw = {} if seed is None else {"seed": seed}   # unset -> the call the paper made
     try:
         resp = client.chat.completions.create(
             model=model, temperature=temperature,
-            messages=[{"role": "user", "content": prompt}])
+            messages=[{"role": "user", "content": prompt}], **kw)
         raw = (resp.choices[0].message.content or "").strip()
     except Exception as e:
         return {**fallback, "raw": f"<call failed: {type(e).__name__}>"}
@@ -1495,6 +1516,299 @@ def objection_to_reaction(parsed: Dict) -> str:
     """The label the Mediator's reweight consumes. Kept separate so the
     gradient table stays the single place a label becomes a number."""
     return parsed["label"] if parsed["label"] in REACTION_GRADIENT else "reject"
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE AI DINER — the live counterpart of the parser replay
+#
+# The replay (rev_parser_replay) draws a cached parse of a hand-written
+# sentence. Here a writer model (gpt-4o-mini) says each diner's intended
+# reaction in words, the objection parser above (gpt-oss-20b, prompt v1) reads
+# it back, and the loop reweights on what was READ. The writer is given a
+# feeling, never a score, an outcome or the label word the parser must find.
+# ═════════════════════════════════════════════════════════════════════════════
+
+# v1 was committed before any message was generated. Its 5-group pilot (kept
+# in runs/mediator_llm.jsonl) showed two problems with the WRITER, not the
+# reader: no veto message ever named the veto, so the token could never fire,
+# and under "sarcastic" a happy diner wrote a complaint. v2 fixes exactly those
+# two and nothing else: the veto feeling asks the diner to say they are using
+# their veto, and a diner who is happy writes plainly whatever the style. The
+# other feelings, including strong_dislike, are unchanged, so any softening the
+# writer adds is still measured. If anything here changes again, bump the
+# version and re-generate from scratch.
+DINER_PROMPT_VERSION = "v2"
+DINER_PROMPT = """You are <<NAME>>, out with <<OTHERS>> to choose a restaurant together.
+A group mediator has just suggested: <<RESTAURANT>>.
+
+How you feel about it: <<FEELING>>
+
+Write the one chat message you would send the group in reply. <<STYLE>>
+Keep it to one or two short sentences, in your own voice. Do not mention
+numbers, scores or ratings, and do not use the words "accept", "reject" or
+"strong dislike". Reply with the message only."""
+
+DINER_FEELINGS = {
+    "accept": "You are happy to go there.",
+    "reject": "You would mildly prefer somewhere else, but it is not a big deal.",
+    "strong_dislike": "You really do not want to go there.",
+    "veto": ("You refuse to go there at all, and you are using your one veto to block it. "
+             "Say that you are using your veto."),
+}
+DINER_STYLES = {
+    "plain": "Say it plainly and directly.",
+    "polite": "Be very polite and considerate of the others.",
+    "vague": "Be vague and noncommittal: hint at how you feel rather than stating it.",
+    "sarcastic": "Be sarcastic.",
+}
+DINER_PLAIN_WHEN_HAPPY = ("sarcastic",)   # styles a happy diner does not use (v2)
+DINER_SEATS = ["Ann", "Ben", "Cara", "Dev", "Eli", "Fay"]   # readable names, by seat
+DINER_WRITER_MODEL = "gpt-4o-mini"
+DINER_READER_MODEL = "openai/gpt-oss-20b"
+DINER_SEED = 7
+DINER_LOG = RUNS / "mediator_llm.jsonl"
+
+
+def diner_prompt(label: str, name: str, others: Sequence[str], restaurant: str,
+                 style: str = "plain") -> str:
+    if len(others) > 1:
+        who = ", ".join(others[:-1]) + " and " + others[-1]
+    else:
+        who = others[0] if others else "friends"
+    if label == "accept" and style in DINER_PLAIN_WHEN_HAPPY:
+        style = "plain"            # sarcastic agreement reads as a complaint even to people
+    return (DINER_PROMPT.replace("<<NAME>>", name).replace("<<OTHERS>>", who)
+            .replace("<<RESTAURANT>>", restaurant)
+            .replace("<<FEELING>>", DINER_FEELINGS[label])
+            .replace("<<STYLE>>", DINER_STYLES[style]))
+
+
+def write_diner_message(label: str, *, name: str, others: Sequence[str], restaurant: str,
+                        style: str = "plain", client, model: str = DINER_WRITER_MODEL,
+                        temperature: float = 0.0, seed: int = DINER_SEED) -> Dict:
+    """The message diner `name` sends about `restaurant`, given their intended
+    reaction `label`. Unlike the parser, a failed call RAISES: an invented
+    message would be data nobody wrote."""
+    prompt = diner_prompt(label, name, others, restaurant, style)
+    resp = client.chat.completions.create(
+        model=model, temperature=temperature, seed=seed, max_tokens=80,
+        messages=[{"role": "user", "content": prompt}])
+    text = (resp.choices[0].message.content or "").strip().strip('"').strip()
+    if not text:
+        raise RuntimeError(f"write_diner_message: empty reply from {model}")
+    return {"text": text, "prompt": prompt}
+
+
+def retrying_client(client, tries: int = 60):
+    """Wrap an OpenAI-compatible client so rate limits and dropped connections
+    are waited out instead of surfacing as failed calls."""
+    import openai
+
+    class _Retrying:
+        def __init__(self):
+            self.chat = self
+            self.completions = self
+
+        def create(self, **kw):
+            for _ in range(tries):
+                try:
+                    return client.chat.completions.create(**kw)
+                except openai.RateLimitError as e:
+                    wait = 15
+                    try:
+                        wait = float(e.response.headers.get("retry-after", 15)) + 1
+                    except Exception:
+                        pass
+                    time.sleep(min(wait, 120))
+                except (openai.APIConnectionError, openai.APITimeoutError, openai.InternalServerError):
+                    time.sleep(10)
+            raise RuntimeError(f"gave up after {tries} retries")
+    return _Retrying()
+
+
+class DinerChat:
+    """Shared state of one live run: the writer and reader clients, the log
+    runs/mediator_llm.jsonl and the caches built from it.
+
+    Every message is logged with its tags (city, truth, arm, style, group_id),
+    round and diner. The log is also the cache: an event already in it is
+    replayed exactly, so a run resumes where it stopped and, with live=False,
+    rebuilds every number with no API call and never writes (a missing event
+    raises). In live mode a new event reuses an identical earlier prompt or
+    message before it pays for a call."""
+
+    def __init__(self, *, writer=None, reader=None, live: bool = False,
+                 writer_model: str = DINER_WRITER_MODEL, reader_model: str = DINER_READER_MODEL,
+                 seed: int = DINER_SEED, log_path: Path = DINER_LOG):
+        self.writer, self.reader, self.live = writer, reader, live
+        self.writer_model, self.reader_model, self.seed = writer_model, reader_model, seed
+        self.log_path = Path(log_path)
+        self._lock = _threading.Lock()
+        self.events: Dict[tuple, Dict] = {}
+        self.texts: Dict[str, str] = {}
+        self.reads: Dict[tuple, Dict] = {}
+        self.calls = {"writer": 0, "reader": 0}
+        self.usage: Dict[str, List[int]] = {}           # model -> [prompt, completion] tokens
+        if self.log_path.exists():
+            for line in self.log_path.read_text().splitlines():
+                if line.strip():
+                    self._remember(json.loads(line))
+
+    @staticmethod
+    def _event_key(r: Dict) -> tuple:
+        return (r["writer_model"], r["diner_prompt_version"], r["reader_model"], r["objection_prompt_version"],
+                r["seed"], r["city"], r["truth"], r["arm"], r["style"], r["group_id"], r["round"], r["diner"])
+
+    def _writer_key(self, prompt: str) -> str:
+        return _hashlib.sha256(f"{self.writer_model}|{self.seed}|{DINER_PROMPT_VERSION}|{prompt}"
+                               .encode()).hexdigest()[:16]
+
+    def _reader_key(self, text: str, names: Sequence[str]) -> tuple:
+        return (self.reader_model, OBJECTION_PROMPT_VERSION, text, tuple(names))
+
+    def _remember(self, r: Dict) -> None:
+        self.events[self._event_key(r)] = r
+        self.texts[r["writer_key"]] = r["text"]
+        self.reads[self._reader_key(r["text"], r["reader_members"])] = {
+            k: r[k] for k in ("parsed_label", "parsed_member", "confidence", "reader_raw", "invented_member")}
+
+    def _tap(self, client, model_usage_key):
+        """Count tokens per model on the way through, for the cost projection."""
+        chat = self
+
+        class _T:
+            def __init__(self):
+                self.chat = self
+                self.completions = self
+
+            def create(self, **kw):
+                r = client.chat.completions.create(**kw)
+                u = getattr(r, "usage", None)
+                if u is not None:
+                    with chat._lock:
+                        t = chat.usage.setdefault(kw.get("model") or model_usage_key, [0, 0])
+                        t[0] += getattr(u, "prompt_tokens", 0) or 0
+                        t[1] += getattr(u, "completion_tokens", 0) or 0
+                return r
+        return _T()
+
+    def _say(self, label, name, others, restaurant, style) -> Tuple[str, str]:
+        prompt = diner_prompt(label, name, others, restaurant, style)
+        wk = self._writer_key(prompt)
+        if wk in self.texts:
+            return self.texts[wk], wk
+        if not self.live:
+            raise LookupError("message not in the log; set the LIVE flag to generate it")
+        out = write_diner_message(label, name=name, others=others, restaurant=restaurant,
+                                  style=style, client=self._tap(self.writer, self.writer_model),
+                                  model=self.writer_model, seed=self.seed)
+        with self._lock:
+            self.calls["writer"] += 1
+            self.texts[wk] = out["text"]
+        return out["text"], wk
+
+    def _read(self, text, names) -> Dict:
+        rk = self._reader_key(text, names)
+        if rk in self.reads:
+            return self.reads[rk]
+        if not self.live:
+            raise LookupError("reading not in the log; set the LIVE flag to generate it")
+        invented = False
+        try:
+            p = parse_objection(text, names, client=self._tap(self.reader, self.reader_model),
+                                model=self.reader_model, seed=self.seed)
+        except ValueError:                      # the parser named someone not at the table
+            p = {"member": "?", "label": "reject", "confidence": 0.0, "raw": "<invented member>"}
+            invented = True
+        if p["raw"].startswith("<call failed"):
+            # retries exhausted: stop the run rather than log an outage as a reading
+            raise RuntimeError(f"reader call failed: {p['raw']}")
+        got = {"parsed_label": objection_to_reaction(p), "parsed_member": p["member"],
+               "confidence": p["confidence"], "reader_raw": p["raw"][:500], "invented_member": invented}
+        with self._lock:
+            self.calls["reader"] += 1
+            self.reads[rk] = got
+        return got
+
+    def talker(self, *, city: str, truth: str, arm: str, style: str, group_id: str,
+               members: Sequence, option_name, records: Optional[List[Dict]] = None):
+        """A talk function for one group: talk(label, who, pick, round) -> label.
+
+        members      the keys `who` takes (diner indices for rev_mediate, member
+                     ids for mediate), in seat order; seat k is DINER_SEATS[k]
+        option_name  pick -> restaurant name (a list for indices, a dict for ids)
+        records      list that collects this group's message rows (for stats)"""
+        seats = {m: DINER_SEATS[k] for k, m in enumerate(members)}
+        names = [seats[m] for m in members]
+        tags = dict(city=city, truth=truth, arm=arm, style=style, group_id=group_id)
+
+        def talk(label, who, pick, rnd):
+            key = (self.writer_model, DINER_PROMPT_VERSION, self.reader_model, OBJECTION_PROMPT_VERSION,
+                   self.seed, city, truth, arm, style, group_id, int(rnd), str(who))
+            row = self.events.get(key)
+            if row is None or row["intended"] != label:
+                if not self.live:          # replay never writes: an event not in the log is missing
+                    raise LookupError(f"{group_id} round {rnd} diner {who} ({arm.strip()}, {style}, "
+                                      f"{truth}) is not in the log; set the LIVE flag to generate it")
+                name = seats[who]
+                restaurant = option_name[pick]
+                text, wk = self._say(label, name, [x for x in names if x != name], restaurant, style)
+                got = self._read(text, names)
+                row = {**tags, "round": int(rnd), "diner": str(who), "seat": name,
+                       "restaurant": restaurant, "intended": label, "text": text, **got,
+                       "reader_ok": got["parsed_label"] == label,
+                       "member_ok": got["parsed_member"] in ("SELF", name),
+                       "reader_members": names, "writer_key": wk,
+                       "writer_model": self.writer_model, "reader_model": self.reader_model,
+                       "diner_prompt_version": DINER_PROMPT_VERSION,
+                       "objection_prompt_version": OBJECTION_PROMPT_VERSION,
+                       "seed": self.seed, "temperature": 0.0}
+                with self._lock:
+                    if key not in self.events or self.events[key]["intended"] != label:
+                        with self.log_path.open("a") as fh:     # on load, the last row wins
+                            fh.write(json.dumps(row) + "\n")
+                    self._remember(row)
+            if records is not None:
+                records.append(row)
+            return row["parsed_label"]
+        return talk
+
+
+def rev_talk_stats(records: Sequence[Dict]) -> Dict:
+    """How often the reader got the diner wrong, over the messages of one run."""
+    n = len(records)
+    obj = [r for r in records if r["intended"] != "accept"]
+    acc = [r for r in records if r["intended"] == "accept"]
+    pct = lambda rs: round(100 * sum(not r["reader_ok"] for r in rs) / len(rs), 1) if rs else "--"
+    return dict(n_messages=n,
+                reader_wrong=sum(not r["reader_ok"] for r in records),
+                pct_reader_wrong=pct(records),
+                pct_wrong_objections=pct(obj), pct_wrong_accepts=pct(acc),
+                n_objection_read_as_accept=sum(r["parsed_label"] == "accept" for r in obj),
+                n_fallback=sum(r["parsed_label"] == "reject" and r["confidence"] == 0.0 for r in records),
+                n_member_wrong=sum(not r["member_ok"] for r in records))
+
+
+@_functools.lru_cache(maxsize=None)
+def catalog_names(city: str) -> Dict[str, str]:
+    """option_id -> restaurant name as a diner would read it (HTML entities decoded)."""
+    import html
+    return {o["option_id"]: html.unescape(o.get("name") or str(o["option_id"]))
+            for o in load_catalog_ubereats(city)}
+
+
+def print_chat(records: Sequence[Dict], width: int = 60) -> None:
+    """One group's conversation, round by round: who meant what, said what,
+    and what the reader heard."""
+    rnd = None
+    for r in sorted(records, key=lambda r: (r["round"], int(r["diner"]) if str(r["diner"]).isdigit() else r["diner"])):
+        if r["round"] != rnd:
+            rnd = r["round"]
+            print(f"  round {rnd}: mediator suggests {r['restaurant']}")
+        mark = "" if r["reader_ok"] else "   <-- MISREAD"
+        print(f"    {r['seat']:<5} meant {r['intended']:<14} read {r['parsed_label']:<14}{mark}")
+        for line in textwrap.wrap(r["text"], width) or [""]:
+            print(f"          | {line}")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -2004,7 +2318,7 @@ def rev_c1_summary(Ms, lam, evals=None):
 
 def rev_mediate(S, *, lam=0.5, eta=REV_ETA, cap=REV_CAP, margin=REV_MARGIN, bar=None,
                 veto_remove=False, veto_grad=False, react_fn=None, U=None, rng=None,
-                parser=None, memory=False):
+                parser=None, memory=False, talk=None):
     """Closed-loop mediation.
 
     S        proxy utility matrix the system sees (|F| x n)
@@ -2014,10 +2328,15 @@ def rev_mediate(S, *, lam=0.5, eta=REV_ETA, cap=REV_CAP, margin=REV_MARGIN, bar=
              (default: the paper's rule -- worst-off diner below bar says
              strong_dislike, everyone else accepts)
     parser   function(label, rng) -> label the loop receives (LLM replay)
+    talk     function(label, diner_idx, pick_idx, round) -> label the loop receives:
+             the label is written as a message by an AI diner and read back by
+             the parser (DinerChat). Live counterpart of `parser`; not both.
     veto_remove  a diner holding a token removes the current pick
     veto_grad    the veto reaction carries g=1.5 instead of 0.5
     memory   a rejected pick is never proposed again (tabu)
     Returns dict(converged, rounds, pick)."""
+    if parser is not None and talk is not None:
+        raise ValueError("rev_mediate: pass parser (replay) or talk (live), not both")
     U = S if U is None else U
     nF, n = S.shape
     if bar is None:
@@ -2045,6 +2364,8 @@ def rev_mediate(S, *, lam=0.5, eta=REV_ETA, cap=REV_CAP, margin=REV_MARGIN, bar=
                       for i, l in enumerate(labels)]
         if parser is not None:
             labels = [parser(l, rng) for l in labels]
+        if talk is not None:
+            labels = [talk(l, i, p, rnd) for i, l in enumerate(labels)]
         g = np.zeros(n)
         removed = False
         for i, l in enumerate(labels):
