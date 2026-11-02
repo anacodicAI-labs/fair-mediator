@@ -8,6 +8,9 @@ Two jobs:
    defined exactly ONCE and every notebook imports it rather than redefining it.
    This is the one file in the repository allowed to hold logic; everything
    else is a notebook.
+3. Helpers that more than one notebook section uses: the C1 report helpers
+   (c1_*) and the numpy library behind the revision analyses (rev_*, REV_*,
+   build_revision_cache), each in its own section at the end of this file.
 
 """
 
@@ -953,7 +956,7 @@ def load_catalog_ubereats(city: Optional[str] = None) -> List[Dict]:
     """Real Uber Eats restaurants for one city, in the shared catalog shape:
     option_id, name, taste[6], menu[{name, taste[6], allergens, ...}].
 
-    Reads the catalog that scripts/build_ubereats_catalog.py built (the dish ->
+    Reads the catalog that 01-taste/03-real-catalogs.ipynb built (the dish ->
     Food.com recipe matching needs pandas/scikit-learn; loading does not).
     Restaurant taste is recomputed here with _restaurant_taste, the same rule
     the default catalog uses."""
@@ -962,8 +965,8 @@ def load_catalog_ubereats(city: Optional[str] = None) -> List[Dict]:
     path = ubereats_cache_path(city)
     if not path.exists():
         raise FileNotFoundError(
-            f"{path} not found. Build it with:\n  python scripts/build_ubereats_catalog.py "
-            f"--city {city!r}\n(see data/README.md for the Kaggle downloads it needs).")
+            f"{path} not found. Build it in 01-taste/03-real-catalogs.ipynb with "
+            f"BUILD_CITY = {city!r}\n(see data/README.md for the Kaggle downloads it needs).")
     built = json.loads(path.read_text())
     meta = built.get("meta", {})
     if meta.get("bitter_list_sha") != bitter_list_sha():
@@ -1576,3 +1579,437 @@ def spearman(a: Sequence[float], b: Sequence[float]) -> float:
     da = sum((x - ma) ** 2 for x in ra) ** 0.5
     db = sum((y - mb) ** 2 for y in rb) ** 0.5
     return num / (da * db) if da and db else float("nan")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# C1 REPORT HELPERS
+# ══════════════════════════════════════════════════════════════════════════════
+# The C1 numbers the harness does not print directly (03-aggregate/03, section
+# "C1 on real restaurants"), computed with the same functions and the same
+# seeded groups. 02-safety/01 and 06-evaluate/02 reuse them, so they live here.
+# Pure Python; no numpy.
+
+C1_SEED, C1_N_GROUPS, C1_ADVERSARIAL_FRAC = 7, 200, 0.35       # as in 06-evaluate
+C1_SWEEP = [0, 0.25, 0.5, 1, 2, 5, 10, 25, 50, 100]            # as in 06-evaluate
+C1_LAMS = [0.5, 5]
+C1_N_BOOT = 10_000          # bootstrap resamples; 02-safety/01 lowers it to 2000
+
+C1_DATASETS = [
+    ("small catalog (5 restaurants)", "small", None),
+    ("Houston, TX", "ubereats", "Houston, TX"),
+    ("Houston, TX shuffled", "ubereats-shuffled", "Houston, TX"),
+    ("Seattle, WA", "ubereats", "Seattle, WA"),
+    ("Seattle, WA shuffled", "ubereats-shuffled", "Seattle, WA"),
+]
+
+
+def c1_boot_ci(xs, seed=C1_SEED):
+    rng = _random.Random(seed)
+    n = len(xs)
+    means = sorted(sum(xs[rng.randrange(n)] for _ in range(n)) / n for _ in range(C1_N_BOOT))
+    return means[int(0.025 * C1_N_BOOT)], means[int(0.975 * C1_N_BOOT) - 1]
+
+
+def c1_boot_ratio_ci(num, den, seed=C1_SEED):
+    """95% bootstrap CI of sum(num)/sum(den), resampling groups. A ratio of
+    sums, not a mean of per-group ratios: a group whose gap is 0 has nothing to
+    recover and must not divide by zero or count as 100%."""
+    rng = _random.Random(seed)
+    n = len(num)
+    ratios = []
+    for _ in range(C1_N_BOOT):
+        idx = [rng.randrange(n) for _ in range(n)]
+        d = sum(den[i] for i in idx)
+        ratios.append(sum(num[i] for i in idx) / d if d > 0 else 0.0)
+    ratios.sort()
+    return ratios[int(0.025 * C1_N_BOOT)], ratios[int(0.975 * C1_N_BOOT) - 1]
+
+
+def c1_matrices(group, catalog):
+    """S_A and S_B over the feasible set, {option_id: {member_id: s}}.
+    A: whole menu, s_i(x) = cos(t_i, mean taste of all dishes at x).
+    B: safe subset, s_i(x) = cos(t_i, mean taste of i's safe dishes at x)."""
+    members = group["members"]
+    F = build_feasible_set(catalog, members)
+    SA, SB = {}, {}
+    for o in F:
+        SA[o["option_id"]] = {m["member_id"]: taste_similarity(m["taste"], o["taste"]) for m in members}
+        SB[o["option_id"]] = {m["member_id"]: taste_similarity(
+            m["taste"], _restaurant_taste(o["safe_dishes"][m["member_id"]])) for m in members}
+    return SA, SB
+
+
+def c1_pick(S, method, lam=0.0):
+    # max() keeps the first of equal scores, as rank_candidates' stable sort does.
+    return max(S, key=lambda o: aggregate(list(S[o].values()), method, lam))
+
+
+def c1_evaluate(label, dataset, city):
+    """Per-dataset C1 rows (both satisfaction formulas, lambda 0.5 and 5) and
+    the per-group picks/values behind them. Sets FM_DATASET / FM_CITY."""
+    os.environ["FM_DATASET"] = dataset
+    if city:
+        os.environ["FM_CITY"] = city
+    catalog = load_catalog()
+    groups = generate_groups(n_groups=C1_N_GROUPS, seed=C1_SEED, adversarial_frac=C1_ADVERSARIAL_FRAC)
+    per = {"A": [], "B": []}
+    for g in groups:
+        SA, SB = c1_matrices(g, catalog)
+        if not SA:
+            continue
+        for key, S in (("A", SA), ("B", SB)):
+            p = {"average": c1_pick(S, "average"), "least_misery": c1_pick(S, "least_misery")}
+            p.update({lam: c1_pick(S, "fair", lam) for lam in set(C1_SWEEP) | set(C1_LAMS)})
+            v = {k: list(S[o].values()) for k, o in p.items()}
+            per[key].append({"picks": p, "vals": v, "F": len(S)})
+
+    rows = []
+    for key, gs in per.items():
+        n = len(gs)
+        moved5 = sum(g["picks"][0] != g["picks"][5] for g in gs)
+        moved_any = sum(len({g["picks"][l] for l in C1_SWEEP}) > 1 for g in gs)
+        for lam in C1_LAMS:
+            d_min = [min(g["vals"][lam]) - min(g["vals"]["average"]) for g in gs]
+            d_mean = [mean_sat(g["vals"][lam]) - mean_sat(g["vals"]["average"]) for g in gs]
+            d_jain = [jain(g["vals"][lam]) - jain(g["vals"]["average"]) for g in gs]
+            changed = sum(g["picks"][lam] != g["picks"]["average"] for g in gs)
+            lo, hi = c1_boot_ci(d_min)
+            # achievable: the most any option in F could raise the worst-off
+            # diner over the Average pick -- least-misery's pick, by definition
+            gap = [min(g["vals"]["least_misery"]) - min(g["vals"]["average"]) for g in gs]
+            pct = 100 * sum(d_min) / sum(gap) if sum(gap) > 0 else 0.0
+            plo, phi = c1_boot_ratio_ci(d_min, gap)
+            lm_cost = [mean_sat(g["vals"]["least_misery"]) - mean_sat(g["vals"]["average"]) for g in gs]
+            rows.append({
+                "dataset": label, "formula": {"A": "whole menu", "B": "safe subset"}[key],
+                "lambda": lam, "n_groups": n, "mean_F": round(sum(g["F"] for g in gs) / n, 1),
+                "pct_moved_0_vs_5": round(100 * moved5 / n, 1),
+                "pct_moved_any_lambda": round(100 * moved_any / n, 1),
+                "pct_pick_differs_from_avg": round(100 * changed / n, 1),
+                "minsat_avg": round(sum(min(g["vals"]["average"]) for g in gs) / n, 4),
+                "minsat_fair": round(sum(min(g["vals"][lam]) for g in gs) / n, 4),
+                "minsat_gain": round(sum(d_min) / n, 4),
+                "minsat_gain_ci_lo": round(lo, 4), "minsat_gain_ci_hi": round(hi, 4),
+                "meansat_change": round(sum(d_mean) / n, 4),
+                "jain_change": round(sum(d_jain) / n, 4),
+                "minsat_achievable_gap": round(sum(gap) / n, 4),
+                "pct_of_achievable": round(pct, 1),
+                "pct_of_achievable_ci_lo": round(100 * plo, 1),
+                "pct_of_achievable_ci_hi": round(100 * phi, 1),
+                "meansat_change_least_misery": round(sum(lm_cost) / n, 4),
+            })
+    return rows, per
+
+
+def c1_table3_rows(label, per_a):
+    out = []
+    for sel, key in (("fair (lambda 0.5)", 0.5), ("average", "average")):
+        row = {"dataset": f"Uber Eats {label}", "selector": sel, "n_groups": len(per_a)}
+        for metric, fn in (("mean_sat", mean_sat), ("min_sat", min), ("jain", jain)):
+            m, ci, _ = mean_ci([fn(g["vals"][key]) for g in per_a])
+            row[metric], row[metric + "_ci95"] = round(m, 4), round(ci, 4)
+        out.append(row)
+    return out
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# REVISION ANALYSES
+# ══════════════════════════════════════════════════════════════════════════════
+# A numpy re-implementation of the selectors and the mediation loop, plus the
+# building blocks of the revision experiments (alternative utility models, the
+# order-aware utility, mediation under a utility the system does not know, the
+# scale of lambda). 06-evaluate/01 checks it against the harness numbers before
+# anything new is run. Outputs go to figdata_rev/.
+#
+# All names here carry a rev_ / REV_ prefix so they do not clash with the
+# dictionary-based functions above (jain, mediate, ...). numpy and pandas are
+# only needed by this section.
+
+import pickle as _pickle
+
+try:
+    import numpy as np
+except ImportError:          # the notebooks 01-04 run without numpy
+    np = None
+
+REV_CACHE = os.environ.get("FM_REV_CACHE") or str(EXTERNAL_CACHE / "revision_matrices.pkl")
+REV_OUT = os.environ.get("FM_REV_OUT") or str(HERE / "figdata_rev")
+REV_CITIES = ["Houston, TX", "Seattle, WA"]
+REV_LAMBDAS = [0, 0.25, 0.5, 1, 2, 5, 10, 25, 50, 100]
+REV_GRAD = {"accept": 0.0, "reject": 0.2, "strong_dislike": 0.5, "veto": 1.5}
+REV_ETA, REV_CAP, REV_MARGIN = 0.5, 8, 0.01
+
+_rev_data = None
+
+
+def build_revision_cache(path=None):
+    """Build the per-group matrices for the revision experiments and pickle them.
+
+    For each catalog (Houston, Seattle, Houston-shuffled, Seattle-shuffled) and each
+    of the 200 seeded groups (seed 7, 35% adversarial, Food.com diners), store:
+      ids      option ids of F (feasible set), in catalog order
+      S        |F| x n whole-menu cosine satisfaction (the paper's Eq. 3)
+      Sc       |F| x n centred cosine (diner and restaurant vectors minus pool means)
+      Se       |F| x n Euclidean similarity 1 - ||t_i - t_x|| / sqrt(6)
+      D        |F| x n best safe dish cosine (order-aware venue utility)
+      D3       |F| x n mean of the top-3 safe dishes (softer order-aware utility)
+      Dsafe    |F| x n cosine to the mean of the diner's safe dishes
+      nsafe    |F| x n number of safe dishes
+      prices   per-option, per-diner arrays of safe dish prices (for budget utility)
+    Takes about 10 minutes. Sets FM_PERSONAS=foodcom."""
+    path = path or REV_CACHE
+    os.environ["FM_PERSONAS"] = "foodcom"
+    groups = generate_groups(n_groups=200, seed=7, adversarial_frac=0.35)
+    pool = load_personas()
+    pool_mean = np.mean([p["taste_vector"] for p in pool], axis=0)
+
+    def unit(v):
+        v = np.asarray(v, float)
+        n = np.linalg.norm(v)
+        return v / n if n > 0 else v
+
+    def cos(a, b):
+        return taste_similarity(list(a), list(b))
+
+    def build(catalog, label):
+        rest_mean = np.mean([o["taste"] for o in catalog], axis=0)
+        out = []
+        for g in groups:
+            members = g["members"]
+            F = build_feasible_set(catalog, members)
+            n = len(members)
+            ids = [o["option_id"] for o in F]
+            S = np.zeros((len(F), n)); Sc = np.zeros_like(S); Se = np.zeros_like(S)
+            D = np.zeros_like(S); D3 = np.zeros_like(S); Dsafe = np.zeros_like(S)
+            nsafe = np.zeros_like(S); prices = []
+            T = [np.asarray(m["taste"], float) for m in members]
+            for a, o in enumerate(F):
+                tx = np.asarray(o["taste"], float)
+                prow = []
+                for i, m in enumerate(members):
+                    S[a, i] = cos(m["taste"], o["taste"])
+                    Sc[a, i] = float(unit(T[i] - pool_mean) @ unit(tx - rest_mean))
+                    Se[a, i] = 1 - np.linalg.norm(T[i] - tx) / math.sqrt(6)
+                    safe = o["safe_dishes"][m["member_id"]]
+                    known = [d for d in safe if sum(abs(x) for x in d["taste"]) > 0]
+                    sims = sorted((cos(m["taste"], d["taste"]) for d in safe), reverse=True)
+                    D[a, i] = sims[0]
+                    D3[a, i] = float(np.mean(sims[:3]))
+                    if known:
+                        mt = np.mean([d["taste"] for d in known], axis=0)
+                        Dsafe[a, i] = cos(m["taste"], mt)
+                    else:
+                        Dsafe[a, i] = S[a, i]
+                    nsafe[a, i] = len(safe)
+                    prow.append(np.array([d.get("price") for d in safe if d.get("price")], float))
+                prices.append(prow)
+            out.append(dict(group_id=g["group_id"], adversarial=g["adversarial"], n=n,
+                            member_ids=[m["member_id"] for m in members],
+                            ids=ids, S=S, Sc=Sc, Se=Se, D=D, D3=D3, Dsafe=Dsafe,
+                            nsafe=nsafe, prices=prices,
+                            price_range=[o.get("price_range") for o in F],
+                            category=[o.get("category") for o in F]))
+        print(label, "done", file=sys.stderr)
+        return out
+
+    data = {}
+    for city in ["Houston, TX", "Seattle, WA"]:
+        cat = load_catalog_ubereats(city)
+        data[city] = build(cat, city)
+        data[city + " shuffled"] = build(shuffle_menus(cat, seed=7), city + " shuffled")
+    data["_groups"] = groups
+    with open(path, "wb") as f:
+        _pickle.dump(data, f)
+    return path
+
+
+def rev_data():
+    """The per-group matrices; built into REV_CACHE on first use if missing."""
+    global _rev_data
+    if _rev_data is None:
+        if not os.path.exists(REV_CACHE):
+            build_revision_cache(REV_CACHE)
+        with open(REV_CACHE, "rb") as f:
+            _rev_data = _pickle.load(f)
+    return _rev_data
+
+
+def rev_var(M):
+    return M.var(axis=1)
+
+
+def rev_fair_scores(M, lam, w=None):
+    mean = M.mean(axis=1) if w is None else M @ w
+    return mean - lam * rev_var(M)
+
+
+def rev_pick(M, rule, lam=0.5, w=None, mask=None):
+    if rule == "average":
+        sc = M.mean(axis=1)
+    elif rule == "least_misery":
+        sc = M.min(axis=1)
+    elif rule == "most_pleasure":
+        sc = M.max(axis=1)
+    elif rule == "fair":
+        sc = rev_fair_scores(M, lam, w)
+    else:
+        raise ValueError(rule)
+    if mask is not None:
+        sc = np.where(mask, sc, -np.inf)
+    return int(np.argmax(sc))          # first max = catalog order, as rank_candidates
+
+
+def rev_jain(v):
+    v = np.asarray(v, float)
+    return float(v.sum() ** 2 / (len(v) * (v ** 2).sum()))
+
+
+def rev_boot_ci(x, n_boot=10000, seed=7):
+    rng = np.random.default_rng(seed)
+    x = np.asarray(x, float)
+    idx = rng.integers(0, len(x), (n_boot, len(x)))
+    m = x[idx].mean(axis=1)
+    return float(np.percentile(m, 2.5)), float(np.percentile(m, 97.5))
+
+
+def rev_ratio_ci(num, den, n_boot=10000, seed=7):
+    rng = np.random.default_rng(seed)
+    num = np.asarray(num, float); den = np.asarray(den, float)
+    idx = rng.integers(0, len(num), (n_boot, len(num)))
+    r = 100 * num[idx].sum(axis=1) / den[idx].sum(axis=1)
+    return float(np.percentile(r, 2.5)), float(np.percentile(r, 97.5))
+
+
+def rev_c1_summary(Ms, lam, evals=None):
+    """Ms: list of per-group utility matrices used for SELECTION.
+    evals: list of matrices used for EVALUATION (default: the same).
+    Returns gain, CI, pct of achievable (achievable defined on the eval
+    matrix with LM selected on the selection matrix), costs."""
+    evals = evals or Ms
+    g_fair, g_lm, d_mean_f, d_mean_lm, moved = [], [], [], [], []
+    for M, E in zip(Ms, evals):
+        a = rev_pick(M, "average"); f = rev_pick(M, "fair", lam); l = rev_pick(M, "least_misery")
+        g_fair.append(E[f].min() - E[a].min())
+        g_lm.append(E[l].min() - E[a].min())
+        d_mean_f.append(E[f].mean() - E[a].mean())
+        d_mean_lm.append(E[l].mean() - E[a].mean())
+        moved.append(f != a)
+    lo, hi = rev_boot_ci(g_fair)
+    plo, phi = rev_ratio_ci(g_fair, g_lm)
+    return dict(lam=lam, gain=np.mean(g_fair), gain_lo=lo, gain_hi=hi,
+                achievable=np.mean(g_lm),
+                pct=100 * np.sum(g_fair) / np.sum(g_lm) if np.sum(g_lm) != 0 else float("nan"),
+                pct_lo=plo, pct_hi=phi, cost=np.mean(d_mean_f), cost_lm=np.mean(d_mean_lm),
+                moved=100 * np.mean(moved))
+
+
+def rev_mediate(S, *, lam=0.5, eta=REV_ETA, cap=REV_CAP, margin=REV_MARGIN, bar=None,
+                veto_remove=False, veto_grad=False, react_fn=None, U=None, rng=None,
+                parser=None, memory=False):
+    """Closed-loop mediation.
+
+    S        proxy utility matrix the system sees (|F| x n)
+    U        'true' utility the diners react with (default: S)
+    bar      consensus bar on U (default: LM floor of U minus margin)
+    react_fn function(u_row, bar, worst_idx, rng) -> list of intended labels
+             (default: the paper's rule -- worst-off diner below bar says
+             strong_dislike, everyone else accepts)
+    parser   function(label, rng) -> label the loop receives (LLM replay)
+    veto_remove  a diner holding a token removes the current pick
+    veto_grad    the veto reaction carries g=1.5 instead of 0.5
+    memory   a rejected pick is never proposed again (tabu)
+    Returns dict(converged, rounds, pick)."""
+    U = S if U is None else U
+    nF, n = S.shape
+    if bar is None:
+        bar = U.min(axis=1).max() - margin
+    w = np.full(n, 1.0 / n)
+    alive = np.ones(nF, bool)
+    tokens = np.ones(n, int)
+    for rnd in range(1, cap + 1):
+        if not alive.any():
+            return dict(converged=False, rounds=rnd - 1, pick=None, reason="exhausted")
+        p = rev_pick(S, "fair", lam, w, alive)
+        u = U[p]
+        if u.min() >= bar:
+            return dict(converged=True, rounds=rnd, pick=p, reason="consensus")
+        worst = int(np.argmin(u))
+        if react_fn is None:
+            labels = ["accept"] * n
+            labels[worst] = "strong_dislike"
+        else:
+            labels = react_fn(u, bar, worst, rng)
+        # a diner who would say strong_dislike and still holds a token says
+        # "veto" instead (the original harness rule, generalised to any diner)
+        if veto_remove or veto_grad:
+            labels = ["veto" if (l == "strong_dislike" and tokens[i] > 0) else l
+                      for i, l in enumerate(labels)]
+        if parser is not None:
+            labels = [parser(l, rng) for l in labels]
+        g = np.zeros(n)
+        removed = False
+        for i, l in enumerate(labels):
+            if l == "veto":
+                if veto_remove or veto_grad:
+                    if tokens[i] > 0:
+                        tokens[i] -= 1
+                        removed = removed or veto_remove
+                    gi = REV_GRAD["veto"] if veto_grad else REV_GRAD["strong_dislike"]
+                else:
+                    gi = REV_GRAD["veto"]   # original nbio semantics: a parsed veto carries g=1.5
+            else:
+                gi = REV_GRAD[l]
+            g[i] = gi
+        if removed or (memory and any(l != "accept" for l in labels)):
+            alive[p] = False
+        w = w * np.exp(eta * g)
+        w = w / w.sum()
+    return dict(converged=False, rounds=cap, pick=p, reason="cap")
+
+
+# Reaction models, the LLM-parser replay and the arm summary, shared by the mediation-quality
+# analyses (05-mediate/01) and the multi-criteria utility (03-aggregate/01).
+
+_rev_parser_pool = None
+
+
+def _rev_pool():
+    global _rev_parser_pool
+    if _rev_parser_pool is None:
+        import pandas as pd
+        P = pd.read_csv(DATA / "objections" / "parser_predictions.csv")
+        _rev_parser_pool = {lab: P[P.gold_label == lab].pred_label.tolist() for lab in REV_GRAD}
+    return _rev_parser_pool
+
+
+def rev_parser_replay(label, rng):
+    """Map an intended label to the label the cached gpt-oss-20b parse of a
+    real hand-labelled free-text reaction with that gold label produced."""
+    opts = _rev_pool()[label]
+    return opts[rng.integers(len(opts))]
+
+
+def rev_worst_only(u, bar, worst, rng):
+    lab = ["accept"] * len(u); lab[worst] = "strong_dislike"; return lab
+
+
+def rev_graded(u, bar, worst, rng, delta=0.02):
+    """Every diner below the bar objects; mildly (reject) if within delta of
+    the bar, strongly otherwise."""
+    return ["accept" if x >= bar else ("reject" if bar - x <= delta else "strong_dislike") for x in u]
+
+
+def rev_summarise(res, Us, bars, label, city, extra=None):
+    conv = [r for r in res if r["converged"]]
+    picks = [(r["pick"], U) for r, U in zip(res, Us) if r["pick"] is not None]
+    row = dict(city=city, arm=label, n=len(res), agree=len(conv),
+               pct_agree=round(100 * len(conv) / len(res), 1),
+               rounds_agree=round(np.mean([r["rounds"] for r in conv]), 2) if conv else "--",
+               rounds_capped=round(np.mean([r["rounds"] for r in res]), 2),
+               exhausted=sum(r["reason"] == "exhausted" for r in res),
+               final_minsat=round(np.mean([U[p].min() for p, U in picks]), 4),
+               final_mean=round(np.mean([U[p].mean() for p, U in picks]), 4),
+               final_jain=round(np.mean([rev_jain(U[p]) for p, U in picks]), 4))
+    if extra:
+        row.update(extra)
+    return row

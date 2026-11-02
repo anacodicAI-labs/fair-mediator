@@ -10,13 +10,8 @@ reviewed a second time by another; the second review changed one Seattle match (
 below. For bitter, "can you notice the bitterness?", not "is bitter the strongest taste?". For matches, a
 similar name is not a similar dish.
 
-Rescore any sheet after editing its labels:
-
-```bash
-python scripts/handcheck.py score-bitter
-python scripts/handcheck.py score-match "Houston, TX"
-python scripts/handcheck.py score-match "Seattle, WA"
-```
+Rescore every sheet after editing its labels by running Step 3 of
+`01-taste/03-real-catalogs.ipynb`.
 
 ## bitter_spotcheck.csv: the hand-made bitter list
 
