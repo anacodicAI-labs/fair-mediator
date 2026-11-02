@@ -13,3 +13,6 @@ data/shared/external/foodcom/
 data/shared/external/ubereats/
 # Per-group matrices for the revision analyses; nbio.build_revision_cache() rebuilds them
 data/shared/cache/revision_matrices.pkl
+# Local OpenAI spend ledger (see nbio.openai_client)
+.openai_spend.json
+.openai_spend.tmp
