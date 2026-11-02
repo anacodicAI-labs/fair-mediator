@@ -48,13 +48,9 @@ data/shared/external/ubereats/restaurant-menus.csv
 ```
 
 To keep them somewhere else, set `FM_UBEREATS_DIR=/path/to/folder`. Then build
-a city's catalog (about 1 minute each):
-
-```bash
-python scripts/build_ubereats_catalog.py --list-cities
-python scripts/build_ubereats_catalog.py --city "Houston, TX"
-python scripts/build_ubereats_catalog.py --city "Seattle, WA"
-```
+a city's catalog (about 1 minute each) in `01-taste/03-real-catalogs.ipynb`: set
+`LIST_CITIES = True` to list the cities, and `BUILD_CITY = "Houston, TX"` (then
+`"Seattle, WA"`) to build one.
 
 Point the harness at a city without editing any notebook. `FM_FIGDATA` keeps
 each run's CSVs apart:
@@ -63,8 +59,10 @@ each run's CSVs apart:
 FM_DATASET=ubereats          FM_CITY="Houston, TX" FM_FIGDATA=figdata/ubereats-houston-tx \
   jupyter nbconvert --to notebook --execute 06-evaluate/01-run-harness.ipynb --output-dir /tmp
 FM_DATASET=ubereats-shuffled FM_CITY="Houston, TX" FM_FIGDATA=figdata/ubereats-shuffled-houston-tx ...
-python scripts/c1_report.py
 ```
+
+The C1 numbers on real restaurants (`c1_summary.csv`, `table3_datasets.csv`) come
+from the "C1 on real restaurants" section of `03-aggregate/03-lambda-dial.ipynb`.
 
 `ubereats-shuffled` is the random-menu control: the same restaurants and menu
 sizes, with every dish dealt to a random restaurant (`FM_SHUFFLE_SEED`,
