@@ -36,12 +36,12 @@ jupyter notebook 01-taste/01-ingredients-to-dish-vectors.ipynb
 | `03-aggregate/03` | whether and when lambda moves the pick; C1 on real restaurants; the propositions checked on real diners; why lambda = 5 is safe | Figure 6, `figdata_rev/` |
 | `04-fairness/01` | mean alone hides an abandoned member; MinSat, Jain, Gini and MaxEnvy do not | Table 9 |
 | `04-fairness/02` | per-diner dish compensation, and the experienced dish-level outcome | Table 14, `figdata_rev/` |
-| `05-mediate/01` | the closed-loop mediator and the veto token, including non-convergence; mediation quality and the proxy-truth gap | Tables 11, 13, `figdata_rev/` |
+| `05-mediate/01` | the closed-loop mediator and the veto token, including non-convergence; mediation quality and the proxy-truth gap; the loop with a live AI diner (gpt-4o-mini writes, the parser reads) | Tables 11, 13, `figdata_rev/` |
 | `05-mediate/02` | free text to reaction label, measured on 100 labelled cases | Table 15 |
 | `05-mediate/03` | a whole conversation end to end, the round-cap check, and rounds to agreement on real diners | Table 18 |
 | `06-evaluate/01` | the whole pipeline swept over synthetic groups, with the ceiling control; reproduces the headline numbers for the revision analyses | Tables 9-14 |
 | `06-evaluate/02` | the paper's figures, from figdata CSVs | Figures 2-6 |
-| `07-judge/01` | an LLM-judge **proxy** for perceived fairness (not a human study), including the Houston run | Tables 16, 17 |
+| `07-judge/01` | an LLM-judge **proxy** for perceived fairness (not a human study), including the Houston run and the live mediator's picks | Tables 16, 17 |
 
 The analyses added in the journal revision (alternative utility models, the
 order-aware utility, mediation under a utility the system does not know, the
@@ -52,7 +52,9 @@ per-group matrices in `data/shared/cache/revision_matrices.pkl`, which
 `nbio.build_revision_cache()` builds on first use (about 10 minutes);
 `06-evaluate/01` first checks that this numpy code reproduces the headline
 numbers. No API calls are made: the LLM-parser replay uses the cached
-predictions in `data/objections/parser_predictions.csv`.
+predictions in `data/objections/parser_predictions.csv`, and the live-AI-diner arm
+(E8, `figdata_rev/e8_live_llm.csv`, and the 5-group pilot in `e8_live_llm_pilot.csv`) replays its conversations from
+`runs/mediator_llm.jsonl` unless `MEDIATOR_LIVE = True`.
 
 ## The one rule
 
