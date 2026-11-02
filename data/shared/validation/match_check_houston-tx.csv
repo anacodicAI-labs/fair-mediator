@@ -1,0 +1,114 @@
+restaurant,dish,description,matched_recipe,match_score,match_text,alt_2,alt_3,correct,notes
+JUJU Tapioca,Shrimp Fried Rice Box,Comes with choice of tea.,shrimp fried rice,0.8462,name,easy shrimp fried rice,thai shrimp fried rice,y,
+End Zone Sports Bar &amp; Grill,Sweet Potato Fry Basket,,basket case deli s sweet potato sald,0.6602,name,parmesan basket,sweet potato trta,p,
+Van Leeuwen - Houston Montrose,Brown Sugar Chunk,"Wheat, eggs, milk, and tree nuts (walnut, coconut) contains gluten.",brown sugar,0.7737,name,brown sugar tea,brown sugar wings,n,ice cream matched to plain sugar
+Nana Sushi &amp; Chinese Bistro,BBQ Eel Bowl,"4 pcs BBQ eels. Served with cucumber, crab meat, seaweed salad, and avocado.",eel sauce,0.5457,name,cheesy bowl,tofu bowl,p,
+Jumma Food,Eel Over Rice 장어덮밥,,eel sauce,0.5514,name,beef over rice,lemon chicken over rice,p,
+Mikoto Ramen and Sushi Bar,Smelt Egg (2 Pcs) Nigiri,Masago,egg bhujia,0.5571,name,egg crusher,scambled egg skillets,n,
+168 Szechuan restaurant,Mushu Pork ( 4 pcs),,geera pork,0.6155,name,saurkraut pork,pork giniling,n,
+HighTower Cafe (San Felipe),Tater Tots,,zucchini tater tots,0.8615,name,tater tots bake,homemade tater tots,p,
+China Village Restaurant,Kung Pao Chicken,Stir fried chicken with vegetables in spicy brown sauce and peanut. Served with steamed rice and fried rice for an additional charge.,kung pao chicken,1.0,name,spiced kung pao chicken,chinese kung pao chicken,y,
+Hao Hao,Szechuan Beef,,szechuan beef,1.0,name,spicy szechuan beef,beef szechuan,y,
+Huong Viet Restaurant,Chén Cơm Trắng,,tried and true chili,0.1437,name,trix treats,trick or treat dip,n,below threshold (unmatched)
+Marco's Pizza (12723 Cutten Road),Crispy Thin Crust Chicken Fresco Pizza,"Grilled chicken, bacon, onions, sliced tomatoes, our original sauce and signature three cheeses, plus cheddar",thin crust pizza,0.6216,name,super crispy thin pizza crust,thin crust pizza dough,p,
+Plant B Copperfield,Sweet Potato Fries,,sweet potato fries,1.0,name,baked sweet potato fries,spicy sweet potato fries,y,
+The Gyro Guys,Hummus and Pita,,hummus,0.6309,name,hummus 2,hummus and veggie wrap,y,
+El Huevo Mexicano,Grilled Shrimp Salad,"Freshly grilled sauteed shrimp with Rochelle iceberg lettuce, tomatoes,cheese, and choice of dressing. ",grilled shrimp,0.8389,name,shrimp salad,easy grilled shrimp,p,
+Kung Fu Tea,Cocoa Cream Wow Milk Cap,Lactose-free milk with house made wow bubbles. Caffeine free.,cocoa cream pie,0.5665,name,cocoa,hershey s cocoa cream pie,p,"drink vs pie, same chocolate-cream taste"
+RA Sushi - City Centre,SPICY SHRICE ROLL† ,Shrimp and crab† mix combined with spicy Thai chili sauce and cucumber; rolled in seaweed and rice,spicy shrimp,0.8795,name,assam spicy shrimp,spicy shrimp soup,p,
+Sushi Fresh ,Spicy Tuna,"Cucumber, Tuna, Sriracha and Chili powder. ***No substitutions***",spicy tuna,1.0,name,spicy tuna salad,spicy tuna pasta,y,
+IHOP- Washington,Strawberry Banana Protein Pancakes - (Full Stack),A fresh-flipped power stack. Four protein pancakes filled with fresh banana slices. Topped with glazed strawberries &amp; more banana slices.,protein pancakes,0.6354,name,strawberry banana protein smoothie,high protein pancakes,p,
+Ginza Japanese Restaurant,Avocado Bomb,"raw: diced tuna, salmon, and white fish wrapped with avocado, sweet chili aioli and lemon pepper miso",ice bomb,0.6649,name,chocolate bomb,cranberry bomb,n,
+Golden Chick (14191 Fayridge Dr),Fried Okra,,fried okra,1.0,name,oven fried okra,stir fried okra,y,
+Romano's Pizza,Dinner Salad,,dee s dinner salad,0.8298,name,mom s dinner salad,szechuan dinner salad,y,
+El Ranchero Mexican Restaurant,"Chile Con Queso, Rice, and Beans",,chile con queso,0.7324,name,chile con queso dip,anne s chile con queso,p,
+Chef Ding Asian Cuisine,Moo Shu Chicken,Served with four pancakes.,moo shu chicken,1.0,name,moo shu chicken wraps,moo shu chicken and vegetables,y,
+Nola G's Cajun Creole,Jambalaya,Jambalaya,jambalaya,1.0,name,jambalaya 1,1 2 3 jambalaya,y,
+The Omega Grill,Pineapple Grilled Chicken Sandwich,"Swiss cheese, peppered bacon, and grilled pineapple with ghost pepper and blueberry bravado hot sauce. Served with fries.",tasha s grilled chicken sandwich,0.7636,name,bistro grilled chicken sandwich,chicken sandwich,p,
+Top Sushi,Spicy Salmon Don Rice Bowl,"Spicy salmon bedded on sushi rice, sliced cucumbers and ponzu sauce.
+",spicy salmon salad,0.5479,name,chicken rice bowl,easy spicy salmon,p,
+Olive + Twist Bar/Kitchen,Twisted Calamari,,calamari,0.7221,name,twisted cookies,twisted bacon,y,
+MENCIUS GOURMET HUNAN,Shrimp Roll (2 pcs),Deep-fried.,shrimp roll,0.9518,name,shrimp,3 2 1 shrimp,p,Chinese fried roll vs US shrimp roll
+Banana Leaf,Deep Fried Fish in Thai Sauce,Deep fried fish served with shredded mango topped with spicy sauce.,deep fried fish,0.7181,name,deep fried fish bites,deep fried fish in batter iceland,p,
+Nana Sushi &amp; Chinese Bistro,Spicy String Bean with Beef,Served with steamed or fried rice or steamed veggies.,green string bean soup,0.5567,name,string pie,schmeckfest green string bean soup,n,
+Mayuri Express,Omelet,,omelet,1.0,name,friar s omelet,chili omelet,y,
+China Village Restaurant,Shrimp with Broccoli Combination,"Served with egg roll, soup, steamed rice, and fried rice for an additional charge.",shrimp with broccoli,0.6772,name,veggie combination,my combination sandwich,y,
+Matsu Sushi Bar,Crazy Roll,"Soypaper, shrimp tempura, cucumber, spicy tuna, masago, avocado - 5 pieces",crazy dip,0.7163,name,crazy corn,crazy pasta,n,
+Jabastian's Mexican Cuisine,Machacado Con Huevo,Dried beef with scrambled eggs. Served with beans and diced potatoes.,huevo casserole,0.6679,name,migas con huevo,huevos con burrito,p,
+Montrose Chinese Restaurant,House Egg Foo Young,,ramen egg foo young,0.8014,name,egg foo young with shrimp,new easy egg foo young 5fix,p,
+Louisiana Fried Chicken - Old Spanish Trail (TX),Cole Slaw,,cole slaw,1.0,name,red cole slaw,lemon cole slaw,y,
+Louisiana Famous Fried Chicken  - S Gessner Rd (TX),Shrimp,,shrimp,1.0,name,3 2 1 shrimp,crimped shrimp,y,
+Jus Mac Galleria,Buffalo Chicken Mac,"Chicken, bacon, and Frank's hot sauce.",buffalo chicken mac n cheese,0.9028,name,buffalo chicken salad,buffalo chicken soup,y,
+Asia Market Thai Lao Food,Pineapple Fried Rice,"Pineapple, raisins, onions, cashew nuts, turmeric, garlic sauce. ",pineapple fried rice,1.0,name,pineapple fried rice with ham,shrimp and pineapple fried rice,y,
+ZaLat Pizza (Gray Street),Chocolate Fudge Brownie,Chocolate Ice Cream with Fudge Brownies,chocolate fudge brownie,1.0,name,fudge brownie pie,chocolate fudge,y,
+Trendy Dumpling,Beef Noodle Soup, Spicy Beef Shank Bok Choy,beef noodle soup,1.0,name,quick beef noodle soup,asian beef noodle soup,y,
+Best Donuts,Ham with Cheese,,scalloped potatoes and ham with cheese,0.5775,name,ham with pasta,chicken with ham and cheese,n,kolache vs casserole
+MENCIUS GOURMET HUNAN,BBQ Ribs (8 pcs),,bbq ribs,0.9477,name,asian bbq ribs,amy s bbq ribs,y,
+viva jalisco bar &amp; grill,Enchilada Dinner,"3 chicken, ground beef or cheese with green sauce.",layered enchilada dinner,0.7895,name,family style enchilada dinner,enchilada stew,y,
+Bouray's Restaurant,Grilled Pork Vermicelli,,pork vermicelli,0.8174,name,chicken vermicelli,lemon vermicelli,y,
+Pepper Twins - Kirby,General Tso’s Chicken,,general tso chicken,0.9671,name,general tso s chicken,grilled general tso s chicken,y,
+Tiger Noodle House,Chicken and Broccoli,White meat. Steamed white rice on the house.,chicken and broccoli,1.0,name,easy chicken and broccoli,lemon chicken and broccoli,y,
+Nana Sushi &amp; Chinese Bistro,Summer Roll (8 pcs),"Salmon, avocado, cucumber, snow crab, fish crab, fish egg, in rice paper, spicy mayonnaise, and eel sauce.",vegetarian summer roll,0.747,name,summer berry roll,summer stew,p,
+wow Kitchen 4 u,Coconut Shrimp Curry,Shrimps simmered in the golden hue of coconut and garlic.,coconut shrimp curry,1.0,name,coconut shrimp,shrimp curry,y,
+Pepper Twins - Kirby,Fried Rice with Pineapple &amp; Steak,,pineapple fried rice with ham,0.6434,name,pineapple fried rice,thai shrimp fried rice with pineapple,p,
+Tostada Regia (Westheimer),Burger Jr.,"Angus beef pattie, white melted cheese, lettuce, tomato, fries.",nani burger,0.5885,name,spicy burger,herb burger,p,
+Carrabba's (750 Kingwood Drive),Side Italian Salad ,"Romaine, garden vegetables, kalamata olives with a side of our Italian vinaigrette dressing.",italian salad,0.8013,name,jodie s italian salad,easy italian salad,y,
+Hao Hao,Squid with Black Bean Sauce,,chicken with black bean sauce,0.6748,name,beef with black bean sauce,shrimp with black bean sauce,p,
+Suzie’s Pastry Shoppe (8619 Richmond Ave),Shaabiyat - Ashta,Freshly layered filo dough stuffed with premium ashta cream with sugar syrup and pistachio.,brown sugar syrup,0.2885,name+description,premium black bean soup,premium turkey meatballs,n,below threshold (unmatched)
+Voodoo Doughnut (Houston),Raised Glazed,Raised yeast doughnut with glaze.,pork pie raised,0.5758,name,raised oatmeal muffins,raised waffles,n,
+Black Bear Diner (15720 North Freeway),Cubs’ Mini Volcano,"An eruption of delicious options, including 2 pancakes, 1 egg*, 1 piece of bacon and 1 sausage link.",baked potato volcano,0.6635,name,volcano sauce,volcano bread,n,
+Razzoo's Cajun Cafe (Pasadena),Creole Pork Chops,"Here for a LIMITED TIME ONLY. Pork Chops, Hand battered and Perfectly Fried. Topped with Jalapeno Cheese Sauce.",creole pork chops,1.0,name,pork chops creole,creole pork chops cornbread casserole,y,
+Church's Chicken (354 Uvalde),Chicken Sandwich Combo,"Chicken Sandwich, Reg Side, Large Drink. We crafted a sandwich using our legendary hand-battered chicken filet placed between a honey-butter brushed and toasted brioche bun. Enjoy this down home flavor with a regular side and large drink. ",chicken sandwich,0.7035,name,natedogg s chicken sandwich,hot chicken sandwich,y,
+Jus Mac Galleria,All American Party Tray,,all american pancakes,0.5838,name,all american burgers,all american wraps,n,
+El Mariachi Mexican Bar &amp; Grill,Anaheim Enchiladas,"2 mild Anaheim peppers filled with beef or chicken fajita wrapped in flour tortillas covered with gravy and cheese. Served with rice, beans, and a cheese puff.",anaheim shrimp scampi,0.5869,name,enchiladas,1 2 3 enchiladas,n,
+La Mexicana,Vegetables Fajitas,"Grilled mixed vegetables, served with grilled onions, rice, refried beans, guacamole, pico, and tortillas.",fajitas,0.7635,name,easy fajitas,vegetarian fajitas,p,
+7Spice (Fuqua),Gumbo (M) 3 Proteins,"The original Gumbo dish is done right by our original 7Spice blend of flavors, prepared with chicken, shrimp, crawfish tails, or sausage. Served with crackers.",gumbo,0.8132,name,joerg s gumbo,gumbo zerbes,y,
+Ginza Japanese Restaurant,Steamed Rice,Side of steamed rice,steamed rice,1.0,name,steamed rice with coconut and lemon,chelo persian steamed rice,y,
+Mikoto Ramen and Sushi Bar,Alaska Roll,,alaska burgers,0.7081,name,alaska mocha,no bake alaska,n,
+Big B Burgers,Call Me Caprese Salad,"Get you some good caprese salad: Freshly sliced tomatoes served with basil, and mozzarella cheese.",caprese salad,0.7744,name,geoff s caprese salad,simple caprese salad,y,
+Bollo Woodfired Pizza - Houston,Italian Style Chicken Wings,Sliced cucmber and side of tzatziki,italian style chicken rolls,0.681,name,chicken wings,italian style chicken cutlets,p,
+Ginza Japanese Restaurant,Chicken Skewer,,mushroom skewer,0.785,name,grilled chicken caesar on a skewer family pleaser,lemon chicken skewers,n,
+Johnny Carino's (Houston),JOHNNY'S MEAL FOR TWO,"1. Share one Hand-Breaded Calamari or Mozzarella Sticks Appetizer.
+
+2. Includes one House or Caesar Salad per person.
+
+3. Choose Two of the Following Entrées:
+Johnny's Fresh Baked Lasagna, Grilled Chicken Bowtie Festival, Spicy Shrimp &amp; Chicken, Lemon Rosemary Chicken or Classic Chicken Parmesan
+
+4. Indulge in One Dessert to Share:
+Tiramisu, Lemon Cream Cake, Italian Chocolate Cake, Strawberry Cheesecake or Turtle Cheesecake
+",johnny m casserole,0.5016,name,johnny mussetti,johnny cake,n,
+Matsu Sushi Bar,House Green Salad,Green Salad with ginger dressing,green salad,0.7535,name,my green salad,house salad,y,
+ASAP Burger,ASAP Shroom Cheeseburger,"Single beef burger with grilled mushrooms, Mozzarella cheese,  lettuce, tomato and red onion plus 1 side.",cheeseburger,0.6403,name,shroom salad,zowie cheeseburger,p,
+7Spice (Fuqua),3 Tenders &amp; 3 Boudin Ball,"Match made in heaven, this combo brings together two of our favorite items on the menu!",boudin stuffed bell peppers,0.4491,name,chicken tenders,tenders pepperonata,p,
+Charlie's Chicken Wings (2616 blodgett Rd),Churros,"Hot, fresh, and golden fried dough tubes coated in cinnamon sugar.",churros,1.0,name,banana churros,churros muffins,y,
+Comapronto ,Rice Flour Pupusas (Pupusas de Harina de Arroz),Served with cabbage and sauce.,pupusas,0.7313,name,salvadorian pupusas,salsa for pupusas,y,
+Hao Hao,BBQ Pork &amp; Chinese Sausage Fried Rice,,sausage fried rice,0.6501,name,bbq pork fried rice,chinese pork fried rice,p,
+The Teahouse Tapioca &amp; Tea (Heights),Mango Ice Blend,,mango ice cream,0.6836,name,pineapple mango ice,orange and mango ice cream,p,
+Cazadores Mexican Restaurant,Nachos Compuestos,"Served with ground beef, beans, melted cheese, sour cream, guacamole, lettuce, tomatoes, and jalapeno slices.",nachos,0.7967,name,nolan s nachos,chocolate nachos,y,
+Hokkaido Japanese Restaurant,31. Saba Entree,"Light salt, grilled mackerel.",walnut saba spread,0.5047,name,entire meal entree,spicy beef cheese potato entree dip,n,
+Seaside Lounge Galleria (5832 Fairdale Lane),Burritos of Chicken Fajita,"With beans, lettuce, tomatoes, avocado, cheese and sour cream.
+$8.50
+",chicken fajita,0.7086,name,chicken fajita dip,chicken fajita potatoes,p,
+Tiger Noodle House,Chicken Fried Rice,"White meat, egg, green beans, carrots, onion and green onion",chicken fried rice,1.0,name,chicken fried rice 3,n y c chicken fried rice,y,
+The Smack Shack,H-Town Steak Fries,,parmesan steak fries,0.644,name,steak n fries salad,oven steak fries,p,
+Nekter Juice Bar (Southwest Fwy),VR Cauliflower Puffs,Vegan Bobs Cauliflower puffs,cauliflower,0.7265,name,cauliflower cake,barking cauliflower,p,
+El Ranchero Mexican Restaurant,Enchiladas Al Carbon,"Beef or chicken fajita topped with chili gravy, and American cheese. Served with Spanish rice, and refried beans or beans la charra.",enchiladas,0.5455,name,1 2 3 enchiladas,tacos al carbon with avocado salsa,p,
+Banana Leaf,Fish Ball Flat Noodle Soup,Flat noodle served in chef's special broth with seafood.,noodle soup,0.6384,name,chicken noodle soup,beef noodle soup,p,
+MENCIUS GOURMET HUNAN,Pork with String Bean,,green string bean soup,0.6036,name,string pie,garlic chicken breast with string beans,n,
+Tortilleria La Reyna #5,Tortillas de Trigo,1 dozen Wheat Tortillas (Cold),tortillas,0.7668,name,tortillas de harina flour tortillas,fish tortillas,y,
+Kung Fu Tea,S'mores Coffee Slush,,iced coffee slush,0.6396,name,chocolate slush,pear slush,p,
+Cazadores Mexican Restaurant,2 Beans and Cheese Burritos,"Topped with chile con queso. Served with rice, refried beans, and guacamole.",cheese burritos,0.8222,name,bean cheese burritos,beef cheese burritos,y,
+Top Sushi,Ribeye Maki,"Thinly-sliced ribeye wrapped around avocado and sweet potato. Grilled and drizzled with teriyaki sauce. Served with steamed rice and vegetables.
+",houstons hawaiian ribeye,0.5705,name,greek grilled ribeye steaks,red wine marinated ribeye steak,p,
+Hao Hao,Szechuan Chicken,,szechuan chicken,1.0,name,szechuan chicken soup,szechuan chicken livers,y,
+No Reservation (Vintage Park),Cajun Cobb Salad,"Mixed baby greens tossed with bleu cheese dressing, topped with cajun grilled chicken or shrimp, bleu cheese crumbles, bacon, green onions, heirloom tomatoes, and hard-boiled egg. Entrées (excluding salads) served with seasoned fries, sweet potatoes fries, or chips and salsa.",cobb salad,0.8274,name,easy cobb salad,potato cobb salad,y,
+Prospect Park- Willowbrook,MVP Burger (10 oz),"Hand-made Angus beef pattie burger cooked to order on a lightly toasted bun topped with pepper jack cheese, 2 crispy bacon strips, fried egg, and sriracha mayo.",mvp chili,0.4682,name,nani burger,spicy burger,n,
+IHOP (23746 Eastex Fwy),Silverware,,silverwater pad thai,0.4216,name,silver cake,silver dragon,n,"not a dish (silverware) - filter gap, fixed"
+The Teahouse Tapioca &amp; Tea (Chinatown),Roasted Rice Green Teapress,Drinks also available hot.,green rice,0.5062,name,green tea rice,roasted green beans,n,drink
+Crab Heads Cajun Boil,Fisherman's Catch,"One flavor and one spice level only. Served with 1 lb Alaskan snow crab, 1 lb shrimp, 2 lbs crawfish,  2 corn, and 2 potatoes.",fisherman s pie,0.6726,name,fisherman s chowder,fisherman s stew,n,seafood boil vs fish pie
+Cheba Hut (2150 Edwards St.),"Pakalolo (Ham, Swiss &amp; Pineapple)","Smoked ham, honey mustard, pineapple, swiss, lettuce, tomato, onion, pickle, Shake &amp; House dressing",ham swiss soup,0.5244,name,pineapple swiss steak,ham swiss pinwheels,p,
+The Teahouse Tapioca &amp; Tea (Chinatown),Mangonada,,mangonada,1.0,name,limoonada,chicken lemonada,y,
+Pepper Twins - Kirby,Golden Eggplant,Salty Duck Egg Yolk and Eggplant.,eggplant,0.6989,name,tha eggplant,golden eggplant aubergine rounds,p,
+Ginger Kale,Loaf Slice,Baked Fresh Daily!,caramilk slice,0.6219,name,pecan slice,ice cream slice,n,
+Jack in the Box (8410 Hilcroft),Sourdough Jack®,"You claim you’re not hungry, but that’s before you read about a 100% beef patty seasoned as it’s grilled topped with hickory smoked bacon, tomato, Swiss-style cheese, real mayonnaise, and ketchup – All on a toasted sourdough bread. One more time for emphasis. Toasted. Sourdough. Bread. See? Now you’re hungry.",sourdough jack bread,0.783,name,sourdough mannaeesh,sourdough scones,n,burger vs bread
